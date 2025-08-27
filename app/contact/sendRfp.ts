@@ -9,14 +9,14 @@ const schema = z.object({
   b2b: z.string().min(1)
 })
 
-export async function sendRfp(formData: FormData){
+export async function sendRfp(formData: FormData): Promise<void> {
   const result = schema.safeParse({
     name: formData.get('name'),
     email: formData.get('email'),
     message: formData.get('message'),
     b2b: formData.get('b2b')
   })
-  if(!result.success) throw new Error('Invalid submission')
+  if (!result.success) throw new Error('Invalid submission')
 
   const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null
   const to = process.env.SALES_EMAIL || 'sales@lueandperez.com'
@@ -28,10 +28,10 @@ Email: ${result.data.email}
 Requirements:
 ${result.data.message}`
 
-  if(resend){
+  if (resend) {
     await resend.emails.send({ from, to, subject: 'New B2B RFP — Lue & Perez', text: body })
   } else {
-    console.log('[RFP]', body) // visible in your terminal during dev
+    console.log('[RFP]', body) // Visible in logs locally or on Vercel
   }
-  return { ok: true }
+  // Return nothing (void) to satisfy Next.js Server Actions typing
 }

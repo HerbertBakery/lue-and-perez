@@ -3,8 +3,8 @@ export default function Page(){
   return (
     <main style={{padding:24}}>
       <h1>Video Test</h1>
-     <video
-  poster="/media/hero-poster.jpg?v=8"
+    <video
+  poster="/media/hero-poster.jpg?v=9"
   autoPlay
   muted
   loop
@@ -19,10 +19,11 @@ export default function Page(){
     background: '#0e0e0e'
   }}
 >
-  {/* H.264 first for Chrome/Firefox/Edge, HEVC as fallback for Safari */}
-  <source src="/media/hero-h264.mp4?v=8" type='video/mp4; codecs="avc1.64001f, mp4a.40.2"' />
-  <source src="/media/hero.mp4?v=8"      type='video/mp4; codecs="hvc1"' />
+  {/* H.264 first for Chrome/Firefox/Edge, HEVC fallback for Safari */}
+  <source src="/media/hero-h264.mp4?v=9" type='video/mp4; codecs="avc1.64001f, mp4a.40.2"' />
+  <source src="/media/hero.mp4?v=9"      type='video/mp4; codecs="hvc1"' />
 </video>
+
 
     </main>
   )

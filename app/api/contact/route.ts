@@ -40,8 +40,9 @@ export async function POST(req: Request) {
       to,
       subject,
       html,
-      // Resend supports `reply_to` (snake_case)
+      // Resend supports snake_case
       reply_to: email || undefined,
+      replyTo: email || undefined,
     });
 
     if (error) {

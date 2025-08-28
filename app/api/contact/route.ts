@@ -42,7 +42,6 @@ export async function POST(req: Request) {
       html,
       // Resend supports snake_case
       reply_to: email || undefined,
-      replyTo: email || undefined,
     });
 
     if (error) {

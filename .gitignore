@@ -11,3 +11,9 @@ public/media/*-source.*
 *.mkv
 *.avi
 *.prores.*
+public/media/originals/**
+public/media/*-source.*
+*.mov
+*.mkv
+*.avi
+*.prores.*

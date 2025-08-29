@@ -1,63 +1,48 @@
-import VideoHero from '@/components/VideoHero'
-import VideoPanel from '@/components/VideoPanel'
-import Link from 'next/link'
+import HeroVideo from "@/components/HeroVideo";
+import VideoGallery from "@/components/VideoGallery";
 
-export default function HomePage(){
+export default function HomePage() {
+  const featured = [
+    {
+      title: "Cold Chain",
+      mp4Src: "/media/cold-chain.mp4",
+      webmSrc: "/media/cold-chain.webm",
+      poster: "/media/cold-chain.jpg",
+      description: "End-to-end temperature-controlled storage & freight.",
+    },
+    {
+      title: "Multi-Supplier Pickups",
+      mp4Src: "/media/multi-supplier-pickups.mp4",
+      webmSrc: "/media/multi-supplier-pickups.webm",
+      poster: "/media/multi-supplier-pickups.jpg",
+      description: "We consolidate from multiple vendors so you don’t have to.",
+    },
+    {
+      title: "Supplier Discovery",
+      mp4Src: "/media/supplier-discovery.mp4",
+      webmSrc: "/media/supplier-discovery.webm",
+      poster: "/media/supplier-discovery.jpg",
+      description: "We match you with vetted Caribbean producers at scale.",
+    },
+    {
+      title: "Co-Packing & Private Label",
+      mp4Src: "/media/co-packing-private-label.mp4",
+      webmSrc: "/media/co-packing-private-label.webm",
+      poster: "/media/co-packing-private-label.jpg",
+      description: "Recipe, packaging, and brand—all under strict QA.",
+    },
+  ];
+
   return (
-    <>
-      <VideoHero
-        src="/media/hero.mp4"
-        title="Caribbean Foods, Delivered Globally — B2B Only"
-        subtitle="From Trinidad & Tobago to the world: export logistics, consolidation, sourcing, and manufacturing."
-        ctaHref="/contact"
-        ctaLabel="Request a Quote"
+    <main className="flex flex-col">
+      <HeroVideo
+        mp4Src="/media/hero-wide.mp4"
+        webmSrc="/media/hero-wide.webm"
+        poster="/media/hero-wide.jpg"
+        headline="Caribbean Export • Cold Chain • Consolidation"
+        subhead="Multi-supplier pickups, supplier discovery, co-packing & private label—handled."
       />
-
-      <div className="py-12 container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-extrabold">What We Do</h2>
-        <p className="mt-3 text-slate-600 max-w-2xl">End-to-end B2B support across export lanes, supplier consolidation, compliant sourcing, and co-packing.</p>
-      </div>
-
-      <VideoPanel
-        eyebrow="Export Logistics"
-        title="Cold chain & customs without the drama"
-        body="FCL/LCL planning, export permits, HS classification, customs documentation, and insured routes for ambient/chilled/frozen."
-        href="/services/export-logistics"
-        src="/media/hero.mp4"
-      />
-      <VideoPanel
-        eyebrow="Consolidation"
-        title="Multi-supplier pickups, QA, palletization"
-        body="We coordinate suppliers, validate shelf-life, and build pallets with correct labeling and ASN docs."
-        href="/services/consolidation"
-        src="/media/hero.mp4"
-        reverse
-      />
-      <VideoPanel
-        eyebrow="Sourcing"
-        title="Supplier discovery & compliance vetting"
-        body="Category research, price benchmarking, GMP/HACCP checks, and documentation feasibility for your target markets."
-        href="/services/sourcing"
-        src="/media/hero.mp4"
-      />
-      <VideoPanel
-        eyebrow="Manufacturing"
-        title="Co-packing & private label"
-        body="Recipe scale-up, label translations, nutrition panels, and export-ready packaging—ambient and frozen."
-        href="/services/manufacturing"
-        src="/media/hero.mp4"
-        reverse
-      />
-
-      <section className="py-12">
-        <div className="container mx-auto px-4 rounded-2xl bg-teal-700 text-white p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div>
-            <h3 className="text-2xl md:text-3xl font-extrabold">Ready for a proposal?</h3>
-            <p className="mt-2 text-teal-50">Send us your SKUs, quantities, and destination—we’ll revert with pricing and lead times.</p>
-          </div>
-          <Link href="/contact" className="rounded-xl bg-white text-teal-800 px-6 py-3 font-semibold hover:bg-teal-50">Start an RFP</Link>
-        </div>
-      </section>
-    </>
-  )
+      <VideoGallery items={featured} />
+    </main>
+  );
 }

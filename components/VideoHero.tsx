@@ -1,50 +1,52 @@
-import Link from 'next/link'
+"use client";
+import React from "react";
 
-export default function VideoHero({
-  src = '/media/hero.mp4',
-  poster = undefined,
-  title = 'Caribbean Foods, Delivered Globally — B2B Only',
-  subtitle = 'Export logistics • Consolidation • Sourcing • Manufacturing',
-  ctaHref = '/contact',
-  ctaLabel = 'Request a Quote',
-}: {
-  src?: string
-  poster?: string
-  title?: string
-  subtitle?: string
-  ctaHref?: string
-  ctaLabel?: string
-}) {
+type Props = {
+  mp4Src: string;
+  webmSrc?: string;
+  poster?: string;
+  headline?: string;
+  subhead?: string;
+};
+
+export default function HeroVideo({
+  mp4Src,
+  webmSrc,
+  poster,
+  headline = "Caribbean Export • Cold Chain • Consolidation",
+  subhead = "Multi-supplier pickups, supplier discovery, co-packing & private label—handled.",
+}: Props) {
   return (
-    <section className="relative h-[70vh] md:h-[85vh] w-full overflow-hidden">
-      <div className="absolute inset-0 -z-10">
-        <video
-          className="h-full w-full object-cover"
-          src={src}
-          playsInline
-          autoPlay
-          loop
-          muted
-          preload="metadata"
-          poster={poster}
-          aria-label="Warehouse and export logistics video background"
-        />
-      </div>
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/25 to-black/60" />
-      <div className="relative z-10 container mx-auto px-4 h-full flex items-center">
-        <div className="max-w-3xl text-white">
-          <h1 className="text-4xl md:text-6xl font-extrabold leading-tight drop-shadow">{title}</h1>
-          <p className="mt-4 text-lg md:text-xl text-slate-100/90">{subtitle}</p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link href={ctaHref} className="rounded-xl bg-teal-600 px-6 py-3 font-semibold text-white hover:bg-teal-700">
-              {ctaLabel}
-            </Link>
-            <Link href="/services" className="rounded-xl bg-white/10 px-6 py-3 font-semibold text-white ring-1 ring-white/30 hover:bg-white/20">
-              View Services
-            </Link>
+    <section className="relative w-full">
+      <div className="absolute inset-0 bg-black/30 z-10" />
+      <video
+        className="w-full h-[55vh] md:h-[70vh] object-cover"
+        autoPlay
+        muted
+        loop
+        playsInline
+        poster={poster}
+        preload="auto"
+      >
+        {webmSrc && <source src={webmSrc} type="video/webm" />}
+        <source src={mp4Src} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
+      <div className="absolute inset-0 z-20 flex items-center">
+        <div className="mx-auto w-full max-w-6xl px-4">
+          <div className="max-w-2xl">
+            <h1 className="text-white text-3xl md:text-5xl font-semibold drop-shadow">
+              {headline}
+            </h1>
+            <p className="mt-3 text-white/90 text-base md:text-lg">
+              {subhead}
+            </p>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
+}
+
 }

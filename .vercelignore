@@ -1,0 +1,15 @@
+# keep heavy source assets out of Vercel uploads
+assets_src/
+
+# extra safety (optional)
+*.mov
+*.mkv
+*.mxf
+*.zip
+*.tar
+*.tar.gz
+*.7z
+
+# these shouldn’t be uploaded either
+.next/
+.DS_Store

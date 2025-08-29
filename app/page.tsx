@@ -4,7 +4,7 @@ import VideoBlock from "@/components/VideoBlock";
 export default function HomePage() {
   return (
     <main className="flex flex-col">
-      {/* Single, wide-angle hero at the top */}
+      {/* Single wide-angle hero (unchanged behavior) */}
       <VideoHero
         mp4Src="/media/hero-wide.mp4"
         webmSrc="/media/hero-wide.webm"
@@ -13,7 +13,7 @@ export default function HomePage() {
         subhead="Trusted supply, multi-supplier pickups, cold chain, co-packing & private label—handled end-to-end."
       />
 
-      {/* Vertical, one-by-one autoplay sections */}
+      {/* Vertical, simple, uniform sections (same copy as before) */}
       <VideoBlock
         title="Cold Chain"
         description="End-to-end temperature-controlled storage and freight—from factory to destination—monitored and documented at every step."

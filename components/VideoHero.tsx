@@ -9,7 +9,7 @@ type Props = {
   subhead?: string;
 };
 
-export default function HeroVideo({
+export default function VideoHero({
   mp4Src,
   webmSrc,
   poster,
@@ -27,10 +27,11 @@ export default function HeroVideo({
         playsInline
         poster={poster}
         preload="auto"
+        onError={(e) => console.error("HERO VIDEO ERROR", e.currentTarget.error)}
+        onCanPlay={() => console.log("HERO canplay")}
       >
         {webmSrc && <source src={webmSrc} type="video/webm" />}
         <source src={mp4Src} type="video/mp4" />
-        Your browser does not support the video tag.
       </video>
 
       <div className="absolute inset-0 z-20 flex items-center">
@@ -47,6 +48,4 @@ export default function HeroVideo({
       </div>
     </section>
   );
-}
-
 }

@@ -1,61 +1,50 @@
+import VideoHero from "@/components/VideoHero";
+import VideoBlock from "@/components/VideoBlock";
+
 export default function HomePage() {
   return (
     <main className="flex flex-col">
-      {/* HERO */}
-      <section className="relative w-full">
-        <div className="absolute inset-0 bg-black/30 z-10" />
-        <video
-          className="w-full h-[55vh] md:h-[70vh] object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster="/media/hero-wide.jpg"
-          preload="auto"
-        >
-          <source src="/media/hero-wide.webm" type="video/webm" />
-          <source src="/media/hero-wide.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 z-20 flex items-center">
-          <div className="mx-auto w-full max-w-6xl px-4">
-            <h1 className="text-white text-3xl md:text-5xl font-semibold drop-shadow">
-              Caribbean Export • Cold Chain • Consolidation
-            </h1>
-            <p className="mt-3 text-white/90 text-base md:text-lg">
-              Multi-supplier pickups, supplier discovery, co-packing & private label—handled.
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* Single, wide-angle hero at the top */}
+      <VideoHero
+        mp4Src="/media/hero-wide.mp4"
+        webmSrc="/media/hero-wide.webm"
+        poster="/media/hero-wide.jpg"
+        headline="Caribbean Food Export • Sourcing • Consolidation"
+        subhead="Trusted supply, multi-supplier pickups, cold chain, co-packing & private label—handled end-to-end."
+      />
 
-      {/* FOUR CLIPS */}
-      <section className="w-full py-10">
-        <div className="mx-auto w-full max-w-6xl px-4 grid grid-cols-1 md:grid-cols-2 gap-6">
-          {[
-            {t:"Cold Chain", f:"cold-chain"},
-            {t:"Multi-Supplier Pickups", f:"multi-supplier-pickups"},
-            {t:"Supplier Discovery", f:"supplier-discovery"},
-            {t:"Co-Packing & Private Label", f:"co-packing-private-label"},
-          ].map((v) => (
-            <article key={v.f} className="rounded-2xl overflow-hidden shadow">
-              <div className="aspect-video bg-black">
-                <video
-                  className="w-full h-full object-cover"
-                  controls
-                  playsInline
-                  preload="metadata"
-                  poster={`/media/${v.f}.jpg`}
-                >
-                  <source src={`/media/${v.f}.webm`} type="video/webm" />
-                  <source src={`/media/${v.f}.mp4`} type="video/mp4" />
-                </video>
-              </div>
-              <div className="p-4"><h3 className="font-medium">{v.t}</h3></div>
-            </article>
-          ))}
-        </div>
-      </section>
+      {/* Vertical, one-by-one autoplay sections */}
+      <VideoBlock
+        title="Cold Chain"
+        description="End-to-end temperature-controlled storage and freight—from factory to destination—monitored and documented at every step."
+        mp4Src="/media/cold-chain.mp4"
+        webmSrc="/media/cold-chain.webm"
+        poster="/media/cold-chain.jpg"
+      />
+
+      <VideoBlock
+        title="Multi-Supplier Pickups"
+        description="We coordinate and consolidate pickups across multiple suppliers, so your goods arrive together—on time, with clean paperwork."
+        mp4Src="/media/multi-supplier-pickups.mp4"
+        webmSrc="/media/multi-supplier-pickups.webm"
+        poster="/media/multi-supplier-pickups.jpg"
+      />
+
+      <VideoBlock
+        title="Supplier Discovery"
+        description="We match you with vetted Caribbean producers at scale—aligned on quality, certifications, capacity, and pricing."
+        mp4Src="/media/supplier-discovery.mp4"
+        webmSrc="/media/supplier-discovery.webm"
+        poster="/media/supplier-discovery.jpg"
+      />
+
+      <VideoBlock
+        title="Co-Packing & Private Label"
+        description="Recipe development, packaging, and brand execution under strict QA—so you can launch or scale with confidence."
+        mp4Src="/media/co-packing-private-label.mp4"
+        webmSrc="/media/co-packing-private-label.webm"
+        poster="/media/co-packing-private-label.jpg"
+      />
     </main>
   );
 }
-

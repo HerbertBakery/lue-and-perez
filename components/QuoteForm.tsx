@@ -1,62 +1,80 @@
-'use client';
-import React, { useState } from 'react';
+"use client";
+import React, { useState, FormEvent } from "react";
+
+type Status = "idle" | "sending" | "ok" | "error";
 
 export default function QuoteForm() {
-  const [status, setStatus] = useState<'idle'|'sending'|'ok'|'err'>('idle');
-  const [msg, setMsg] = useState('');
+  const [status, setStatus] = useState<Status>("idle");
+  const [error, setError] = useState<string>("");
 
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setStatus('sending'); setMsg('');
-    const fd = new FormData(e.currentTarget);
+    setError("");
+    setStatus("sending");
 
-    // honeypot
-    if (fd.get('website')) { setStatus('ok'); (e.currentTarget as HTMLFormElement).reset(); return; }
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    const name = (data.get("name") || "").toString().trim();
+    const email = (data.get("email") || "").toString().trim();
+    const phone = (data.get("phone") || "").toString().trim();
+    const message = (data.get("message") || "").toString().trim();
 
-    const payload: Record<string,string> = {};
-    fd.forEach((v,k) => { payload[k] = String(v); });
+    if (!name || !email || !message) {
+      setStatus("error");
+      setError("Please fill in name, email, and message.");
+      return;
+    }
 
     try {
-      const r = await fetch('/api/quote', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, phone, message }),
       });
-      if (!r.ok) throw new Error(await r.text());
-      setStatus('ok');
-      (e.currentTarget as HTMLFormElement).reset();
-    } catch (err: any) {
-      setStatus('err'); setMsg(err?.message || 'Something went wrong');
+      const json = await res.json().catch(() => ({}));
+
+      if (!res.ok || !json?.ok) {
+        setStatus("error");
+        setError(json?.error || "Send failed.");
+        return;
+      }
+
+      setStatus("ok");
+      form.reset();
+    } catch (err) {
+      setStatus("error");
+      setError("Network error. Please try again.");
     }
   }
 
-  const input = { width:'100%', padding:8, border:'1px solid #ccc', borderRadius:8 } as const;
-  const label = { display:'block', marginBottom:8 } as const;
-  const row   = { display:'grid', gridTemplateColumns:'1fr 1fr', gap:12 } as const;
-
   return (
-    <form onSubmit={onSubmit} style={{ display:'grid', gap:12, marginTop:16 }}>
-      <div style={row}>
-        <label style={label}><div style={{fontSize:12,marginBottom:4}}>Company *</div><input name="company" required style={input} /></label>
-        <label style={label}><div style={{fontSize:12,marginBottom:4}}>Contact name *</div><input name="name" required style={input} /></label>
+    <form onSubmit={onSubmit} className="space-y-4 max-w-xl">
+      <div className="grid md:grid-cols-2 gap-4">
+        <input name="name" placeholder="Your name *" required
+          className="w-full rounded-xl border px-3 py-2" />
+        <input name="email" type="email" placeholder="Email *" required
+          className="w-full rounded-xl border px-3 py-2" />
       </div>
-      <div style={row}>
-        <label style={label}><div style={{fontSize:12,marginBottom:4}}>Email *</div><input type="email" name="email" required style={input} /></label>
-        <label style={label}><div style={{fontSize:12,marginBottom:4}}>Phone</div><input name="phone" style={input} /></label>
-      </div>
-      <label style={label}><div style={{fontSize:12,marginBottom:4}}>Destination country *</div><input name="country" required style={input} /></label>
-      <label style={label}><div style={{fontSize:12,marginBottom:4}}>Products/SKUs & quantities *</div><textarea name="products" required rows={4} style={{...input, resize:'vertical'} as any} /></label>
-      <label style={label}><div style={{fontSize:12,marginBottom:4}}>Notes (Incoterms, target price, timeline)</div><textarea name="notes" rows={3} style={{...input, resize:'vertical'} as any} /></label>
-
-      {/* hidden honeypot */}
-      <input type="text" name="website" autoComplete="off" style={{position:'absolute',left:-10000,top:'auto',width:1,height:1,overflow:'hidden'}} />
-
-      <button disabled={status==='sending'} style={{padding:'10px 16px',borderRadius:12,color:'#fff',background:'#0a8f77',border:'none',cursor: status==='sending'?'default':'pointer',opacity: status==='sending'?0.7:1}}>
-        {status==='sending' ? 'Sending…' : 'Request a Quote'}
+      <input name="phone" placeholder="Phone"
+        className="w-full rounded-xl border px-3 py-2" />
+      <textarea name="message" placeholder="What can we help with? *" rows={5} required
+        className="w-full rounded-xl border px-3 py-2" />
+      <button
+        type="submit"
+        disabled={status === "sending"}
+        className="inline-flex items-center rounded-xl bg-teal-700 px-4 py-2 text-white font-semibold shadow-sm hover:bg-teal-800 disabled:opacity-60"
+      >
+        {status === "sending" ? "Sending…" : "Request a Quote"}
       </button>
 
-      {status==='ok'  && <p style={{color:'#0a8f77'}}>Thanks! We’ll reply within 1 business day.</p>}
-      {status==='err' && <p style={{color:'#b00020'}}>Couldn’t submit. {msg}</p>}
+      <div aria-live="polite" className="text-sm">
+        {status === "ok" && (
+          <p className="text-green-700 mt-2">Thanks! We’ll get back to you shortly.</p>
+        )}
+        {status === "error" && (
+          <p className="text-red-700 mt-2">{error || "Something went wrong."}</p>
+        )}
+      </div>
     </form>
   );
 }

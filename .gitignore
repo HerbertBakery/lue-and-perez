@@ -5,3 +5,9 @@ out
 .DS_Store
 .vercel
 assets_src/
+public/media/originals/**
+public/media/*-source.*
+*.mov
+*.mkv
+*.avi
+*.prores.*

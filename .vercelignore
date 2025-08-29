@@ -1,12 +1,7 @@
-# never upload repo history or local deps
 .git/**
 node_modules/**
-
-# exclude raw/original media and source bins
 assets_src/**
 public/media/originals/**
-
-# common big containers to exclude anywhere
 *.mov
 *.mkv
 *.avi

@@ -1,15 +1,16 @@
-# keep heavy source assets out of Vercel uploads
-assets_src/
+# never upload repo history or local deps
+.git/**
+node_modules/**
 
-# extra safety (optional)
+# exclude raw/original media and source bins
+assets_src/**
+public/media/originals/**
+
+# common big containers to exclude anywhere
 *.mov
 *.mkv
-*.mxf
+*.avi
+*.prores.*
+*.dmg
 *.zip
 *.tar
-*.tar.gz
-*.7z
-
-# these shouldn’t be uploaded either
-.next/
-.DS_Store

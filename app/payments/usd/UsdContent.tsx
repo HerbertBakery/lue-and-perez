@@ -1,152 +1,119 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-
-const USD = {
-  bankName: process.env.NEXT_PUBLIC_USD_BANK_NAME || "—",
-  accountName: process.env.NEXT_PUBLIC_USD_ACCOUNT_NAME || "—",
-  accountNumber: process.env.NEXT_PUBLIC_USD_ACCOUNT_NUMBER || "—",
-  routingOrSwift: process.env.NEXT_PUBLIC_USD_ROUTING_OR_SWIFT || "",
-  iban: process.env.NEXT_PUBLIC_USD_IBAN || "",
-  beneficiaryAddress: process.env.NEXT_PUBLIC_USD_BENEFICIARY_ADDRESS || "—",
-  bankAddress: process.env.NEXT_PUBLIC_USD_BANK_ADDRESS || "—",
-  notes: process.env.NEXT_PUBLIC_USD_NOTES || "",
-};
-
-const CONTACT_EMAIL = process.env.NEXT_PUBLIC_PAYMENTS_EMAIL || "";
-
-function copy(text: string) {
-  navigator.clipboard.writeText(text);
-}
+import { useMemo, useState } from "react";
 
 export default function UsdContent() {
-  // Keeping this here so if you rely on URL params, it’s safe and inside Suspense.
   const search = useSearchParams();
-  // (Optional) Example usage, not required:
-  const ref = search.get("ref") || "";
+  const initialAmount = (() => {
+    const q = search?.get("amount");
+    const n = q ? Number(q) : NaN;
+    return Number.isFinite(n) ? n : 0;
+  })();
+  const [amount, setAmount] = useState<number>(initialAmount);
+  const [link, setLink] = useState<string>(search?.get("link") || search?.get("invoice") || "");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const allDetails = [
-    "Lue & Perez — USD Bank Transfer",
-    `Bank: ${USD.bankName}`,
-    `Account name: ${USD.accountName}`,
-    `Account number: ${USD.accountNumber}`,
-    USD.routingOrSwift ? `Routing / SWIFT: ${USD.routingOrSwift}` : "",
-    USD.iban ? `IBAN: ${USD.iban}` : "",
-    `Beneficiary Address: ${USD.beneficiaryAddress}`,
-    `Bank Address: ${USD.bankAddress}`,
-    USD.notes ? `Notes: ${USD.notes}` : "",
-  ]
-    .filter(Boolean)
-    .join("\n");
+  const amountCents = useMemo(
+    () => Math.round((Number.isFinite(amount) ? amount : 0) * 100),
+    [amount]
+  );
+  const canPay = amountCents >= 50; // Stripe min is 50¢
+
+  async function handlePay() {
+    setError(null);
+    if (!canPay) {
+      setError("Enter at least $0.50");
+      return;
+    }
+    setLoading(true);
+    try {
+      const res = await fetch("/api/stripe/checkout/custom-amount", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ amountCents }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data?.url) {
+        throw new Error(data?.message || data?.error || "Failed to create Stripe Checkout session.");
+      }
+      window.location.href = data.url as string;
+    } catch (e: any) {
+      setLoading(false);
+      setError(e?.message || "Something went wrong.");
+    }
+  }
+
+  function openLink() {
+    let url = link.trim();
+    if (!url) return;
+    if (!/^https?:\/\//i.test(url)) url = "https://" + url;
+    window.open(url, "_blank", "noopener,noreferrer");
+  }
 
   return (
     <main className="max-w-3xl mx-auto py-10 space-y-8">
       <header className="space-y-2">
-        <h1 className="text-3xl font-semibold">Bank Transfer (USD)</h1>
+        <h1 className="text-3xl font-semibold">USD Payments</h1>
         <p className="text-gray-700">
-          Use these instructions to pay in <strong>US Dollars (USD)</strong>.
-          Please include your <strong>invoice number</strong>
-          {ref ? ` (${ref})` : ""} in the payment reference.
+          Pay a <strong>custom amount</strong> with Stripe, or paste an existing Stripe invoice/payment link.
         </p>
       </header>
 
+      {/* Pay a custom amount (Stripe Checkout) */}
       <section className="border rounded-2xl p-5 bg-white space-y-3">
-        <h2 className="text-xl font-medium">Bank details</h2>
+        <h2 className="text-xl font-medium">Pay a custom amount</h2>
 
-        <ul className="divide-y">
-          <li className="py-2 flex items-center justify-between gap-4">
-            <div>
-              <div className="text-sm text-gray-500">Bank</div>
-              <div className="font-medium">{USD.bankName}</div>
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-3 items-end">
+          <div className="space-y-1">
+            <label className="text-sm text-gray-600">Amount (USD)</label>
+            <div className="flex items-center gap-2">
+              <span className="px-3 py-2 border rounded bg-gray-50">$</span>
+              <input
+                className="border p-2 rounded w-full"
+                type="number"
+                min="0.50"
+                step="0.01"
+                inputMode="decimal"
+                placeholder="0.50"
+                value={Number.isFinite(amount) && amount > 0 ? amount : ""}
+                onChange={(e) => setAmount(Number(e.target.value))}
+              />
             </div>
-            <button onClick={() => copy(USD.bankName)} className="border rounded px-3 py-1 text-sm">Copy</button>
-          </li>
+            <p className="text-xs text-gray-500">Minimum $0.50</p>
+          </div>
 
-          <li className="py-2 flex items-center justify-between gap-4">
-            <div>
-              <div className="text-sm text-gray-500">Account name</div>
-              <div className="font-medium">{USD.accountName}</div>
-            </div>
-            <button onClick={() => copy(USD.accountName)} className="border rounded px-3 py-1 text-sm">Copy</button>
-          </li>
-
-          <li className="py-2 flex items-center justify-between gap-4">
-            <div>
-              <div className="text-sm text-gray-500">Account number</div>
-              <div className="font-medium tracking-wider">{USD.accountNumber}</div>
-            </div>
-            <button onClick={() => copy(USD.accountNumber)} className="border rounded px-3 py-1 text-sm">Copy</button>
-          </li>
-
-          {!!USD.routingOrSwift && (
-            <li className="py-2 flex items-center justify-between gap-4">
-              <div>
-                <div className="text-sm text-gray-500">Routing / SWIFT</div>
-                <div className="font-medium">{USD.routingOrSwift}</div>
-              </div>
-              <button onClick={() => copy(USD.routingOrSwift)} className="border rounded px-3 py-1 text-sm">Copy</button>
-            </li>
-          )}
-
-          {!!USD.iban && (
-            <li className="py-2 flex items-center justify-between gap-4">
-              <div>
-                <div className="text-sm text-gray-500">IBAN</div>
-                <div className="font-medium">{USD.iban}</div>
-              </div>
-              <button onClick={() => copy(USD.iban)} className="border rounded px-3 py-1 text-sm">Copy</button>
-            </li>
-          )}
-
-          <li className="py-2 flex items-center justify-between gap-4">
-            <div>
-              <div className="text-sm text-gray-500">Beneficiary Address</div>
-              <div className="font-medium">{USD.beneficiaryAddress}</div>
-            </div>
-            <button onClick={() => copy(USD.beneficiaryAddress)} className="border rounded px-3 py-1 text-sm">Copy</button>
-          </li>
-
-          <li className="py-2 flex items-center justify-between gap-4">
-            <div>
-              <div className="text-sm text-gray-500">Bank Address</div>
-              <div className="font-medium">{USD.bankAddress}</div>
-            </div>
-            <button onClick={() => copy(USD.bankAddress)} className="border rounded px-3 py-1 text-sm">Copy</button>
-          </li>
-        </ul>
-
-        {USD.notes && (
-          <p className="text-sm text-gray-600">
-            <span className="font-medium">Notes:</span> {USD.notes}
-          </p>
-        )}
-
-        <div className="flex flex-wrap gap-3 pt-2">
-          <button onClick={() => copy(allDetails)} className="px-4 py-2 rounded-2xl bg-black text-white">
-            Copy all details
-          </button>
-          <button onClick={() => window.print()} className="px-4 py-2 rounded-2xl border">
-            Print instructions
+          <button
+            type="button"
+            onClick={handlePay}
+            disabled={!canPay || loading}
+            className="px-4 py-2 rounded-2xl bg-black text-white disabled:opacity-50"
+          >
+            {loading ? "Processing…" : "Pay securely with Stripe"}
           </button>
         </div>
+
+        {error && <p className="text-sm text-red-600">{error}</p>}
       </section>
 
-      <section className="border rounded-2xl p-5 bg-white">
-        <h2 className="text-lg font-medium mb-2">How to pay</h2>
-        <ol className="list-decimal list-inside space-y-1 text-gray-700 text-sm">
-          <li>Add <strong>Lue &amp; Perez</strong> as a payee in your banking app.</li>
-          <li>Enter the bank details above exactly as shown.</li>
-          <li>Amount: as shown on your invoice (USD).</li>
-          <li>Reference: include your <strong>invoice number</strong>{ref ? ` (${ref})` : ""}.</li>
-          <li>
-            Send a payment confirmation/receipt to{" "}
-            {CONTACT_EMAIL ? (
-              <a className="underline" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
-            ) : (
-              "our email on your invoice"
-            )}.
-          </li>
-        </ol>
+      {/* Open a Stripe invoice or payment link */}
+      <section className="border rounded-2xl p-5 bg-white space-y-3">
+        <h2 className="text-xl font-medium">Open an invoice/payment link</h2>
+        <div className="flex gap-2">
+          <input
+            className="border p-2 rounded w-full"
+            placeholder="Paste a Stripe invoice/payment link (e.g. https://invoice.stripe.com/...)"
+            value={link}
+            onChange={(e) => setLink(e.target.value)}
+          />
+          <button type="button" onClick={openLink} className="px-4 py-2 rounded-2xl bg-black text-white">
+            Open
+          </button>
+        </div>
+        <p className="text-xs text-gray-500">
+          Accepts hosted invoice URLs, payment links, and checkout links.
+        </p>
       </section>
     </main>
   );

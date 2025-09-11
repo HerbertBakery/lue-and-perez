@@ -1,12 +1,8 @@
-import { Suspense } from "react";
 import UsdContent from "./UsdContent";
 
-export const dynamic = "force-dynamic"; // avoids prerender issues
+// ensure this page is always dynamic (no caching)
+export const dynamic = "force-dynamic";
 
 export default function Page() {
-  return (
-    <Suspense fallback={null}>
-      <UsdContent />
-    </Suspense>
-  );
+  return <UsdContent />;
 }

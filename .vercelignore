@@ -1,0 +1,11 @@
+.git/**
+node_modules/**
+assets_src/**
+public/media/originals/**
+*.mov
+*.mkv
+*.avi
+*.prores.*
+*.dmg
+*.zip
+*.tar

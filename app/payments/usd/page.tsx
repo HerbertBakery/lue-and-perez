@@ -1,15 +1,12 @@
-import Section from '@/components/Section'
-import { Breadcrumbs } from '@/components/Breadcrumbs'
-import USDClient from './Client'
+import { Suspense } from "react";
+import UsdContent from "./UsdContent";
 
-export const metadata = { title: 'USD Payments — Lue & Perez' }
+export const dynamic = "force-dynamic"; // avoids prerender issues
 
-export default function Page(){
+export default function Page() {
   return (
-    <Section className="py-12">
-      <Breadcrumbs items={[{href:'/payments', label:'Payments'},{href:'/payments/usd', label:'USD'}]} />
-      <h1 className="mt-4 text-3xl md:text-4xl font-extrabold">USD Portal (Stripe)</h1>
-      <USDClient />
-    </Section>
-  )
+    <Suspense fallback={null}>
+      <UsdContent />
+    </Suspense>
+  );
 }

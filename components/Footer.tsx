@@ -1,54 +1,50 @@
-import Link from 'next/link'
+import { headers } from "next/headers";
+import Stripe from "stripe";
 
-export default function Footer() {
-  return (
-    <footer className="py-12">
-      <div className="container mx-auto px-4 grid md:grid-cols-4 gap-8 text-sm">
-        {/* Brand */}
-        <div>
-          <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-teal-700" />
-            <span className="font-extrabold text-lg">Lue & Perez</span>
-          </div>
-          <p className="mt-3 text-slate-600">
-            B2B export partner for Caribbean foods — export logistics, consolidation, sourcing, and manufacturing.
-          </p>
-        </div>
+export const runtime = "nodejs";          // ✅ must be Node (not edge)
+export const dynamic = "force-dynamic";   // ✅ avoid caching for webhooks
 
-        {/* Company */}
-        <div>
-          <h4 className="font-semibold">Company</h4>
-          <ul className="mt-3 space-y-2">
-            <li><Link className="hover:text-teal-700" href="/services">Services</Link></li>
-            <li><Link className="hover:text-teal-700" href="/case-studies">What We’ve Done</Link></li>
-            <li><Link className="hover:text-teal-700" href="/markets-compliance">Markets & Compliance</Link></li>
-            <li><Link className="hover:text-teal-700" href="/contact">Contact</Link></li>
-          </ul>
-        </div>
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  apiVersion: "2024-06-20",
+});
 
-        {/* Payments */}
-        <div>
-          <h4 className="font-semibold">Payments</h4>
-          <ul className="mt-3 space-y-2">
-            <li><Link className="hover:text-teal-700" href="/payments/ttd">TTD Portal</Link></li>
-            <li><Link className="hover:text-teal-700" href="/payments/usd">USD Portal</Link></li>
-            <li><span className="text-slate-500">Invoices & bank wire available</span></li>
-          </ul>
-        </div>
+export async function POST(req: Request) {
+  const sig = headers().get("stripe-signature") || "";
+  const secret = process.env.STRIPE_WEBHOOK_SECRET;
+  if (!secret) {
+    return new Response("Missing STRIPE_WEBHOOK_SECRET", { status: 500 });
+  }
 
-        {/* Legal */}
-        <div>
-          <h4 className="font-semibold">Legal</h4>
-          <ul className="mt-3 space-y-2">
-            <li><Link className="hover:text-teal-700" href="/terms-of-service">Terms of Service</Link></li>
-            <li><Link className="hover:text-teal-700" href="/privacy-policy">Privacy Policy</Link></li>
-          </ul>
-        </div>
-      </div>
+  // Read raw body for signature verification
+  const body = await req.text();
 
-      <div className="container mx-auto px-4 mt-8 text-xs text-slate-500">
-        © {new Date().getFullYear()} Lue & Perez. All rights reserved.
-      </div>
-    </footer>
-  )
+  let event: Stripe.Event;
+  try {
+    event = stripe.webhooks.constructEvent(body, sig, secret);
+  } catch (err: any) {
+    return new Response(`Webhook Error: ${err.message}`, { status: 400 });
+  }
+
+  // Handle the events you subscribed to
+  switch (event.type) {
+    case "checkout.session.completed": {
+      const session = event.data.object as Stripe.Checkout.Session;
+      console.log("✅ Checkout completed:", session.id);
+      break;
+    }
+    case "payment_intent.succeeded": {
+      const pi = event.data.object as Stripe.PaymentIntent;
+      console.log("✅ PaymentIntent succeeded:", pi.id);
+      break;
+    }
+    case "invoice.paid": {
+      const inv = event.data.object as Stripe.Invoice;
+      console.log("✅ Invoice paid:", inv.id);
+      break;
+    }
+    default:
+      console.log("ℹ️ Unhandled event:", event.type);
+  }
+
+  return new Response("ok");
 }

@@ -1,40 +1,21 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
-import { headers } from "next/headers";
 
-function getBaseUrl() {
-  const h = headers();
-  const proto = h.get("x-forwarded-proto") || "https";
-  const host = h.get("x-forwarded-host") || h.get("host") || "localhost:3000";
-  // Use http for localhost
-  const isLocal = host.includes("localhost") || host.includes("127.0.0.1");
-  return `${isLocal ? "http" : proto}://${host}`;
-}
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: "2024-06-20" as any });
 
 export async function POST(req: Request) {
-  const key = process.env.STRIPE_SECRET_KEY;
-  if (!key) {
-    return NextResponse.json(
-      { ok: false, error: "Missing STRIPE_SECRET_KEY server env" },
-      { status: 500 }
-    );
-  }
-
-  const stripe = new Stripe(key); // rely on account API version
-
   try {
+    if (!process.env.STRIPE_SECRET_KEY) {
+      return NextResponse.json({ ok: false, error: "Missing STRIPE_SECRET_KEY" }, { status: 500 });
+    }
     const body = await req.json();
-    const raw = Number(body?.amountCents);
-    const amountCents = Math.floor(raw);
+    const amountCents = Math.floor(Number(body?.amountCents));
 
     if (!Number.isFinite(amountCents) || amountCents < 50) {
-      return NextResponse.json(
-        { ok: false, error: "Invalid amount. Minimum is 50 cents." },
-        { status: 400 }
-      );
+      return NextResponse.json({ ok: false, error: "Invalid amount. Minimum is 50 cents." }, { status: 400 });
     }
 
-    const base = getBaseUrl();
+    const base = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
@@ -49,19 +30,13 @@ export async function POST(req: Request) {
           quantity: 1,
         },
       ],
-      success_url: `${base}/payments/usd?status=success&amount=${amountCents}`,
-      cancel_url: `${base}/payments/usd?status=cancelled`,
-      // You can enable these if you want:
-      // billing_address_collection: "auto",
-      // allow_promotion_codes: true,
+      success_url: `${base}/payments/usd?status=success&session_id={CHECKOUT_SESSION_ID}&amount=${amountCents}`,
+      cancel_url:  `${base}/payments/usd?status=cancel`,
     });
 
     return NextResponse.json({ ok: true, id: session.id, url: session.url });
   } catch (err: any) {
     console.error("[checkout/custom-amount] error:", err);
-    return NextResponse.json(
-      { ok: false, error: err?.message || "Stripe error" },
-      { status: 500 }
-    );
-    }
+    return NextResponse.json({ ok: false, error: err?.message || "Stripe error" }, { status: 500 });
+  }
 }

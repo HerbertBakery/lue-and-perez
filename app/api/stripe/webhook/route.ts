@@ -1,47 +1,46 @@
 import { headers } from "next/headers";
 import Stripe from "stripe";
 
+export const runtime = "nodejs";        // run on Node (not edge)
+export const dynamic = "force-dynamic"; // no caching
+
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2024-06-20",
 });
 
-export const runtime = "nodejs"; // ✅ not edge
-export const config = { api: { bodyParser: false } }; // ✅ raw body
-
 export async function POST(req: Request) {
-  const sig = headers().get("stripe-signature");
+  const sig = headers().get("stripe-signature") || "";
+  const secret = process.env.STRIPE_WEBHOOK_SECRET;
+  if (!secret) return new Response("Missing STRIPE_WEBHOOK_SECRET", { status: 500 });
+
+  // Use raw text body for signature verification
   const body = await req.text();
 
   let event: Stripe.Event;
   try {
-    event = stripe.webhooks.constructEvent(
-      body,
-      sig!,
-      process.env.STRIPE_WEBHOOK_SECRET!
-    );
+    event = stripe.webhooks.constructEvent(body, sig, secret);
   } catch (err: any) {
     return new Response(`Webhook Error: ${err.message}`, { status: 400 });
   }
 
-  // Handle events you care about
   switch (event.type) {
     case "checkout.session.completed": {
       const session = event.data.object as Stripe.Checkout.Session;
-      console.log("✅ Checkout complete", session.id);
+      console.log("✅ Checkout completed:", session.id);
       break;
     }
     case "payment_intent.succeeded": {
       const pi = event.data.object as Stripe.PaymentIntent;
-      console.log("✅ Payment succeeded", pi.id);
+      console.log("✅ PaymentIntent succeeded:", pi.id);
       break;
     }
     case "invoice.paid": {
-      const invoice = event.data.object as Stripe.Invoice;
-      console.log("✅ Invoice paid", invoice.id);
+      const inv = event.data.object as Stripe.Invoice;
+      console.log("✅ Invoice paid:", inv.id);
       break;
     }
     default:
-      console.log(`Unhandled event type ${event.type}`);
+      console.log("ℹ️ Unhandled event:", event.type);
   }
 
   return new Response("ok");

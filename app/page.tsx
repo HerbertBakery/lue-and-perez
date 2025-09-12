@@ -10,12 +10,12 @@ export default function HomePage() {
         webmSrc="/media/hero-wide.webm"
         poster="/media/hero-wide.jpg"
         headline="Caribbean Food Export • Sourcing • Consolidation"
-        subhead="Trusted supply, multi-supplier pickups, cold chain, co-packing & private label—handled end-to-end."
+        subhead="Trusted supply, multi-supplier pickups, co-packing & private label—handled end-to-end."
       />
 
       {/* Vertical, simple, uniform sections (same copy as before) */}
       <VideoBlock
-        title="Cold Chain"
+        title="Scalable Manufacturing Solutions"
         description="End-to-end temperature-controlled storage and freight—from factory to destination—monitored and documented at every step."
         mp4Src="/media/cold-chain.mp4"
         webmSrc="/media/cold-chain.webm"
@@ -24,7 +24,7 @@ export default function HomePage() {
 
       <VideoBlock
         title="Multi-Supplier Pickups"
-        description="We coordinate and consolidate pickups across multiple suppliers, so your goods arrive together—on time, with clean paperwork."
+        description="We coordinate and consolidate pickups across multiple suppliers, so your goods arrive together—on time."
         mp4Src="/media/multi-supplier-pickups.mp4"
         webmSrc="/media/multi-supplier-pickups.webm"
         poster="/media/multi-supplier-pickups.jpg"

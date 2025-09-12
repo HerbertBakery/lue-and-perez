@@ -90,11 +90,11 @@ export default function UsdContent() {
             disabled={!canPay || loading}
             className="px-4 py-2 rounded-2xl bg-black text-white disabled:opacity-50"
           >
-            {loading ? "Processing…" : "Pay securely with Stripe"}
+            {loading ? "Processing…" : "Pay by card (Stripe)"}
           </button>
         </div>
 
-      {error && <p className="text-sm text-red-600">{error}</p>}
+        {error && <p className="text-sm text-red-600">{error}</p>}
       </section>
 
       {/* Open a Stripe invoice or payment link */}

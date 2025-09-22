@@ -1,126 +1,124 @@
-import Link from "next/link";
+"use client";
 
-/** Tiny inline icons to avoid extra deps */
-function LockIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
-      <path
-        d="M7 10V8a5 5 0 0 1 10 0v2h1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1h1zm2 0h6V8a3 3 0 0 0-6 0v2z"
-        fill="currentColor"
-      />
-    </svg>
-  );
-}
-function ShieldCheckIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
-      <path
-        d="M12 2l7 3v6c0 5-3.6 9-7 11-3.4-2-7-6-7-11V5l7-3zm-1 13l5-5-1.4-1.4L11 12.2 9.4 10.6 8 12l3 3z"
-        fill="currentColor"
-      />
-    </svg>
-  );
-}
-function BankIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
-      <path
-        d="M3 10l9-6 9 6v2H3v-2zm2 4h2v6H5v-6zm4 0h2v6H9v-6zm4 0h2v6h-2v-6zm4 0h2v6h-2v-6z"
-        fill="currentColor"
-      />
-    </svg>
-  );
-}
+import { useSearchParams } from "next/navigation";
+import { useMemo, useState } from "react";
 
-function SecureBadges() {
-  return (
-    <div className="flex flex-wrap items-center gap-3 text-xs text-slate-600">
-      <span className="inline-flex items-center gap-1 rounded-full border px-2 py-1">
-        <LockIcon className="h-3.5 w-3.5" /> Secured by Stripe
-      </span>
-      <span className="inline-flex items-center gap-1 rounded-full border px-2 py-1">
-        <ShieldCheckIcon className="h-3.5 w-3.5" /> PCI&nbsp;DSS Level&nbsp;1
-      </span>
-      <span className="inline-flex items-center gap-1 rounded-full border px-2 py-1">
-        <ShieldCheckIcon className="h-3.5 w-3.5" /> 3D Secure supported
-      </span>
-    </div>
-  );
-}
+// ensure this page is always dynamic (no caching)
+export const dynamic = "force-dynamic";
 
 export default function PaymentsPage() {
+  const search = useSearchParams();
+
+  const initialAmount = (() => {
+    const q = search?.get("amount");
+    const n = q ? Number(q) : NaN;
+    return Number.isFinite(n) ? n : 0;
+  })();
+  const [amount, setAmount] = useState<number>(initialAmount);
+  const [link, setLink] = useState<string>(search?.get("link") || search?.get("invoice") || "");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const amountCents = useMemo(
+    () => Math.round((Number.isFinite(amount) ? amount : 0) * 100),
+    [amount]
+  );
+  const canPay = amountCents >= 50; // Stripe min is 50¢
+
+  async function handlePay() {
+    setError(null);
+    if (!canPay) {
+      setError("Enter at least $0.50");
+      return;
+    }
+    setLoading(true);
+    try {
+      const res = await fetch("/api/stripe/checkout/custom-amount", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ amountCents }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data?.url) {
+        throw new Error(data?.message || data?.error || "Failed to create Stripe Checkout session.");
+      }
+      window.location.href = data.url as string;
+    } catch (e: any) {
+      setLoading(false);
+      setError(e?.message || "Something went wrong.");
+    }
+  }
+
+  function openLink() {
+    let url = link.trim();
+    if (!url) return;
+    if (!/^https?:\/\//i.test(url)) url = "https://" + url;
+    window.open(url, "_blank", "noopener,noreferrer");
+  }
+
   return (
     <main className="max-w-3xl mx-auto py-10 space-y-8">
       <header className="space-y-2">
-        <h1 className="text-3xl font-semibold">Choose a payment method</h1>
-        <p className="text-slate-700">
-          Select the option that works best for your team. Card payments are processed securely by Stripe.
+        <h1 className="text-3xl font-semibold">Payments</h1>
+        <p className="text-gray-700">
+          Pay a <strong>custom USD amount</strong> securely by card with Stripe, or paste an existing Stripe invoice/payment link.
         </p>
       </header>
 
-      {/* Bank transfer */}
-      <section className="rounded-2xl border bg-white p-5 shadow-sm">
-        <div className="flex items-start gap-3">
-          <BankIcon className="h-6 w-6 text-slate-700" />
-          <div className="flex-1 space-y-3">
-            <div className="flex items-center justify-between">
-              <h2 className="text-xl font-medium">Bank transfer</h2>
+      {/* Pay a custom amount (Stripe Checkout) */}
+      <section className="border rounded-2xl p-5 bg-white space-y-3">
+        <h2 className="text-xl font-medium">Pay a custom amount (USD)</h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-3 items-end">
+          <div className="space-y-1">
+            <label className="text-sm text-gray-600">Amount (USD)</label>
+            <div className="flex items-center gap-2">
+              <span className="px-3 py-2 border rounded bg-gray-50">$</span>
+              <input
+                className="border p-2 rounded w-full"
+                type="number"
+                min="0.50"
+                step="0.01"
+                inputMode="decimal"
+                placeholder="0.50"
+                value={Number.isFinite(amount) && amount > 0 ? amount : ""}
+                onChange={(e) => setAmount(Number(e.target.value))}
+              />
             </div>
-            <ul className="ml-5 list-disc space-y-1 text-sm text-slate-700">
-              <li>Local transfer; clears in 1–2 business days</li>
-              <li>Use your <strong>invoice number</strong> as the payment reference</li>
-              <li>Remit advice to <a className="underline" href="mailto:billing@lueandperez.com">billing@lueandperez.com</a></li>
-            </ul>
-            <Link
-              href="/payments/ttd"
-              className="inline-block rounded-2xl bg-black px-4 py-2 text-white"
-            >
-              View bank details
-            </Link>
+            <p className="text-xs text-gray-500">Minimum $0.50</p>
           </div>
+
+          <button
+            type="button"
+            onClick={handlePay}
+            disabled={!canPay || loading}
+            className="px-4 py-2 rounded-2xl bg-black text-white disabled:opacity-50"
+          >
+            {loading ? "Processing…" : "Pay by card (Stripe)"}
+          </button>
         </div>
+
+        {error && <p className="text-sm text-red-600">{error}</p>}
       </section>
 
-      {/* Card (Stripe) */}
-      <section className="rounded-2xl border bg-white p-5 shadow-sm">
-        <div className="flex items-start gap-3">
-          <LockIcon className="h-6 w-6 text-slate-700" />
-          <div className="flex-1 space-y-3">
-            <div className="flex items-center justify-between">
-              <h2 className="text-xl font-medium">Pay securely with Stripe</h2>
-            </div>
-
-            <ul className="ml-5 list-disc space-y-1 text-sm text-slate-700">
-              <li>Instant confirmation</li>
-              <li>Visa &amp; Mastercard (incl. Trinidad &amp; Tobago cards)</li>
-              <li>Charged in USD; your bank handles currency conversion</li>
-            </ul>
-
-            <SecureBadges />
-
-            <div className="mt-3 flex flex-wrap gap-3">
-              <Link
-                href="/payments/usd"
-                className="inline-block rounded-2xl bg-black px-4 py-2 text-white"
-              >
-                Pay securely with Stripe
-              </Link>
-              <Link
-                href="/payments/usd?focus=link"
-                className="inline-block rounded-2xl border px-4 py-2"
-              >
-                Open an invoice link
-              </Link>
-            </div>
-          </div>
+      {/* Open a Stripe invoice or payment link */}
+      <section className="border rounded-2xl p-5 bg-white space-y-3">
+        <h2 className="text-xl font-medium">Open an invoice/payment link</h2>
+        <div className="flex gap-2">
+          <input
+            className="border p-2 rounded w-full"
+            placeholder="Paste a Stripe invoice/payment link (e.g. https://invoice.stripe.com/...)"
+            value={link}
+            onChange={(e) => setLink(e.target.value)}
+          />
+          <button type="button" onClick={openLink} className="px-4 py-2 rounded-2xl bg-black text-white">
+            Open
+          </button>
         </div>
+        <p className="text-xs text-gray-500">
+          Accepts hosted invoice URLs, payment links, and checkout links.
+        </p>
       </section>
-
-      <p className="text-xs text-slate-500">
-        By paying, you agree to our{" "}
-        <Link className="underline" href="/terms-of-service">Terms of Service</Link> and{" "}
-        <Link className="underline" href="/privacy-policy">Privacy Policy</Link>.
-      </p>
     </main>
   );
 }

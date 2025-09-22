@@ -1,6 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+
 function NavLink({href,label}:{href:string,label:string}) {
   const pathname = usePathname()
   const active = pathname === href || pathname.startsWith(href + '/')
@@ -10,13 +11,18 @@ function NavLink({href,label}:{href:string,label:string}) {
     </Link>
   )
 }
+
 export default function Header(){
   return (
     <header className="border-b border-slate-200 bg-white/80 backdrop-blur sticky top-0 z-40">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2">
-          <div className="h-8 w-8 rounded-lg bg-teal-700" />
-          <span className="font-extrabold tracking-tight text-xl">Lue & Perez</span>
+        <Link href="/" className="flex items-center gap-3">
+          <img
+            src="/logo.png"  // adjust if your file is /logo.svg or in a subfolder
+            alt="Lue & Perez Logo"
+            className="h-12 w-auto md:h-14"
+          />
+          <span className="text-slate-700 font-semibold">Marketing &amp; Distribution</span>
         </Link>
         <nav className="hidden md:flex gap-6 text-sm">
           <NavLink href="/services" label="Services" />

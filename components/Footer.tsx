@@ -6,9 +6,13 @@ export default function Footer() {
       <div className="container mx-auto px-4 grid md:grid-cols-4 gap-8 text-sm">
         {/* Brand */}
         <div>
-          <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-teal-700" />
-            <span className="font-extrabold text-lg">Lue & Perez</span>
+          <div className="flex items-center gap-3">
+            <img
+              src="/logo.png"  // adjust if your file is /logo.svg or in a subfolder
+              alt="Lue & Perez Logo"
+              className="h-12 w-auto md:h-14"
+            />
+            <span className="text-slate-700 font-semibold">Marketing &amp; Distribution</span>
           </div>
           <p className="mt-3 text-slate-600">
             B2B export partner for Caribbean foods — export logistics, consolidation, sourcing, and manufacturing.
@@ -30,8 +34,7 @@ export default function Footer() {
         <div>
           <h4 className="font-semibold">Payments</h4>
           <ul className="mt-3 space-y-2">
-            <li><Link className="hover:text-teal-700" href="/payments/ttd">TTD Portal</Link></li>
-            <li><Link className="hover:text-teal-700" href="/payments/usd">USD Portal</Link></li>
+            <li><Link className="hover:text-teal-700" href="/payments">Pay by Card (USD)</Link></li>
             <li><span className="text-slate-500">Invoices & bank wire available</span></li>
           </ul>
         </div>

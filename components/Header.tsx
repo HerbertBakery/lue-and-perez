@@ -20,7 +20,7 @@ export default function Header(){
           <img
             src="/logo.png"  // adjust if your file is /logo.svg or in a subfolder
             alt="Lue & Perez Logo"
-            className="h-12 w-auto md:h-14"
+            className="h-16 w-auto md:h-20"
           />
           <span className="text-slate-700 font-semibold">Marketing &amp; Distribution</span>
         </Link>

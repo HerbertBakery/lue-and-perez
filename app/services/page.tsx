@@ -9,6 +9,8 @@ export default function ServicesPage(){
     { href:'/services/consolidation', title:'Consolidation', desc:'Multi-supplier pickups, QA, palletization, labeling.'},
     { href:'/services/sourcing', title:'Sourcing', desc:'Supplier discovery, price benchmarking, compliance vetting.'},
     { href:'/services/manufacturing', title:'Manufacturing', desc:'Co-packing, private label, regulatory/label review.'},
+    { href:'/caribbean-food-exports', title:'Caribbean Food Exports', desc:'End-to-end export partner: sourcing, consolidation, cold chain, documentation.' },
+
   ]
   return (
     <Section className="py-12">

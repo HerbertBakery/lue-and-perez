@@ -62,7 +62,7 @@ export default function HomePage() {
           </p>
           <Link
             href="/services"
-            className="inline-block rounded-md border px-4 py-2 text-sm font-medium hover:bg-gray-50"
+            className="inline-block rounded-xl bg-teal-700 px-5 py-3 text-white font-semibold hover:bg-teal-800"
           >
             Learn about our Caribbean Food Export services →
           </Link>

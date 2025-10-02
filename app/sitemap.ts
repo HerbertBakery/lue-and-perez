@@ -1,21 +1,51 @@
 // app/sitemap.ts
 import type { MetadataRoute } from "next";
 
-const SITE_URL = "https://www.lueandperez.com"; // set to your live domain
+const SITE_URL = "https://www.lueandperez.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = [
-    "/",
-    "/services",
-    "/services/export-logistics",
-    "/services/consolidation",
-    "/services/sourcing",
-    "/services/manufacturing",
-    "/caribbean-food-exports",
+  return [
+    {
+      url: `${SITE_URL}/`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 1,
+    },
+    {
+      url: `${SITE_URL}/services`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${SITE_URL}/services/export-logistics`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${SITE_URL}/services/consolidation`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${SITE_URL}/services/sourcing`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${SITE_URL}/services/manufacturing`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${SITE_URL}/caribbean-food-exports`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
   ];
-  return routes.map((r) => ({
-    url: `${SITE_URL}${r}`,
-    changeFrequency: r === "/" ? "weekly" : "monthly",
-    priority: r === "/" ? 1.0 : 0.8,
-  }));
 }

@@ -1,6 +1,7 @@
 import Section from '@/components/Section'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 import { sendRfp } from './sendRfp'
+import Script from 'next/script'  // ✅ add this
 
 export const metadata = { title: 'Contact / Request a Quote — Lue & Perez' }
 
@@ -13,6 +14,18 @@ export default function Page({ searchParams }: { searchParams?: { sent?: string;
       <Breadcrumbs items={[{href:'/contact', label:'Contact'}]} />
       <h1 className="mt-4 text-3xl md:text-4xl font-extrabold">Request a Quote</h1>
       <p className="mt-3 text-slate-600 max-w-2xl">Tell us SKUs, volumes, destination, and timelines. We’ll reply with pricing and lead times.</p>
+
+      {/* ✅ Fire GA4 lead event ONLY on success */}
+      {sent === '1' && (
+        <Script id="ga-generate-lead" strategy="afterInteractive">
+          {`
+            window.gtag && window.gtag('event', 'generate_lead', {
+              form_name: 'rfp_contact',
+              page_path: '/contact'
+            });
+          `}
+        </Script>
+      )}
 
       {sent === '1' && (
         <div className="mt-6 rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-green-800">

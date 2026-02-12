@@ -1,4 +1,14 @@
+'use client'
+
 import Link from 'next/link'
+
+function track(eventName: string, params: Record<string, any> = {}) {
+  // @ts-ignore
+  if (typeof window !== 'undefined' && window.gtag) {
+    // @ts-ignore
+    window.gtag('event', eventName, params)
+  }
+}
 
 export default function Footer() {
   return (
@@ -8,7 +18,7 @@ export default function Footer() {
         <div>
           <div className="flex items-center gap-3">
             <img
-              src="/logo.png"  // adjust if your file is /logo.svg or in a subfolder
+              src="/logo.png"
               alt="Lue & Perez Logo"
               className="h-16 w-auto md:h-20"
             />
@@ -26,7 +36,15 @@ export default function Footer() {
             <li><Link className="hover:text-teal-700" href="/services">Services</Link></li>
             <li><Link className="hover:text-teal-700" href="/case-studies">What We’ve Done</Link></li>
             <li><Link className="hover:text-teal-700" href="/markets-compliance">Markets & Compliance</Link></li>
-            <li><Link className="hover:text-teal-700" href="/contact">Contact</Link></li>
+            <li>
+              <Link
+                className="hover:text-teal-700"
+                href="/contact"
+                onClick={() => track('click_request_quote', { link_text: 'Contact (footer)', link_url: '/contact' })}
+              >
+                Contact
+              </Link>
+            </li>
           </ul>
         </div>
 
@@ -34,7 +52,15 @@ export default function Footer() {
         <div>
           <h4 className="font-semibold">Payments</h4>
           <ul className="mt-3 space-y-2">
-            <li><Link className="hover:text-teal-700" href="/payments">Pay by Card (USD)</Link></li>
+            <li>
+              <Link
+                className="hover:text-teal-700"
+                href="/payments"
+                onClick={() => track('click_payments', { link_text: 'Pay by Card (USD)', link_url: '/payments' })}
+              >
+                Pay by Card (USD)
+              </Link>
+            </li>
             <li><span className="text-slate-500">Invoices & bank wire available</span></li>
           </ul>
         </div>

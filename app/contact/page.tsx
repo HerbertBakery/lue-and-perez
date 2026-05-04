@@ -12,8 +12,21 @@ export default function Page({ searchParams }: { searchParams?: { sent?: string;
   return (
     <Section className="py-12">
       <Breadcrumbs items={[{href:'/contact', label:'Contact'}]} />
-      <h1 className="mt-4 text-3xl md:text-4xl font-extrabold">Request a Quote</h1>
-      <p className="mt-3 text-slate-600 max-w-2xl">Tell us SKUs, volumes, destination, and timelines. We’ll reply with pricing and lead times.</p>
+      <div className="mt-4 max-w-3xl">
+        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-700">Contact</p>
+        <h1 className="mt-2 text-3xl font-extrabold md:text-4xl">Talk to the Lue & Perez team</h1>
+        <p className="mt-3 max-w-2xl text-slate-600">
+          Use this form for general business inquiries, introductions, and partnership questions. If you already know your products, volumes, and destination, use the dedicated quote form for a faster commercial response.
+        </p>
+      </div>
+
+      <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-5 text-sm text-slate-700 shadow-sm">
+        For detailed sourcing or export requests, head to{" "}
+        <a href="/request-a-quote" className="font-semibold text-teal-700 underline underline-offset-2">
+          Request a Quote
+        </a>
+        .
+      </div>
 
       {/* ✅ Fire GA4 lead event ONLY on success */}
       {sent === '1' && (
@@ -38,7 +51,7 @@ export default function Page({ searchParams }: { searchParams?: { sent?: string;
         </div>
       )}
 
-      <form action={sendRfp} className="mt-8 grid md:grid-cols-2 gap-4 max-w-3xl">
+      <form action={sendRfp} className="mt-8 grid max-w-3xl gap-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:grid-cols-2">
         <div>
           <label className="text-sm font-medium" htmlFor="name">Company / Contact</label>
           <input id="name" name="name" required className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3" />

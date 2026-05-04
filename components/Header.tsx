@@ -1,14 +1,11 @@
 'use client'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useState } from 'react'
+import { Menu, X } from 'lucide-react'
 
-function track(eventName: string, params: Record<string, any> = {}) {
-  // @ts-ignore
-  if (typeof window !== 'undefined' && window.gtag) {
-    // @ts-ignore
-    window.gtag('event', eventName, params)
-  }
-}
+import SiteLogo from '@/components/SiteLogo'
+import { trackEvent } from '@/lib/analytics'
 
 function NavLink({
   href,
@@ -26,43 +23,84 @@ function NavLink({
     <Link
       href={href}
       onClick={() => {
-        if (trackEvent) track(trackEvent, { link_text: label, link_url: href })
+        if (trackEvent) trackEventFn(trackEvent, { link_text: label, link_url: href })
       }}
-      className={`hover:text-teal-700 ${active ? 'text-teal-700 font-semibold' : ''}`}
+      className={`rounded-md px-1 py-1 hover:text-teal-700 ${active ? 'text-teal-700 font-semibold' : ''}`}
     >
       {label}
     </Link>
   )
 }
 
+function trackEventFn(eventName: string, params: Record<string, unknown>) {
+  trackEvent(eventName, params)
+}
+
 export default function Header() {
+  const [open, setOpen] = useState(false)
+
+  const navItems = [
+    { href: '/services', label: 'Services' },
+    { href: '/case-studies', label: 'Case Studies' },
+    { href: '/markets-compliance', label: 'Markets & Compliance' },
+    { href: '/payments', label: 'Payments', trackEvent: 'click_payments' },
+    { href: '/contact', label: 'Contact', trackEvent: 'click_request_quote' },
+  ]
+
   return (
-    <header className="border-b border-slate-200 bg-white/80 backdrop-blur sticky top-0 z-40">
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-3">
-          <img
-            src="/logo.png"
-            alt="Lue & Perez Logo"
-            className="h-16 w-auto md:h-20"
-          />
-          <span className="text-slate-700 font-semibold">Marketing &amp; Distribution</span>
-        </Link>
+    <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/90 backdrop-blur">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between py-3">
+          <SiteLogo />
 
-        <nav className="hidden md:flex gap-6 text-sm">
-          <NavLink href="/services" label="Services" />
-          <NavLink href="/case-studies" label="Case Studies" />
-          <NavLink href="/markets-compliance" label="Markets & Compliance" />
-          <NavLink href="/payments" label="Payments" trackEvent="click_payments" />
-          <NavLink href="/contact" label="Contact" trackEvent="click_request_quote" />
-        </nav>
+          <nav className="hidden items-center gap-6 text-sm md:flex">
+            {navItems.map((item) => (
+              <NavLink key={item.href} href={item.href} label={item.label} trackEvent={item.trackEvent} />
+            ))}
+          </nav>
 
-        <Link
-          href="/contact"
-          onClick={() => track('click_request_quote', { link_text: 'Request a Quote', link_url: '/contact' })}
-          className="inline-flex items-center rounded-xl bg-teal-700 px-4 py-2 text-white text-sm font-semibold shadow-sm hover:bg-teal-800"
+          <div className="hidden md:block">
+            <Link
+              href="/request-a-quote"
+              onClick={() => trackEvent('click_request_quote', { link_text: 'Request a Quote', link_url: '/request-a-quote' })}
+              className="inline-flex items-center rounded-xl bg-teal-700 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-teal-800"
+            >
+              Request a Quote
+            </Link>
+          </div>
+
+          <button
+            type="button"
+            className="inline-flex items-center justify-center rounded-xl border border-slate-200 p-2 text-slate-700 md:hidden"
+            aria-expanded={open}
+            aria-controls="mobile-nav"
+            aria-label={open ? 'Close navigation' : 'Open navigation'}
+            onClick={() => setOpen((current) => !current)}
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
+
+        <nav
+          id="mobile-nav"
+          className={`${open ? 'grid' : 'hidden'} gap-2 border-t border-slate-200 py-3 md:hidden`}
         >
-          Request a Quote
-        </Link>
+          {navItems.map((item) => (
+            <div key={item.href} onClick={() => setOpen(false)}>
+              <NavLink href={item.href} label={item.label} trackEvent={item.trackEvent} />
+            </div>
+          ))}
+          <Link
+            href="/request-a-quote"
+            onClick={() => {
+              trackEvent('click_request_quote', { link_text: 'Request a Quote', link_url: '/request-a-quote' })
+              setOpen(false)
+            }}
+            className="mt-2 inline-flex items-center justify-center rounded-xl bg-teal-700 px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-teal-800"
+          >
+            Request a Quote
+          </Link>
+        </nav>
       </div>
     </header>
   )

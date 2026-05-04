@@ -1,14 +1,9 @@
 'use client'
 
 import Link from 'next/link'
+import SiteLogo from '@/components/SiteLogo'
 
-function track(eventName: string, params: Record<string, any> = {}) {
-  // @ts-ignore
-  if (typeof window !== 'undefined' && window.gtag) {
-    // @ts-ignore
-    window.gtag('event', eventName, params)
-  }
-}
+import { trackEvent } from '@/lib/analytics'
 
 export default function Footer() {
   return (
@@ -16,14 +11,7 @@ export default function Footer() {
       <div className="container mx-auto px-4 grid md:grid-cols-4 gap-8 text-sm">
         {/* Brand */}
         <div>
-          <div className="flex items-center gap-3">
-            <img
-              src="/logo.png"
-              alt="Lue & Perez Logo"
-              className="h-16 w-auto md:h-20"
-            />
-            <span className="text-slate-700 font-semibold">Marketing &amp; Distribution</span>
-          </div>
+          <SiteLogo compact />
           <p className="mt-3 text-slate-600">
             B2B export partner for Caribbean foods — export logistics, consolidation, sourcing, and manufacturing.
           </p>
@@ -40,7 +28,7 @@ export default function Footer() {
               <Link
                 className="hover:text-teal-700"
                 href="/contact"
-                onClick={() => track('click_request_quote', { link_text: 'Contact (footer)', link_url: '/contact' })}
+                onClick={() => trackEvent('click_request_quote', { link_text: 'Contact (footer)', link_url: '/contact' })}
               >
                 Contact
               </Link>
@@ -56,7 +44,7 @@ export default function Footer() {
               <Link
                 className="hover:text-teal-700"
                 href="/payments"
-                onClick={() => track('click_payments', { link_text: 'Pay with PayPal (USD)', link_url: '/payments' })}
+                onClick={() => trackEvent('click_payments', { link_text: 'Pay with PayPal (USD)', link_url: '/payments' })}
               >
                 Pay with PayPal (USD)
               </Link>

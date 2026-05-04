@@ -2,7 +2,67 @@
 @tailwind components;
 @tailwind utilities;
 
-:root { --background: #f8fafc; }
-body { background: var(--background); color: #0f172a; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; }
-.container { max-width: 1200px; }
-.grid-auto-fit { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+:root {
+  --background: #f8fafc;
+  --surface: #ffffff;
+  --foreground: #0f172a;
+  --muted: #475569;
+  --line: #e2e8f0;
+  --brand: #0f766e;
+  --brand-dark: #115e59;
+}
+
+html {
+  scroll-padding-top: 6rem;
+}
+
+body {
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 55%);
+  color: var(--foreground);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+}
+
+.grid-auto-fit {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+a,
+button,
+input,
+textarea,
+select {
+  transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease, opacity 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--brand) 78%, white);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: rgba(15, 118, 110, 0.18);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

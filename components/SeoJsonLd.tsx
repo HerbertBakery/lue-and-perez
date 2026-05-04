@@ -1,11 +1,15 @@
-// app/components/SeoJsonLd.tsx
-"use client";
+type JsonValue =
+  | string
+  | number
+  | boolean
+  | null
+  | { [key: string]: JsonValue }
+  | JsonValue[];
 
-export default function SeoJsonLd({ json }: { json: Record<string, any> }) {
+export default function SeoJsonLd({ json }: { json: JsonValue }) {
   return (
     <script
       type="application/ld+json"
-      // @ts-ignore
       dangerouslySetInnerHTML={{ __html: JSON.stringify(json) }}
     />
   );

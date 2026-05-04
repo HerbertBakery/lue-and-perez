@@ -11,25 +11,35 @@ type Props = {
 
 // Simple vertical block: heading, subcopy, fixed-width video, autoplay/muted/loop
 export default function VideoBlock({ title, description, mp4Src, webmSrc, poster }: Props) {
+  const [prefersReducedMotion, setPrefersReducedMotion] = React.useState(false);
+
+  React.useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setPrefersReducedMotion(mediaQuery.matches);
+    update();
+    mediaQuery.addEventListener("change", update);
+    return () => mediaQuery.removeEventListener("change", update);
+  }, []);
+
   return (
-    <section className="w-full py-10">
+    <section className="w-full py-12 md:py-16">
       <div className="mx-auto w-full max-w-6xl px-4">
-        <h2 className="text-2xl md:text-3xl font-semibold">{title}</h2>
+        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">{title}</h2>
         {description ? (
-          <p className="mt-2 text-neutral-700 max-w-3xl">{description}</p>
+          <p className="mt-3 max-w-3xl text-neutral-700 md:text-lg">{description}</p>
         ) : null}
 
-        {/* same visual size for every section */}
-        <div className="mt-6 mx-auto w-full max-w-4xl rounded-2xl overflow-hidden bg-black">
+        <div className="mt-6 mx-auto w-full max-w-4xl overflow-hidden rounded-2xl border border-slate-200 bg-black shadow-sm">
           <div className="w-full aspect-video">
             <video
               className="w-full h-full object-cover"
-              autoPlay
+              autoPlay={!prefersReducedMotion}
               muted
-              loop
+              loop={!prefersReducedMotion}
               playsInline
               poster={poster}
               preload="metadata"
+              aria-label={`${title} video`}
             >
               {webmSrc && <source src={webmSrc} type="video/webm" />}
               <source src={mp4Src} type="video/mp4" />

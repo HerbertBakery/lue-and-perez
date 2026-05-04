@@ -18,6 +18,7 @@ export async function POST(req: Request) {
       email: String(body.email),
       phone: String(body.phone || ''),
       country: String(body.country),
+      companyWebsite: String(body.companyWebsite || ''),
       products: String(body.products),
       notes: String(body.notes || ''),
       at: new Date().toISOString(),
@@ -37,6 +38,7 @@ Name: ${payload.name}
 Email: ${payload.email}
 Phone: ${payload.phone}
 Country: ${payload.country}
+Website: ${payload.companyWebsite}
 
 Products:
 ${payload.products}

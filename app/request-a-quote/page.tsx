@@ -1,3 +1,4 @@
+import CapabilitiesLink from "@/components/CapabilitiesLink";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import QuoteForm from "@/components/QuoteForm";
 import Section from "@/components/Section";
@@ -53,6 +54,18 @@ export default function Page() {
                 </li>
               ))}
             </ul>
+          </div>
+
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">Buyer support</p>
+            <h2 className="mt-2 text-lg font-semibold text-slate-900">Need a one-page overview first?</h2>
+            <p className="mt-3 text-sm leading-6 text-slate-600">
+              Download a clean branded capabilities sheet if your team wants a quick summary before sending the commercial brief.
+            </p>
+            <CapabilitiesLink
+              context="quote_sidebar"
+              className="mt-5 inline-flex items-center gap-2 rounded-xl border border-slate-300 px-4 py-3 text-sm font-semibold text-slate-800 hover:border-teal-700 hover:text-teal-700"
+            />
           </div>
         </aside>
       </div>

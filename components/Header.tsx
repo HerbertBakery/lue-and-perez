@@ -50,7 +50,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/90 backdrop-blur">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between py-3">
+        <div className="flex items-center justify-between gap-3 py-2.5 sm:py-3">
           <SiteLogo />
 
           <nav className="hidden items-center gap-6 text-sm md:flex">
@@ -71,7 +71,7 @@ export default function Header() {
 
           <button
             type="button"
-            className="inline-flex items-center justify-center rounded-xl border border-slate-200 p-2 text-slate-700 md:hidden"
+            className="inline-flex shrink-0 items-center justify-center rounded-xl border border-slate-200 p-2 text-slate-700 md:hidden"
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? 'Close navigation' : 'Open navigation'}

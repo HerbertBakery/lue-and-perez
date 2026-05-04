@@ -22,11 +22,11 @@ export default function VideoBlock({ title, description, mp4Src, webmSrc, poster
   }, []);
 
   return (
-    <section className="w-full py-12 md:py-16">
+    <section className="w-full py-10 md:py-14">
       <div className="mx-auto w-full max-w-6xl px-4">
-        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">{title}</h2>
+        <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">{title}</h2>
         {description ? (
-          <p className="mt-3 max-w-3xl text-neutral-700 md:text-lg">{description}</p>
+          <p className="mt-3 max-w-3xl text-sm leading-6 text-neutral-700 sm:text-base md:text-lg">{description}</p>
         ) : null}
 
         <div className="mt-6 mx-auto w-full max-w-4xl overflow-hidden rounded-2xl border border-slate-200 bg-black shadow-sm">

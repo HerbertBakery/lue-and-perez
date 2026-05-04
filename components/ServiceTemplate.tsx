@@ -5,6 +5,7 @@ import ScrollDepthTracker from "@/components/ScrollDepthTracker";
 import Section from "@/components/Section";
 import SeoJsonLd from "@/components/SeoJsonLd";
 import TrackedLink from "@/components/TrackedLink";
+import VideoBlock from "@/components/VideoBlock";
 import type { ServiceContent } from "@/lib/siteContent";
 
 export function buildServiceMetadata(service: ServiceContent): Metadata {
@@ -80,6 +81,18 @@ export default function ServiceTemplate({ service }: { service: ServiceContent }
           </ul>
         </div>
       </div>
+
+      {service.media ? (
+        <div className="mt-6">
+          <VideoBlock
+            title={service.media.title}
+            description={service.media.description}
+            mp4Src={service.media.mp4Src}
+            webmSrc={service.media.webmSrc}
+            poster={service.media.poster}
+          />
+        </div>
+      ) : null}
 
       <div className="mt-10 rounded-2xl border border-slate-200 bg-slate-950 px-6 py-8 text-white shadow-sm">
         <h2 className="text-2xl font-semibold">Need this capability in your supply chain?</h2>

@@ -16,6 +16,13 @@ export type ServiceContent = {
   includes: string[];
   outcomes: string[];
   commonChallenges: string[];
+  media?: {
+    title: string;
+    description: string;
+    mp4Src: string;
+    webmSrc?: string;
+    poster?: string;
+  };
 };
 
 export type CaseStudyKey =
@@ -97,6 +104,14 @@ export const services: ServiceContent[] = [
       "Mixed storage requirements across the same order",
       "Last-minute relabeling or pallet configuration problems",
     ],
+    media: {
+      title: "Multi-Supplier Pickups",
+      description:
+        "We coordinate and consolidate pickups across multiple suppliers so product arrives together, in specification, and ready for export handling.",
+      mp4Src: "/media/multi-supplier-pickups.mp4",
+      webmSrc: "/media/multi-supplier-pickups.webm",
+      poster: "/media/multi-supplier-pickups.jpg",
+    },
   },
   {
     key: "sourcing",
@@ -128,6 +143,14 @@ export const services: ServiceContent[] = [
       "MOQ or pricing that does not fit the target channel",
       "Unclear label or regulatory readiness for the destination market",
     ],
+    media: {
+      title: "Supplier Discovery",
+      description:
+        "We match buyers with vetted Caribbean producers aligned on capability, quality expectations, commercial fit, and documentation readiness.",
+      mp4Src: "/media/supplier-discovery.mp4",
+      webmSrc: "/media/supplier-discovery.webm",
+      poster: "/media/supplier-discovery.jpg",
+    },
   },
   {
     key: "manufacturing",
@@ -159,6 +182,14 @@ export const services: ServiceContent[] = [
       "Packaging that looks market-ready but misses compliance details",
       "Production timing that slips because specs are incomplete",
     ],
+    media: {
+      title: "Co-Packing & Private Label",
+      description:
+        "Recipe development, packaging, and private-label execution under tighter QA so buyers can launch or scale with more confidence.",
+      mp4Src: "/media/co-packing-private-label.mp4",
+      webmSrc: "/media/co-packing-private-label.webm",
+      poster: "/media/co-packing-private-label.jpg",
+    },
   },
   {
     key: "caribbean-food-exports",

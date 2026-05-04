@@ -22,21 +22,21 @@ export default function HomePage() {
       />
 
       <section className="border-y border-slate-200 bg-white/85">
-        <div className="mx-auto grid w-full max-w-6xl gap-4 px-4 py-5 md:grid-cols-4">
+        <div className="mx-auto grid w-full max-w-6xl gap-3 px-4 py-4 sm:grid-cols-2 xl:grid-cols-4">
           {[
             "Distributor, importer, retail, and private-label support",
             "Ambient, chilled, and frozen export models",
             "North America, UK/EU, Middle East, and CARICOM lanes",
             "Sourcing, consolidation, documentation, and scale-up guidance",
           ].map((item) => (
-            <p key={item} className="text-sm font-medium text-slate-700">
+            <p key={item} className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700">
               {item}
             </p>
           ))}
         </div>
       </section>
 
-      <section className="py-14 md:py-16">
+      <section className="py-12 md:py-16">
         <div className="mx-auto w-full max-w-6xl px-4">
           <div className="max-w-3xl">
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-700">Who this is for</p>
@@ -46,9 +46,9 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             {buyerProfiles.map((profile) => (
-              <div key={profile.title} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+              <div key={profile.title} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
                 <h3 className="text-lg font-semibold">{profile.title}</h3>
                 <p className="mt-3 text-sm leading-6 text-slate-600">{profile.description}</p>
               </div>
@@ -59,7 +59,7 @@ export default function HomePage() {
 
       <section className="py-4 md:py-6">
         <div className="mx-auto w-full max-w-6xl px-4">
-          <div className="flex items-end justify-between gap-4">
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div className="max-w-3xl">
               <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-700">Core capabilities</p>
               <h2 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">What buyers actually need help with</h2>
@@ -93,35 +93,11 @@ export default function HomePage() {
       </section>
 
       <VideoBlock
-        title="Scalable Manufacturing Solutions"
+        title="Cold Chain & Shipment Integrity"
         description="End-to-end temperature-controlled storage and freight—from factory to destination—monitored and documented at every step."
         mp4Src="/media/cold-chain.mp4"
         webmSrc="/media/cold-chain.webm"
         poster="/media/cold-chain.jpg"
-      />
-
-      <VideoBlock
-        title="Multi-Supplier Pickups"
-        description="We coordinate and consolidate pickups across multiple suppliers, so your goods arrive together—on time."
-        mp4Src="/media/multi-supplier-pickups.mp4"
-        webmSrc="/media/multi-supplier-pickups.webm"
-        poster="/media/multi-supplier-pickups.jpg"
-      />
-
-      <VideoBlock
-        title="Supplier Discovery"
-        description="We match you with vetted Caribbean producers at scale—aligned on quality, certifications, capacity, and pricing."
-        mp4Src="/media/supplier-discovery.mp4"
-        webmSrc="/media/supplier-discovery.webm"
-        poster="/media/supplier-discovery.jpg"
-      />
-
-      <VideoBlock
-        title="Co-Packing & Private Label"
-        description="Recipe development, packaging, and brand execution under strict QA—so you can launch or scale with confidence."
-        mp4Src="/media/co-packing-private-label.mp4"
-        webmSrc="/media/co-packing-private-label.webm"
-        poster="/media/co-packing-private-label.jpg"
       />
 
       <section className="py-14 md:py-16">
@@ -153,7 +129,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-14 md:py-16">
+      <section className="py-12 md:py-16">
         <div className="mx-auto w-full max-w-4xl px-4">
           <div className="max-w-2xl">
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-700">FAQ</p>
@@ -173,9 +149,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="pb-16">
+      <section className="pb-14 md:pb-16">
         <div className="mx-auto w-full max-w-6xl px-4">
-          <div className="rounded-3xl border border-slate-200 bg-slate-950 px-6 py-10 text-white shadow-sm md:px-10">
+          <div className="rounded-3xl border border-slate-200 bg-slate-950 px-5 py-8 text-white shadow-sm sm:px-6 md:px-10 md:py-10">
             <div className="max-w-3xl">
               <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-300">Next step</p>
               <h2 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">If the program is commercially serious, start with a qualified quote request</h2>
@@ -183,12 +159,12 @@ export default function HomePage() {
                 Share your destination market, product scope, estimated volume, and timeline. That gives Lue & Perez enough context to respond like an operator, not just a brochure site.
               </p>
             </div>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <TrackedLink
                 href="/request-a-quote"
                 eventName="quote_cta_click"
                 eventParams={{ location: "home_bottom" }}
-                className="inline-flex items-center rounded-xl bg-teal-700 px-5 py-3 font-semibold text-white hover:bg-teal-800"
+                className="inline-flex items-center justify-center rounded-xl bg-teal-700 px-5 py-3 font-semibold text-white hover:bg-teal-800"
               >
                 Request a Quote
               </TrackedLink>
@@ -196,7 +172,7 @@ export default function HomePage() {
                 href="/about"
                 eventName="about_page_click"
                 eventParams={{ location: "home_bottom" }}
-                className="inline-flex items-center rounded-xl border border-white/15 bg-white/5 px-5 py-3 font-semibold text-white hover:bg-white/10"
+                className="inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/5 px-5 py-3 font-semibold text-white hover:bg-white/10"
               >
                 Learn How We Work
               </TrackedLink>

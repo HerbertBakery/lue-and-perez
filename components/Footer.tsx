@@ -8,7 +8,7 @@ import { trackEvent } from '@/lib/analytics'
 export default function Footer() {
   return (
     <footer className="py-12">
-      <div className="container mx-auto px-4 grid md:grid-cols-4 gap-8 text-sm">
+      <div className="container mx-auto grid gap-8 px-4 text-sm sm:grid-cols-2 xl:grid-cols-4">
         {/* Brand */}
         <div>
           <SiteLogo compact />
@@ -65,7 +65,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 mt-8 text-xs text-slate-500">
+      <div className="container mx-auto mt-8 px-4 text-xs text-slate-500">
         © {new Date().getFullYear()} Lue & Perez. All rights reserved.
       </div>
     </footer>

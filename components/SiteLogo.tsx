@@ -18,16 +18,16 @@ export default function SiteLogo({ href = "/", compact = false }: Props) {
         className={compact ? "h-12 w-12" : "h-14 w-14 md:h-16 md:w-16"}
       />
       <div className="min-w-0">
-        <div className="text-sm font-semibold uppercase tracking-[0.16em] text-slate-900">
+        <div className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-900 sm:text-sm sm:tracking-[0.16em]">
           Lue & Perez
         </div>
-        <div className="text-sm text-slate-600">Marketing &amp; Distribution</div>
+        <div className="hidden text-sm text-slate-600 sm:block">Marketing &amp; Distribution</div>
       </div>
     </>
   );
 
   return (
-    <Link href={href} className="flex items-center gap-3">
+    <Link href={href} className="flex items-center gap-2.5 sm:gap-3">
       {content}
     </Link>
   );

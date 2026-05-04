@@ -59,7 +59,7 @@ export async function sendRfp(formData: FormData) {
 
   const resend = new Resend(apiKey);
 
-  const subject = `New contact: ${name}`;
+  const subject = `[Contact] ${name}`;
   const html = `
     <h2>New Inquiry (Contact page)</h2>
     <p><strong>Name:</strong> ${name}</p>

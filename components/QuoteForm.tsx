@@ -1,12 +1,15 @@
 "use client";
 import React, { useState, FormEvent } from "react";
 
+import { trackEvent } from "@/lib/analytics";
+
 type Status = "idle" | "sending" | "ok" | "error";
 
 export default function QuoteForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string>("");
   const startedAt = React.useMemo(() => String(Date.now()), []);
+  const [trackedStart, setTrackedStart] = useState(false);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -53,6 +56,7 @@ export default function QuoteForm() {
       }
 
       setStatus("ok");
+      trackEvent("generate_lead", { form_name: "request_a_quote", page_path: "/request-a-quote" });
       form.reset();
     } catch (err) {
       setStatus("error");
@@ -61,7 +65,16 @@ export default function QuoteForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-5">
+    <form
+      onSubmit={onSubmit}
+      onFocusCapture={() => {
+        if (!trackedStart) {
+          setTrackedStart(true);
+          trackEvent("quote_form_start", { page_path: "/request-a-quote" });
+        }
+      }}
+      className="space-y-5"
+    >
       <input type="hidden" name="startedAt" value={startedAt} />
       <div className="grid gap-4 md:grid-cols-2">
         <div>
@@ -89,6 +102,40 @@ export default function QuoteForm() {
         <div>
           <label className="text-sm font-medium text-slate-700" htmlFor="country">Destination Country</label>
           <input id="country" name="country" placeholder="United Kingdom" required className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3" />
+        </div>
+        <div>
+          <label className="text-sm font-medium text-slate-700" htmlFor="buyerType">Buyer Type</label>
+          <select id="buyerType" name="buyerType" className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3">
+            <option value="">Select buyer type</option>
+            <option value="distributor">Distributor</option>
+            <option value="importer">Importer</option>
+            <option value="retailer">Retailer</option>
+            <option value="private-label">Private Label Buyer</option>
+            <option value="foodservice">Foodservice Operator</option>
+          </select>
+        </div>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2">
+        <div>
+          <label className="text-sm font-medium text-slate-700" htmlFor="estimatedVolume">Estimated Volume</label>
+          <input id="estimatedVolume" name="estimatedVolume" placeholder="e.g. 1 x 20ft container / month" className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3" />
+        </div>
+        <div>
+          <label className="text-sm font-medium text-slate-700" htmlFor="launchTimeline">Launch Timeline</label>
+          <input id="launchTimeline" name="launchTimeline" placeholder="e.g. Q4 2026" className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3" />
+        </div>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2">
+        <div>
+          <label className="text-sm font-medium text-slate-700" htmlFor="privateLabelNeed">Private Label / Co-Packing</label>
+          <select id="privateLabelNeed" name="privateLabelNeed" className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3">
+            <option value="">Select option</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+            <option value="exploring">Exploring options</option>
+          </select>
         </div>
         <div>
           <label className="text-sm font-medium text-slate-700" htmlFor="companyWebsite">Website</label>

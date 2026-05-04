@@ -68,7 +68,7 @@ export async function POST(req: Request) {
 
     const resend = new Resend(apiKey);
 
-    const subject = `New contact: ${name}`;
+    const subject = `[Contact] ${name}`;
     const html = `
       <h2>New Inquiry</h2>
       <p><strong>Name:</strong> ${name}</p>

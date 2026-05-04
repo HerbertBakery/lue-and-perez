@@ -26,6 +26,10 @@ export async function POST(req: Request) {
     const email = normalizeText(body.email);
     const phone = normalizeText(body.phone);
     const country = normalizeText(body.country);
+    const buyerType = normalizeText(body.buyerType);
+    const estimatedVolume = normalizeText(body.estimatedVolume);
+    const launchTimeline = normalizeText(body.launchTimeline);
+    const privateLabelNeed = normalizeText(body.privateLabelNeed);
     const companyWebsite = normalizeText(body.companyWebsite);
     const products = normalizeText(body.products);
     const notes = normalizeText(body.notes);
@@ -47,7 +51,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Please include more product and volume detail.' }, { status: 400 });
     }
 
-    const combinedText = `${company} ${name} ${email} ${country} ${companyWebsite} ${products} ${notes}`;
+    const combinedText = `${company} ${name} ${email} ${country} ${buyerType} ${estimatedVolume} ${launchTimeline} ${privateLabelNeed} ${companyWebsite} ${products} ${notes}`;
     if (countUrls(products) > 1 || countUrls(notes) > 1 || computeSpamScore(combinedText) >= 4) {
       return NextResponse.json({ error: 'We could not accept that quote request.' }, { status: 400 });
     }
@@ -70,6 +74,10 @@ export async function POST(req: Request) {
       email,
       phone,
       country,
+      buyerType,
+      estimatedVolume,
+      launchTimeline,
+      privateLabelNeed,
       companyWebsite,
       products,
       notes,
@@ -83,13 +91,17 @@ export async function POST(req: Request) {
       await resend.emails.send({
         from: process.env.QUOTE_FROM || 'onboarding@resend.dev',
         to: (process.env.QUOTE_NOTIFY_TO || 'you@example.com').split(','),
-        subject: `New Quote — ${payload.company} (${payload.country})`,
+        subject: `[Quote] ${payload.company} (${payload.country})`,
         text:
 `Company: ${payload.company}
 Name: ${payload.name}
 Email: ${payload.email}
 Phone: ${payload.phone}
 Country: ${payload.country}
+Buyer Type: ${payload.buyerType}
+Estimated Volume: ${payload.estimatedVolume}
+Launch Timeline: ${payload.launchTimeline}
+Private Label / Co-Packing: ${payload.privateLabelNeed}
 Website: ${payload.companyWebsite}
 
 Products:

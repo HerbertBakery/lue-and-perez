@@ -1,7 +1,9 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+
+import { trackEvent } from "@/lib/analytics";
 
 export default function PaymentsClient() {
   const search = useSearchParams();
@@ -23,6 +25,10 @@ export default function PaymentsClient() {
   );
   const canPay = amountCents > 0;
 
+  useEffect(() => {
+    trackEvent("view_payments_page", { page_path: "/payments" });
+  }, []);
+
   async function handlePay() {
     setError(null);
     if (!canPay) {
@@ -40,6 +46,7 @@ export default function PaymentsClient() {
       if (!res.ok || !data?.url) {
         throw new Error(data?.message || data?.error || "Failed to create PayPal checkout.");
       }
+      trackEvent("payments_checkout_start", { amount_cents: amountCents });
       window.location.href = data.url as string;
     } catch (e: any) {
       setLoading(false);

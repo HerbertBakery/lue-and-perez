@@ -43,7 +43,7 @@ export default function Header() {
     { href: '/services', label: 'Services' },
     { href: '/case-studies', label: 'Case Studies' },
     { href: '/markets-compliance', label: 'Markets & Compliance' },
-    { href: '/payments', label: 'Payments', trackEvent: 'click_payments' },
+    { href: '/about', label: 'About' },
     { href: '/contact', label: 'Contact', trackEvent: 'click_request_quote' },
   ]
 

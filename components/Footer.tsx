@@ -21,6 +21,7 @@ export default function Footer() {
         <div>
           <h4 className="font-semibold">Company</h4>
           <ul className="mt-3 space-y-2">
+            <li><Link className="hover:text-teal-700" href="/about">About</Link></li>
             <li><Link className="hover:text-teal-700" href="/services">Services</Link></li>
             <li><Link className="hover:text-teal-700" href="/case-studies">What We’ve Done</Link></li>
             <li><Link className="hover:text-teal-700" href="/markets-compliance">Markets & Compliance</Link></li>
@@ -57,6 +58,7 @@ export default function Footer() {
         <div>
           <h4 className="font-semibold">Legal</h4>
           <ul className="mt-3 space-y-2">
+            <li><Link className="hover:text-teal-700" href="/faq">FAQ</Link></li>
             <li><Link className="hover:text-teal-700" href="/terms-of-service">Terms of Service</Link></li>
             <li><Link className="hover:text-teal-700" href="/privacy-policy">Privacy Policy</Link></li>
           </ul>

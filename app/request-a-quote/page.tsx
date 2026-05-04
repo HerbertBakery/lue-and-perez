@@ -20,6 +20,9 @@ export default function Page() {
           <p className="mt-4 max-w-2xl text-slate-600 md:text-lg">
             Tell us what you need, where it is going, and how you plan to sell it. We will review product fit, export readiness, and the logistics path before responding with next steps.
           </p>
+          <p className="mt-4 text-sm font-medium text-slate-700">
+            Qualified B2B inquiries typically receive a response within 2 business days.
+          </p>
 
           <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <QuoteForm />

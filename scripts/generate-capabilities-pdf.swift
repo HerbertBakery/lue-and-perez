@@ -9,7 +9,7 @@ let outputURL = URL(fileURLWithPath: currentDirectory).appendingPathComponent("p
 let logoURL = URL(fileURLWithPath: currentDirectory).appendingPathComponent("public/logo.png")
 
 let pageSize = CGSize(width: 612, height: 792)
-let scale: CGFloat = 2
+let scale: CGFloat = 4
 let canvasSize = CGSize(width: pageSize.width * scale, height: pageSize.height * scale)
 
 let margin: CGFloat = 48 * scale

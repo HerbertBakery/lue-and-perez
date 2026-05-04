@@ -7,6 +7,12 @@ import { Menu, X } from 'lucide-react'
 import SiteLogo from '@/components/SiteLogo'
 import { trackEvent } from '@/lib/analytics'
 
+type NavItem = {
+  href: string
+  label: string
+  trackEvent?: string
+}
+
 function NavLink({
   href,
   label,
@@ -39,12 +45,11 @@ function trackEventFn(eventName: string, params: Record<string, unknown>) {
 export default function Header() {
   const [open, setOpen] = useState(false)
 
-  const navItems = [
+  const navItems: NavItem[] = [
     { href: '/services', label: 'Services' },
     { href: '/case-studies', label: 'Case Studies' },
     { href: '/markets-compliance', label: 'Markets & Compliance' },
     { href: '/about', label: 'About' },
-    { href: '/contact', label: 'Contact', trackEvent: 'click_request_quote' },
   ]
 
   return (

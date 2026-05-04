@@ -25,15 +25,7 @@ export default function Footer() {
             <li><Link className="hover:text-teal-700" href="/services">Services</Link></li>
             <li><Link className="hover:text-teal-700" href="/case-studies">What We’ve Done</Link></li>
             <li><Link className="hover:text-teal-700" href="/markets-compliance">Markets & Compliance</Link></li>
-            <li>
-              <Link
-                className="hover:text-teal-700"
-                href="/contact"
-                onClick={() => trackEvent('click_request_quote', { link_text: 'Contact (footer)', link_url: '/contact' })}
-              >
-                Contact
-              </Link>
-            </li>
+            <li><Link className="hover:text-teal-700" href="/request-a-quote">Request a Quote</Link></li>
           </ul>
         </div>
 

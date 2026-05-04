@@ -1,7 +1,6 @@
 import Image from "next/image";
 import type { Metadata } from "next";
 
-import CapabilitiesLink from "@/components/CapabilitiesLink";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import ScrollDepthTracker from "@/components/ScrollDepthTracker";
 import Section from "@/components/Section";
@@ -120,10 +119,6 @@ export default function CaseStudyTemplate({ caseStudy }: { caseStudy: CaseStudyC
           >
             Discuss a Similar Project
           </TrackedLink>
-          <CapabilitiesLink
-            context={`case_study_${caseStudy.slug}`}
-            className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 px-5 py-3 font-semibold text-white hover:bg-white/10"
-          />
         </div>
       </div>
     </Section>

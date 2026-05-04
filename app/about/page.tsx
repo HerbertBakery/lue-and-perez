@@ -1,4 +1,3 @@
-import CapabilitiesLink from "@/components/CapabilitiesLink";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import ScrollDepthTracker from "@/components/ScrollDepthTracker";
 import Section from "@/components/Section";
@@ -43,10 +42,6 @@ export default function AboutPage() {
             >
               Start a Qualified Quote Request
             </TrackedLink>
-            <CapabilitiesLink
-              context="about_hero"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 px-5 py-3 font-semibold text-slate-800 hover:border-teal-700 hover:text-teal-700"
-            />
           </div>
         </div>
 

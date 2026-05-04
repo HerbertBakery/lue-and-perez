@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 
-import CapabilitiesLink from "@/components/CapabilitiesLink";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import ScrollDepthTracker from "@/components/ScrollDepthTracker";
 import Section from "@/components/Section";
@@ -109,10 +108,6 @@ export default function ServiceTemplate({ service }: { service: ServiceContent }
           >
             Request a Quote
           </TrackedLink>
-          <CapabilitiesLink
-            context={`service_${service.key}`}
-            className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 px-5 py-3 font-semibold text-white hover:bg-white/10"
-          />
         </div>
       </div>
     </Section>

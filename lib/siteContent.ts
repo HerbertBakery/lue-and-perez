@@ -52,8 +52,6 @@ export type CaseStudyContent = {
   }>;
 };
 
-export const capabilitiesPdfPath = "/lue-and-perez-capabilities.pdf";
-
 export const services: ServiceContent[] = [
   {
     key: "export-logistics",

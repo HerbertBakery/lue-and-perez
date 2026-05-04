@@ -1,6 +1,5 @@
 import Section from '@/components/Section'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
-import CapabilitiesLink from '@/components/CapabilitiesLink'
 import ScrollDepthTracker from '@/components/ScrollDepthTracker'
 import TrackedLink from '@/components/TrackedLink'
 import { services } from '@/lib/siteContent'
@@ -17,10 +16,6 @@ export default function ServicesPage(){
         <p className="mt-3 max-w-2xl text-slate-600">
           These services are designed to help buyers solve the real operational questions behind Caribbean food programs: supplier fit, shipment structure, documentation readiness, private-label scale-up, and market execution.
         </p>
-        <CapabilitiesLink
-          context="services_index"
-          className="mt-5 inline-flex items-center gap-2 rounded-xl border border-slate-300 px-4 py-3 text-sm font-semibold text-slate-800 hover:border-teal-700 hover:text-teal-700"
-        />
       </div>
       <div className="mt-8 grid gap-6 md:grid-cols-2">
         {services.map(s => (

@@ -1,6 +1,5 @@
 import Image from "next/image";
 
-import CapabilitiesLink from "@/components/CapabilitiesLink";
 import FaqList from "@/components/FaqList";
 import ScrollDepthTracker from "@/components/ScrollDepthTracker";
 import TrackedLink from "@/components/TrackedLink";
@@ -44,16 +43,12 @@ export default function HomePage() {
           </div>
 
           <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">Capabilities sheet</p>
-            <h2 className="mt-2 text-xl font-semibold text-slate-900">A simple B2B leave-behind for buyer teams</h2>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">Next step</p>
+            <h2 className="mt-2 text-xl font-semibold text-slate-900">Bring the commercial brief, not just a general inquiry</h2>
             <p className="mt-3 text-sm leading-6 text-slate-600">
-              Download a concise overview of markets served, operating scope, and the kind of programs Lue & Perez is built to support.
+              Serious buyer conversations move faster when destination market, product scope, timing, and packaging realities are already in view.
             </p>
             <div className="mt-5 flex flex-col gap-3 sm:flex-row lg:flex-col">
-              <CapabilitiesLink
-                context="home_trust_strip"
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 px-4 py-3 text-sm font-semibold text-slate-800 hover:border-teal-700 hover:text-teal-700"
-              />
               <TrackedLink
                 href="/request-a-quote"
                 eventName="quote_cta_click"
@@ -272,10 +267,6 @@ export default function HomePage() {
               >
                 Learn How We Work
               </TrackedLink>
-              <CapabilitiesLink
-                context="home_bottom"
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 px-5 py-3 font-semibold text-white hover:bg-white/10"
-              />
             </div>
           </div>
         </div>

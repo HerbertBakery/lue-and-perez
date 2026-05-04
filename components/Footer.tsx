@@ -2,7 +2,6 @@
 
 import Link from 'next/link'
 
-import CapabilitiesLink from '@/components/CapabilitiesLink'
 import SiteLogo from '@/components/SiteLogo'
 import { trackEvent } from '@/lib/analytics'
 
@@ -15,10 +14,6 @@ export default function Footer() {
           <p className="mt-3 max-w-sm text-slate-600">
             B2B export partner for Caribbean foods across sourcing, consolidation, export logistics, private label, and market-readiness work.
           </p>
-          <CapabilitiesLink
-            context="footer_brand"
-            className="mt-5 inline-flex items-center gap-2 rounded-xl border border-slate-300 px-4 py-3 text-sm font-semibold text-slate-800 hover:border-teal-700 hover:text-teal-700"
-          />
         </div>
 
         <div>

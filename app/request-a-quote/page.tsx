@@ -1,4 +1,3 @@
-import CapabilitiesLink from "@/components/CapabilitiesLink";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import QuoteForm from "@/components/QuoteForm";
 import Section from "@/components/Section";
@@ -54,17 +53,6 @@ export default function Page() {
                 </li>
               ))}
             </ul>
-          </div>
-
-          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
-            <h2 className="text-lg font-semibold text-slate-900">Need an internal leave-behind first?</h2>
-            <p className="mt-3 text-sm leading-6 text-slate-600">
-              Download the capabilities PDF if the buyer team needs a quick summary of markets served, operating scope, and program fit before starting the conversation.
-            </p>
-            <CapabilitiesLink
-              context="quote_sidebar"
-              className="mt-5 inline-flex items-center gap-2 rounded-xl border border-slate-300 px-4 py-3 text-sm font-semibold text-slate-800 hover:border-teal-700 hover:text-teal-700"
-            />
           </div>
         </aside>
       </div>

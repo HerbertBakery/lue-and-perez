@@ -16,9 +16,6 @@ export default function Page({ searchParams }: { searchParams?: { sent?: string;
       <div className="mt-4 max-w-3xl">
         <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-700">Contact</p>
         <h1 className="mt-2 text-3xl font-extrabold md:text-4xl">Talk to the Lue & Perez team</h1>
-        <p className="mt-3 max-w-2xl text-slate-600">
-          Use this form for general business inquiries, introductions, and partnership questions. If you already know your products, volumes, and destination, use the dedicated quote form for a faster commercial response.
-        </p>
       </div>
 
       <div className="mt-6 rounded-2xl border border-slate-200 bg-white p-5 text-sm text-slate-700 shadow-sm">

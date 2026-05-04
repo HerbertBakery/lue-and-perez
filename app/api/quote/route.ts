@@ -1,28 +1,80 @@
 import { NextResponse } from 'next/server';
 
+import {
+  computeSpamScore,
+  countUrls,
+  getClientIp,
+  isFreeEmail,
+  isValidEmail,
+  normalizeText,
+  rateLimit,
+  validateSubmissionAge,
+} from '@/lib/intake';
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();
     const required = ['company','name','email','country','products'];
     for (const k of required) {
-      if (!body[k] || String(body[k]).trim() === '') {
+      if (!normalizeText(body[k])) {
         return NextResponse.json({ error: `Missing field: ${k}` }, { status: 400 });
       }
     }
-    // honeypot
-    if (body.website) return NextResponse.json({ ok: true });
+
+    const company = normalizeText(body.company);
+    const name = normalizeText(body.name);
+    const email = normalizeText(body.email);
+    const phone = normalizeText(body.phone);
+    const country = normalizeText(body.country);
+    const companyWebsite = normalizeText(body.companyWebsite);
+    const products = normalizeText(body.products);
+    const notes = normalizeText(body.notes);
+    const website = normalizeText(body.website);
+    const b2b = normalizeText(body.b2b);
+    const startedAt = normalizeText(body.startedAt);
+
+    if (website) return NextResponse.json({ ok: true });
+    if (!validateSubmissionAge(startedAt).ok) {
+      return NextResponse.json({ error: 'Invalid submission.' }, { status: 400 });
+    }
+    if (b2b !== 'yes') {
+      return NextResponse.json({ error: 'Please confirm this is a business request.' }, { status: 400 });
+    }
+    if (!isValidEmail(email)) {
+      return NextResponse.json({ error: 'Please enter a valid work email.' }, { status: 400 });
+    }
+    if (products.length < 25) {
+      return NextResponse.json({ error: 'Please include more product and volume detail.' }, { status: 400 });
+    }
+
+    const combinedText = `${company} ${name} ${email} ${country} ${companyWebsite} ${products} ${notes}`;
+    if (countUrls(products) > 1 || countUrls(notes) > 1 || computeSpamScore(combinedText) >= 4) {
+      return NextResponse.json({ error: 'We could not accept that quote request.' }, { status: 400 });
+    }
+    if (isFreeEmail(email) && !companyWebsite) {
+      return NextResponse.json(
+        { error: 'Please use a business email or include your company website.' },
+        { status: 400 }
+      );
+    }
+
+    const ip = getClientIp(req);
+    const limiter = rateLimit(`quote:${ip}`, 4, 1000 * 60 * 60);
+    if (!limiter.ok) {
+      return NextResponse.json({ error: 'Too many attempts. Please try again later.' }, { status: 429 });
+    }
 
     const payload = {
-      company: String(body.company),
-      name: String(body.name),
-      email: String(body.email),
-      phone: String(body.phone || ''),
-      country: String(body.country),
-      companyWebsite: String(body.companyWebsite || ''),
-      products: String(body.products),
-      notes: String(body.notes || ''),
+      company,
+      name,
+      email,
+      phone,
+      country,
+      companyWebsite,
+      products,
+      notes,
       at: new Date().toISOString(),
-      ip: (req.headers.get('x-forwarded-for') || '').split(',')[0] || ''
+      ip,
     };
 
     if (process.env.RESEND_API_KEY) {

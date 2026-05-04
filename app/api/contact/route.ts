@@ -1,19 +1,59 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
+import {
+  computeSpamScore,
+  countUrls,
+  formatMultilineHtml,
+  getClientIp,
+  isValidEmail,
+  normalizeText,
+  rateLimit,
+  validateSubmissionAge,
+} from "@/lib/intake";
+
 type Body = {
   name: string;
   email: string;
   phone?: string | null;
   message: string;
+  website?: string | null;
+  startedAt?: string | null;
 };
 
 export async function POST(req: Request) {
   try {
-    const { name, email, phone, message } = (await req.json()) as Partial<Body>;
+    const body = (await req.json()) as Partial<Body>;
+    const name = normalizeText(body.name);
+    const email = normalizeText(body.email);
+    const phone = normalizeText(body.phone);
+    const message = normalizeText(body.message);
+    const website = normalizeText(body.website);
+    const startedAt = normalizeText(body.startedAt);
 
     if (!name || !email || !message) {
       return NextResponse.json({ ok: false, error: "Missing required fields." }, { status: 400 });
+    }
+    if (website) {
+      return NextResponse.json({ ok: true });
+    }
+    if (!validateSubmissionAge(startedAt).ok) {
+      return NextResponse.json({ ok: false, error: "Invalid submission." }, { status: 400 });
+    }
+    if (!isValidEmail(email)) {
+      return NextResponse.json({ ok: false, error: "Please enter a valid email." }, { status: 400 });
+    }
+    if (message.length < 20) {
+      return NextResponse.json({ ok: false, error: "Please include a bit more detail." }, { status: 400 });
+    }
+    if (countUrls(message) > 1 || computeSpamScore(`${name} ${email} ${message}`) >= 4) {
+      return NextResponse.json({ ok: false, error: "We could not accept that submission." }, { status: 400 });
+    }
+
+    const ip = getClientIp(req);
+    const limiter = rateLimit(`contact-api:${ip}`, 5, 1000 * 60 * 30);
+    if (!limiter.ok) {
+      return NextResponse.json({ ok: false, error: "Too many attempts. Please try again later." }, { status: 429 });
     }
 
     const to = process.env.CONTACT_TO;
@@ -35,7 +75,7 @@ export async function POST(req: Request) {
       <p><strong>Email:</strong> ${email}</p>
       <p><strong>Phone:</strong> ${phone || "—"}</p>
       <p><strong>Message:</strong></p>
-      <p>${(message || "").replace(/\n/g,"<br/>")}</p>
+      <p>${formatMultilineHtml(message)}</p>
       <hr/><small>Source: ${process.env.VERCEL_URL || "local dev"}</small>
     `;
 

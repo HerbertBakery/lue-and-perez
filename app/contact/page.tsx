@@ -8,6 +8,7 @@ export const metadata = { title: 'Contact / Request a Quote — Lue & Perez' }
 export default function Page({ searchParams }: { searchParams?: { sent?: string; error?: string } }) {
   const sent = searchParams?.sent;
   const err = searchParams?.error;
+  const startedAt = Date.now();
 
   return (
     <Section className="py-12">
@@ -52,6 +53,8 @@ export default function Page({ searchParams }: { searchParams?: { sent?: string;
       )}
 
       <form action={sendRfp} className="mt-8 grid max-w-3xl gap-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:grid-cols-2">
+        <input type="hidden" name="startedAt" value={startedAt} />
+        <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
         <div>
           <label className="text-sm font-medium" htmlFor="name">Company / Contact</label>
           <input id="name" name="name" required className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3" />

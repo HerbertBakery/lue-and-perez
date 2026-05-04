@@ -6,6 +6,7 @@ type Status = "idle" | "sending" | "ok" | "error";
 export default function QuoteForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string>("");
+  const startedAt = React.useMemo(() => String(Date.now()), []);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -23,10 +24,17 @@ export default function QuoteForm() {
     const products = (data.get("products") || "").toString().trim();
     const notes = (data.get("notes") || "").toString().trim();
     const website = (data.get("website") || "").toString().trim();
+    const b2b = data.get("b2b") ? "yes" : "";
+    const startedAtValue = (data.get("startedAt") || "").toString().trim();
 
     if (!company || !name || !email || !country || !products) {
       setStatus("error");
       setError("Please fill in company, name, email, country, and products.");
+      return;
+    }
+    if (!b2b) {
+      setStatus("error");
+      setError("Please confirm this request is for a business.");
       return;
     }
 
@@ -34,7 +42,7 @@ export default function QuoteForm() {
       const res = await fetch("/api/quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ company, name, email, phone, country, companyWebsite, products, notes, website }),
+        body: JSON.stringify({ company, name, email, phone, country, companyWebsite, products, notes, website, b2b, startedAt: startedAtValue }),
       });
       const json = await res.json().catch(() => ({}));
 
@@ -54,6 +62,7 @@ export default function QuoteForm() {
 
   return (
     <form onSubmit={onSubmit} className="space-y-5">
+      <input type="hidden" name="startedAt" value={startedAt} />
       <div className="grid gap-4 md:grid-cols-2">
         <div>
           <label className="text-sm font-medium text-slate-700" htmlFor="company">Company</label>
@@ -98,6 +107,11 @@ export default function QuoteForm() {
         <label className="text-sm font-medium text-slate-700" htmlFor="notes">Notes</label>
         <textarea id="notes" name="notes" placeholder="Lead times, certifications, cold chain requirements, destination port, or retailer targets." rows={4} className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3" />
       </div>
+
+      <label className="inline-flex items-center gap-2 text-sm text-slate-600">
+        <input type="checkbox" name="b2b" value="yes" className="rounded border-slate-300" required />
+        I confirm this is a legitimate business quote request.
+      </label>
 
       <button
         type="submit"

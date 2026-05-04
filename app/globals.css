@@ -21,6 +21,8 @@ body {
   color: var(--foreground);
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 .container {
@@ -37,6 +39,22 @@ input,
 textarea,
 select {
   transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease, opacity 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p,
+li {
+  text-wrap: pretty;
+}
+
+img,
+video {
+  display: block;
 }
 
 a:focus-visible,

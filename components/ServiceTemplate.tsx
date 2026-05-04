@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import CapabilitiesLink from "@/components/CapabilitiesLink";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import ScrollDepthTracker from "@/components/ScrollDepthTracker";
 import Section from "@/components/Section";
@@ -99,14 +100,20 @@ export default function ServiceTemplate({ service }: { service: ServiceContent }
         <p className="mt-3 max-w-2xl text-sm leading-6 text-white/75">
           Share the market, product categories, and commercial scope you are working toward. We’ll respond with the operating realities and next best step.
         </p>
-        <TrackedLink
-          href="/request-a-quote"
-          eventName="service_cta_click"
-          eventParams={{ service: service.key, destination: "/request-a-quote" }}
-          className="mt-6 inline-flex items-center rounded-xl bg-teal-700 px-5 py-3 font-semibold text-white hover:bg-teal-800"
-        >
-          Request a Quote
-        </TrackedLink>
+        <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <TrackedLink
+            href="/request-a-quote"
+            eventName="service_cta_click"
+            eventParams={{ service: service.key, destination: "/request-a-quote" }}
+            className="inline-flex items-center justify-center rounded-xl bg-teal-700 px-5 py-3 font-semibold text-white hover:bg-teal-800"
+          >
+            Request a Quote
+          </TrackedLink>
+          <CapabilitiesLink
+            context={`service_${service.key}`}
+            className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 px-5 py-3 font-semibold text-white hover:bg-white/10"
+          />
+        </div>
       </div>
     </Section>
   );

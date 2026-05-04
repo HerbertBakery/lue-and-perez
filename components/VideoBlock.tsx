@@ -2,7 +2,7 @@
 import React from "react";
 
 type Props = {
-  title: string;
+  title?: string;
   description?: string;
   mp4Src: string;
   webmSrc?: string;
@@ -24,12 +24,12 @@ export default function VideoBlock({ title, description, mp4Src, webmSrc, poster
   return (
     <section className="w-full py-10 md:py-14">
       <div className="mx-auto w-full max-w-6xl px-4">
-        <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">{title}</h2>
+        {title ? <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">{title}</h2> : null}
         {description ? (
           <p className="mt-3 max-w-3xl text-sm leading-6 text-neutral-700 sm:text-base md:text-lg">{description}</p>
         ) : null}
 
-        <div className="mt-6 mx-auto w-full max-w-4xl overflow-hidden rounded-2xl border border-slate-200 bg-black shadow-sm">
+        <div className={`${title || description ? "mt-6" : ""} mx-auto w-full max-w-4xl overflow-hidden rounded-2xl border border-slate-200 bg-black shadow-sm`}>
           <div className="w-full aspect-video">
             <video
               className="w-full h-full object-cover"
@@ -39,7 +39,7 @@ export default function VideoBlock({ title, description, mp4Src, webmSrc, poster
               playsInline
               poster={poster}
               preload="metadata"
-              aria-label={`${title} video`}
+              aria-label={title ? `${title} video` : "Lue & Perez service video"}
             >
               {webmSrc && <source src={webmSrc} type="video/webm" />}
               <source src={mp4Src} type="video/mp4" />

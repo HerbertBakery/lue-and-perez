@@ -40,7 +40,19 @@ export type CaseStudyContent = {
   approach: string[];
   outcomes: string[];
   relevance: string;
+  highlight: string;
+  service: string;
+  image: {
+    src: string;
+    alt: string;
+  };
+  snapshot: Array<{
+    label: string;
+    value: string;
+  }>;
 };
+
+export const capabilitiesPdfPath = "/lue-and-perez-capabilities.pdf";
 
 export const services: ServiceContent[] = [
   {
@@ -105,9 +117,8 @@ export const services: ServiceContent[] = [
       "Last-minute relabeling or pallet configuration problems",
     ],
     media: {
-      title: "Multi-Supplier Pickups",
-      description:
-        "We coordinate and consolidate pickups across multiple suppliers so product arrives together, in specification, and ready for export handling.",
+      title: "",
+      description: "",
       mp4Src: "/media/multi-supplier-pickups.mp4",
       webmSrc: "/media/multi-supplier-pickups.webm",
       poster: "/media/multi-supplier-pickups.jpg",
@@ -144,7 +155,7 @@ export const services: ServiceContent[] = [
       "Unclear label or regulatory readiness for the destination market",
     ],
     media: {
-      title: "Supplier Discovery",
+      title: "Supplier discovery",
       description:
         "We match buyers with vetted Caribbean producers aligned on capability, quality expectations, commercial fit, and documentation readiness.",
       mp4Src: "/media/supplier-discovery.mp4",
@@ -183,7 +194,7 @@ export const services: ServiceContent[] = [
       "Production timing that slips because specs are incomplete",
     ],
     media: {
-      title: "Co-Packing & Private Label",
+      title: "Co-packing and private label",
       description:
         "Recipe development, packaging, and private-label execution under tighter QA so buyers can launch or scale with more confidence.",
       mp4Src: "/media/co-packing-private-label.mp4",
@@ -227,7 +238,7 @@ export const services: ServiceContent[] = [
 export const caseStudies: CaseStudyContent[] = [
   {
     slug: "uk-fcl-consolidation",
-    title: "UK Distributor Consolidation — FCL",
+    title: "UK Distributor Consolidation - FCL",
     market: "United Kingdom",
     clientType: "Distributor",
     summary: "A Caribbean food distributor needed a more efficient full-container model across multiple suppliers heading into the UK market.",
@@ -245,10 +256,21 @@ export const caseStudies: CaseStudyContent[] = [
     ],
     relevance:
       "This project reflects the type of consolidation work that matters for distributors trying to improve landed cost without compromising commercial usability.",
+    highlight: "18% lower freight per unit through better pallet density and pickup alignment.",
+    service: "Consolidation",
+    image: {
+      src: "/media/multi-supplier-pickups.jpg",
+      alt: "Multi-supplier shipment staging for export consolidation.",
+    },
+    snapshot: [
+      { label: "Lane", value: "Caribbean to UK" },
+      { label: "Focus", value: "FCL consolidation" },
+      { label: "Buyer need", value: "Lower landed cost" },
+    ],
   },
   {
     slug: "private-label-pepper-sauce",
-    title: "Private Label Pepper Sauce — Canada",
+    title: "Private Label Pepper Sauce - Canada",
     market: "Canada",
     clientType: "Private Label Buyer",
     summary: "A buyer developing a private-label Caribbean condiment program needed recipe consistency, packaging discipline, and export readiness for Canada.",
@@ -266,10 +288,21 @@ export const caseStudies: CaseStudyContent[] = [
     ],
     relevance:
       "This is the kind of work that helps buyers turn a promising Caribbean product concept into a commercial program with repeat purchase potential.",
+    highlight: "Retail-ready packaging, bilingual labeling, and a repeatable production spec before scale-up.",
+    service: "Manufacturing",
+    image: {
+      src: "/media/co-packing-private-label.jpg",
+      alt: "Private-label packaging setup and production coordination.",
+    },
+    snapshot: [
+      { label: "Market", value: "Canada" },
+      { label: "Program", value: "Private label" },
+      { label: "Priority", value: "Packaging readiness" },
+    ],
   },
   {
     slug: "frozen-bakery-middle-east",
-    title: "Frozen Bakery SKUs — Middle East",
+    title: "Frozen Bakery SKUs - Middle East",
     market: "Middle East",
     clientType: "Importer / Distributor",
     summary: "A frozen bakery shipment required tight temperature integrity, minimal dwell time, and a lane design suited to a longer-haul export market.",
@@ -287,6 +320,17 @@ export const caseStudies: CaseStudyContent[] = [
     ],
     relevance:
       "This project demonstrates the kind of execution detail required when product quality depends on temperature discipline, timing, and route design.",
+    highlight: "Export movement scheduled within 72 hours of production readiness to protect frozen quality.",
+    service: "Export Logistics",
+    image: {
+      src: "/media/cold-chain.jpg",
+      alt: "Temperature-controlled export planning for frozen bakery products.",
+    },
+    snapshot: [
+      { label: "Product state", value: "Frozen" },
+      { label: "Market", value: "Middle East" },
+      { label: "Priority", value: "Cold-chain control" },
+    ],
   },
 ];
 
@@ -342,6 +386,59 @@ export const buyerProfiles = [
   },
 ];
 
+export const trustSignals = [
+  {
+    label: "Buyer types",
+    value: "Importers, distributors, retail programs, foodservice, and private label",
+    description: "The workflow is built for B2B buyers that need repeatable commercial execution rather than one-off consumer transactions.",
+  },
+  {
+    label: "Product handling",
+    value: "Ambient, chilled, and frozen operating models",
+    description: "Programs can be structured around category-specific handling, shelf-life, and route discipline from origin through destination.",
+  },
+  {
+    label: "Markets served",
+    value: "North America, UK/EU, Middle East, and CARICOM",
+    description: "Destination-market requirements shape packaging, documentation, and handoff decisions from the start.",
+  },
+  {
+    label: "Operating scope",
+    value: "Sourcing, consolidation, export logistics, and private label support",
+    description: "Buyers can solve supplier fit, shipment readiness, and go-to-market questions through one operating partner.",
+  },
+];
+
+export const operatingPillars = [
+  {
+    title: "Commercial fit before activity",
+    description: "The work starts by testing whether the product, market, and operating model fit together commercially.",
+    bullets: [
+      "Buyer brief reviewed against market and channel realities",
+      "Supplier capability screened before momentum is wasted",
+      "Launch expectations grounded in practical export readiness",
+    ],
+  },
+  {
+    title: "Cleaner coordination across moving parts",
+    description: "Lue & Perez sits where suppliers, documentation, packaging, and freight handoffs tend to break down.",
+    bullets: [
+      "Multiple suppliers aligned into one clearer shipment path",
+      "Documentation, shelf-life, and handling discipline reviewed together",
+      "Less fragmentation between origin-side tasks and buyer expectations",
+    ],
+  },
+  {
+    title: "Market-minded execution",
+    description: "Programs are shaped around destination-market requirements, not just origin-side availability.",
+    bullets: [
+      "Label, packaging, and private-label questions surfaced early",
+      "Cold-chain and route decisions tied to product sensitivity",
+      "Commercial timelines weighed against operational realities",
+    ],
+  },
+];
+
 export const capabilityHighlights = [
   "North America, UK/EU, Middle East, and CARICOM market support",
   "Ambient, chilled, and frozen execution models",
@@ -362,6 +459,47 @@ export const aboutHighlights = [
     title: "Market-minded execution",
     description: "The work is shaped around destination-market packaging, compliance, and logistics realities, not just origin-side availability.",
   },
+  {
+    title: "Buyer-side discipline",
+    description: "The goal is not more email traffic. It is a clearer path to quote, launch, replenish, and scale with fewer avoidable surprises.",
+  },
+];
+
+export const authorityPanels = [
+  {
+    title: "What gets reviewed first",
+    description: "Most serious projects are assessed against the same buyer-side realities before time gets committed.",
+    items: [
+      "Destination market, channel, and labeling expectations",
+      "Category-specific handling, shelf-life, or temperature constraints",
+      "Supplier fit, MOQ logic, and commercial viability",
+      "Packaging, private-label, or documentation gaps that could delay launch",
+    ],
+  },
+  {
+    title: "Where Lue & Perez tends to add value",
+    description: "The strongest fit is where sourcing decisions and export execution need to move together.",
+    items: [
+      "New Caribbean category programs entering a formal market",
+      "Multi-supplier orders that need consolidation discipline",
+      "Private-label programs requiring packaging and production readiness",
+      "Temperature-sensitive shipments where timing and routing matter",
+    ],
+  },
+];
+
+export const quoteChecklist = [
+  "Products or categories you want sourced or exported",
+  "Approximate order volume and launch timeline",
+  "Destination country or retail market",
+  "Packaging, labeling, or private-label requirements",
+  "Any certifications or cold-chain constraints",
+];
+
+export const quoteExpectations = [
+  "Qualified B2B requests receive a response within two business days.",
+  "The team reviews commercial fit, export readiness, and likely execution risks before replying.",
+  "If more detail is needed, follow-up focuses on what moves the program forward rather than generic back-and-forth.",
 ];
 
 export function getServiceByKey(key: ServiceKey) {

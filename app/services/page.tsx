@@ -1,5 +1,6 @@
 import Section from '@/components/Section'
 import { Breadcrumbs } from '@/components/Breadcrumbs'
+import CapabilitiesLink from '@/components/CapabilitiesLink'
 import ScrollDepthTracker from '@/components/ScrollDepthTracker'
 import TrackedLink from '@/components/TrackedLink'
 import { services } from '@/lib/siteContent'
@@ -16,6 +17,10 @@ export default function ServicesPage(){
         <p className="mt-3 max-w-2xl text-slate-600">
           These services are designed to help buyers solve the real operational questions behind Caribbean food programs: supplier fit, shipment structure, documentation readiness, private-label scale-up, and market execution.
         </p>
+        <CapabilitiesLink
+          context="services_index"
+          className="mt-5 inline-flex items-center gap-2 rounded-xl border border-slate-300 px-4 py-3 text-sm font-semibold text-slate-800 hover:border-teal-700 hover:text-teal-700"
+        />
       </div>
       <div className="mt-8 grid gap-6 md:grid-cols-2">
         {services.map(s => (
@@ -29,6 +34,14 @@ export default function ServicesPage(){
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">{s.eyebrow}</p>
             <h3 className="mt-2 text-xl font-bold">{s.title}</h3>
             <p className="mt-3 text-sm leading-6 text-slate-600">{s.summary}</p>
+            <ul className="mt-4 space-y-2 text-sm leading-6 text-slate-700">
+              {s.outcomes.slice(0, 2).map((item) => (
+                <li key={item} className="flex gap-2">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-700" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
           </TrackedLink>
         ))}
       </div>

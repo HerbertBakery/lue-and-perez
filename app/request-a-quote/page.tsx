@@ -1,6 +1,8 @@
+import CapabilitiesLink from "@/components/CapabilitiesLink";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import QuoteForm from "@/components/QuoteForm";
 import Section from "@/components/Section";
+import { quoteChecklist, quoteExpectations } from "@/lib/siteContent";
 
 export const metadata = {
   title: "Request a Quote",
@@ -13,31 +15,57 @@ export default function Page() {
     <Section className="py-12">
       <Breadcrumbs items={[{ href: "/request-a-quote", label: "Request a Quote" }]} />
 
-      <div className="mt-4 grid gap-8 lg:grid-cols-[minmax(0,1.25fr)_320px]">
+      <div className="mt-4 grid gap-8 lg:grid-cols-[minmax(0,1.25fr)_340px]">
         <div className="max-w-3xl">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-700">Commercial inquiry</p>
           <h1 className="mt-2 text-3xl font-extrabold md:text-4xl">Request a quote</h1>
           <p className="mt-4 max-w-2xl text-slate-600 md:text-lg">
-            Tell us what you need, where it is going, and how you plan to sell it. We will review product fit, export readiness, and the logistics path before responding with next steps.
+            Tell us what you need, where it is going, and how you plan to sell it. We review commercial fit, export readiness, and the likely logistics path before responding with next steps.
           </p>
           <p className="mt-4 text-sm font-medium text-slate-700">
-            Qualified B2B inquiries typically receive a response within 2 business days.
+            Qualified B2B inquiries typically receive a response within two business days.
           </p>
 
-          <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
             <QuoteForm />
           </div>
         </div>
 
-        <aside className="h-fit rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-          <h2 className="text-lg font-semibold">What to include</h2>
-          <ul className="mt-4 space-y-3 text-sm text-slate-600">
-            <li>Products or categories you want sourced or exported</li>
-            <li>Approximate order volume and launch timeline</li>
-            <li>Destination country or retail market</li>
-            <li>Packaging, labeling, or private-label requirements</li>
-            <li>Any certifications or cold-chain constraints</li>
-          </ul>
+        <aside className="space-y-4">
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h2 className="text-lg font-semibold">What to include</h2>
+            <ul className="mt-4 space-y-3 text-sm leading-6 text-slate-600">
+              {quoteChecklist.map((item) => (
+                <li key={item} className="flex gap-2">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-700" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="rounded-2xl border border-slate-200 bg-slate-950 p-6 text-white shadow-sm">
+            <h2 className="text-lg font-semibold">What happens next</h2>
+            <ul className="mt-4 space-y-3 text-sm leading-6 text-white/80">
+              {quoteExpectations.map((item) => (
+                <li key={item} className="flex gap-2">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-300" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+            <h2 className="text-lg font-semibold text-slate-900">Need an internal leave-behind first?</h2>
+            <p className="mt-3 text-sm leading-6 text-slate-600">
+              Download the capabilities PDF if the buyer team needs a quick summary of markets served, operating scope, and program fit before starting the conversation.
+            </p>
+            <CapabilitiesLink
+              context="quote_sidebar"
+              className="mt-5 inline-flex items-center gap-2 rounded-xl border border-slate-300 px-4 py-3 text-sm font-semibold text-slate-800 hover:border-teal-700 hover:text-teal-700"
+            />
+          </div>
         </aside>
       </div>
     </Section>

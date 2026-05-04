@@ -66,6 +66,9 @@ export default function AdminInvoicesPage() {
   return (
     <main className="max-w-3xl mx-auto py-10 space-y-6">
       <h1 className="text-2xl font-semibold">PayPal Invoice Builder — USD only</h1>
+      <p className="text-sm text-gray-600">
+        Hosted invoices use the configured Lue &amp; Perez PayPal branding profile, logo, and optional PayPal invoice template.
+      </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-1">

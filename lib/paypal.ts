@@ -91,3 +91,70 @@ export function computeDueDate(daysUntilDue: number) {
 export function getPayPalWebhookId() {
   return process.env.PAYPAL_WEBHOOK_ID || "";
 }
+
+function trimEnv(name: string) {
+  return process.env[name]?.trim() || "";
+}
+
+function absoluteAssetUrl(path: string) {
+  const baseUrl = getBaseUrl().replace(/\/+$/, "");
+  if (!/^https?:\/\//i.test(baseUrl)) return "";
+  return `${baseUrl}${path.startsWith("/") ? path : `/${path}`}`;
+}
+
+export function getPayPalInvoiceTemplateId() {
+  return trimEnv("PAYPAL_INVOICE_TEMPLATE_ID");
+}
+
+export function getPayPalInvoicerInfo() {
+  const businessName = trimEnv("PAYPAL_INVOICER_NAME") || "Lue & Perez Marketing & Distribution";
+  const emailAddress = trimEnv("PAYPAL_BUSINESS_EMAIL");
+  const website = trimEnv("PAYPAL_INVOICER_WEBSITE") || getBaseUrl();
+  const logoUrl = trimEnv("PAYPAL_INVOICER_LOGO_URL") || absoluteAssetUrl("/logo.png");
+  const additionalNotes =
+    trimEnv("PAYPAL_INVOICER_NOTES") || "B2B sourcing, consolidation, export logistics, and private-label support.";
+  const taxId = trimEnv("PAYPAL_INVOICER_TAX_ID");
+
+  const phoneCountryCode = trimEnv("PAYPAL_INVOICER_PHONE_COUNTRY_CODE");
+  const phoneNationalNumber = trimEnv("PAYPAL_INVOICER_PHONE_NATIONAL_NUMBER");
+  const phoneType = trimEnv("PAYPAL_INVOICER_PHONE_TYPE") || "MOBILE";
+
+  const addressLine1 = trimEnv("PAYPAL_INVOICER_ADDRESS_LINE_1");
+  const addressLine2 = trimEnv("PAYPAL_INVOICER_ADDRESS_LINE_2");
+  const city = trimEnv("PAYPAL_INVOICER_CITY");
+  const state = trimEnv("PAYPAL_INVOICER_STATE");
+  const postalCode = trimEnv("PAYPAL_INVOICER_POSTAL_CODE");
+  const countryCode = trimEnv("PAYPAL_INVOICER_COUNTRY_CODE");
+
+  return {
+    business_name: businessName,
+    ...(emailAddress ? { email_address: emailAddress } : {}),
+    ...(website ? { website } : {}),
+    ...(logoUrl && /^https:\/\//i.test(logoUrl) ? { logo_url: logoUrl } : {}),
+    ...(additionalNotes ? { additional_notes: additionalNotes } : {}),
+    ...(taxId ? { tax_id: taxId } : {}),
+    ...(phoneCountryCode && phoneNationalNumber
+      ? {
+          phones: [
+            {
+              country_code: phoneCountryCode,
+              national_number: phoneNationalNumber,
+              phone_type: phoneType,
+            },
+          ],
+        }
+      : {}),
+    ...(addressLine1 && city && countryCode
+      ? {
+          address: {
+            address_line_1: addressLine1,
+            ...(addressLine2 ? { address_line_2: addressLine2 } : {}),
+            admin_area_2: city,
+            ...(state ? { admin_area_1: state } : {}),
+            ...(postalCode ? { postal_code: postalCode } : {}),
+            country_code: countryCode,
+          },
+        }
+      : {}),
+  };
+}

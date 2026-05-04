@@ -1,6 +1,11 @@
 import { NextResponse } from "next/server";
 
-import { computeDueDate, paypalFetch } from "@/lib/paypal";
+import {
+  computeDueDate,
+  getPayPalInvoicerInfo,
+  getPayPalInvoiceTemplateId,
+  paypalFetch,
+} from "@/lib/paypal";
 
 type Item = { description: string; amountCents: number; quantity?: number };
 type Body = {
@@ -44,6 +49,10 @@ function splitName(name?: string) {
   };
 }
 
+function invoiceDateToday() {
+  return new Date().toISOString().slice(0, 10);
+}
+
 export async function POST(req: Request) {
   try {
     const body = (await req.json()) as Body;
@@ -59,7 +68,8 @@ export async function POST(req: Request) {
     const dueDate = computeDueDate(daysUntilDue);
     const note = body.notes?.trim() || body.memo?.trim() || "Thanks for your business!";
     const recipientName = splitName(body.name);
-    const businessEmail = process.env.PAYPAL_BUSINESS_EMAIL?.trim();
+    const invoiceTemplateId = getPayPalInvoiceTemplateId();
+    const invoicer = getPayPalInvoicerInfo();
 
     const items = body.items.map((item, index) => {
       const amountCents = Math.trunc(Number(item.amountCents));
@@ -88,22 +98,22 @@ export async function POST(req: Request) {
       },
       body: JSON.stringify({
         detail: {
+          invoice_date: invoiceDateToday(),
           currency_code: "USD",
           note,
           memo: note,
-          payment_terms: `Payment due by ${dueDate}.`,
+          payment_terms:
+            process.env.PAYPAL_INVOICE_PAYMENT_TERMS?.trim() ||
+            `Payment due by ${dueDate}.`,
+          term:
+            process.env.PAYPAL_INVOICE_TERM?.trim() ||
+            "This invoice is issued in USD through PayPal.",
           payment_term: {
             term_type: "DUE_ON_DATE_SPECIFIED",
             due_date: dueDate,
           },
         },
-        ...(businessEmail
-          ? {
-              invoicer: {
-                email_address: businessEmail,
-              },
-            }
-          : {}),
+        invoicer,
         primary_recipients: [
           {
             billing_info: {
@@ -113,6 +123,13 @@ export async function POST(req: Request) {
           },
         ],
         items,
+        ...(invoiceTemplateId
+          ? {
+              configuration: {
+                template_id: invoiceTemplateId,
+              },
+            }
+          : {}),
       }),
     });
 

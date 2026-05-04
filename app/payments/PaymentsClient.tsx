@@ -21,7 +21,7 @@ export default function PaymentsClient() {
     () => Math.round((Number.isFinite(amount) ? amount : 0) * 100),
     [amount]
   );
-  const canPay = amountCents >= 50; // Stripe min is 50¢
+  const canPay = amountCents > 0;
 
   async function handlePay() {
     setError(null);
@@ -31,14 +31,14 @@ export default function PaymentsClient() {
     }
     setLoading(true);
     try {
-      const res = await fetch("/api/stripe/checkout/custom-amount", {
+      const res = await fetch("/api/paypal/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ amountCents }),
       });
       const data = await res.json();
       if (!res.ok || !data?.url) {
-        throw new Error(data?.message || data?.error || "Failed to create Stripe Checkout session.");
+        throw new Error(data?.message || data?.error || "Failed to create PayPal checkout.");
       }
       window.location.href = data.url as string;
     } catch (e: any) {
@@ -59,11 +59,11 @@ export default function PaymentsClient() {
       <header className="space-y-2">
         <h1 className="text-3xl font-semibold">Payments</h1>
         <p className="text-gray-700">
-          Pay a <strong>custom USD amount</strong> securely by card with Stripe, or paste an existing Stripe invoice/payment link.
+          Pay a <strong>custom USD amount</strong> securely with PayPal, or open an existing PayPal invoice link.
         </p>
       </header>
 
-      {/* Pay a custom amount (Stripe Checkout) */}
+      {/* Pay a custom amount (PayPal Checkout) */}
       <section className="border rounded-2xl p-5 bg-white space-y-3">
         <h2 className="text-xl font-medium">Pay a custom amount (USD)</h2>
 
@@ -78,12 +78,12 @@ export default function PaymentsClient() {
                 min="0.50"
                 step="0.01"
                 inputMode="decimal"
-                placeholder="0.50"
+                placeholder="1.00"
                 value={Number.isFinite(amount) && amount > 0 ? amount : ""}
                 onChange={(e) => setAmount(Number(e.target.value))}
               />
             </div>
-            <p className="text-xs text-gray-500">Minimum $0.50</p>
+            <p className="text-xs text-gray-500">You will be redirected to PayPal to complete payment.</p>
           </div>
 
           <button
@@ -92,20 +92,20 @@ export default function PaymentsClient() {
             disabled={!canPay || loading}
             className="px-4 py-2 rounded-2xl bg-black text-white disabled:opacity-50"
           >
-            {loading ? "Processing…" : "Pay by card (Stripe)"}
+            {loading ? "Redirecting…" : "Pay with PayPal"}
           </button>
         </div>
 
         {error && <p className="text-sm text-red-600">{error}</p>}
       </section>
 
-      {/* Open a Stripe invoice or payment link */}
+      {/* Open a PayPal invoice or payment link */}
       <section className="border rounded-2xl p-5 bg-white space-y-3">
         <h2 className="text-xl font-medium">Open an invoice/payment link</h2>
         <div className="flex gap-2">
           <input
             className="border p-2 rounded w-full"
-            placeholder="Paste a Stripe invoice/payment link (e.g. https://invoice.stripe.com/...)"
+            placeholder="Paste a PayPal invoice/payment link"
             value={link}
             onChange={(e) => setLink(e.target.value)}
           />
@@ -114,7 +114,7 @@ export default function PaymentsClient() {
           </button>
         </div>
         <p className="text-xs text-gray-500">
-          Accepts hosted invoice URLs, payment links, and checkout links.
+          Accepts PayPal-hosted invoice and checkout links.
         </p>
       </section>
     </main>

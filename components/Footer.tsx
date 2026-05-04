@@ -56,9 +56,9 @@ export default function Footer() {
               <Link
                 className="hover:text-teal-700"
                 href="/payments"
-                onClick={() => track('click_payments', { link_text: 'Pay by Card (USD)', link_url: '/payments' })}
+                onClick={() => track('click_payments', { link_text: 'Pay with PayPal (USD)', link_url: '/payments' })}
               >
-                Pay by Card (USD)
+                Pay with PayPal (USD)
               </Link>
             </li>
             <li><span className="text-slate-500">Invoices & bank wire available</span></li>

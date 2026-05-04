@@ -55,7 +55,7 @@ export default function PrivacyPage() {
           <h2 className="text-2xl font-semibold mb-2">Information We Collect</h2>
           <ul className="list-disc ml-6">
             <li>Business contact details (name, email, phone, address)</li>
-            <li>Payment details processed securely via Stripe</li>
+            <li>Payment details processed securely via PayPal</li>
             <li>Communications sent to our team (emails, forms)</li>
             <li>Website usage data (cookies, analytics)</li>
           </ul>
@@ -75,7 +75,7 @@ export default function PrivacyPage() {
           <h2 className="text-2xl font-semibold mb-2">Sharing & Disclosure</h2>
           <p>
             We do not sell or rent your information. Data may be shared with service providers
-            (e.g., Stripe, logistics partners) strictly for order fulfillment and compliance
+            (e.g., PayPal, logistics partners) strictly for order fulfillment and compliance
             purposes.
           </p>
         </section>
@@ -83,7 +83,7 @@ export default function PrivacyPage() {
         <section id="security">
           <h2 className="text-2xl font-semibold mb-2">Data Security</h2>
           <p>
-            All payments are processed through <strong>Stripe</strong> and never stored on our
+            All payments are processed through <strong>PayPal</strong> and never stored on our
             servers. We use industry-standard security measures to protect your information.
           </p>
         </section>
@@ -110,7 +110,7 @@ export default function PrivacyPage() {
           <h2 className="text-2xl font-semibold mb-2">Compliance</h2>
           <p>
             We comply with applicable data protection laws in Trinidad & Tobago, Canada, and other
-            jurisdictions where we operate. Stripe maintains PCI DSS compliance for payment
+            jurisdictions where we operate. PayPal maintains PCI DSS compliance for payment
             processing.
           </p>
         </section>

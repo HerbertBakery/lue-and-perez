@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 type Body = {
   name: string;
   email: string;
@@ -20,9 +18,15 @@ export async function POST(req: Request) {
 
     const to = process.env.CONTACT_TO;
     const from = process.env.CONTACT_FROM || "Lue & Perez <onboarding@resend.dev>";
+    const apiKey = process.env.RESEND_API_KEY;
     if (!to) {
       return NextResponse.json({ ok: false, error: "CONTACT_TO env not set." }, { status: 500 });
     }
+    if (!apiKey) {
+      return NextResponse.json({ ok: false, error: "RESEND_API_KEY env not set." }, { status: 500 });
+    }
+
+    const resend = new Resend(apiKey);
 
     const subject = `New contact: ${name}`;
     const html = `

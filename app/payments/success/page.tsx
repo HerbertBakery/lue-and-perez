@@ -1,24 +1,15 @@
-// app/payments/success/page.tsx
-import type Stripe from "stripe";
 import { Suspense } from "react";
 
-export const dynamic = "force-dynamic";
+import { formatAmount, paypalFetch } from "@/lib/paypal";
 
-function formatAmount(cents?: number | null, currency?: string | null) {
-  if (cents == null || !Number.isFinite(cents)) return "";
-  const amount = cents / 100;
-  const code = (currency || "usd").toUpperCase();
-  return new Intl.NumberFormat("en-US", { style: "currency", currency: code }).format(amount);
-}
+export const dynamic = "force-dynamic";
 
 function SuccessShell({
   amountText,
   email,
-  receiptUrl,
 }: {
   amountText?: string;
   email?: string;
-  receiptUrl?: string | null;
 }) {
   return (
     <main className="max-w-xl mx-auto py-14">
@@ -44,17 +35,6 @@ function SuccessShell({
           )}
         </p>
 
-        {receiptUrl ? (
-          <a
-            href={receiptUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center rounded-xl bg-black px-5 py-3 text-white font-semibold hover:opacity-90"
-          >
-            View / Download receipt
-          </a>
-        ) : null}
-
         <div className="flex flex-wrap gap-3 justify-center pt-2">
           <a href="/payments" className="rounded-xl border px-4 py-2 font-medium hover:border-teal-700">
             Make another payment
@@ -70,46 +50,68 @@ function SuccessShell({
   );
 }
 
-async function SuccessFromStripe({ sessionId }: { sessionId: string }) {
-  let amountText = "";
-  let email = "";
-  let receiptUrl: string | null = null;
+type PayPalOrder = {
+  status?: string;
+  payer?: {
+    email_address?: string;
+  };
+  purchase_units?: Array<{
+    amount?: { value?: string; currency_code?: string };
+    payments?: {
+      captures?: Array<{
+        amount?: { value?: string; currency_code?: string };
+      }>;
+    };
+  }>;
+};
 
+async function loadOrder(orderId: string) {
   try {
-    const { default: Stripe } = await import("stripe");
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
-      apiVersion: "2024-06-20",
+    const order = await paypalFetch<PayPalOrder>(`/v2/checkout/orders/${orderId}`, {
+      method: "GET",
     });
 
-    const session = await stripe.checkout.sessions.retrieve(sessionId, {
-      expand: ["payment_intent.latest_charge"],
-    });
+    if (order.status !== "COMPLETED") {
+      const captured = await paypalFetch<PayPalOrder>(`/v2/checkout/orders/${orderId}/capture`, {
+        method: "POST",
+        body: JSON.stringify({}),
+      });
+      return captured;
+    }
 
-    amountText = formatAmount(session.amount_total ?? null, session.currency ?? null);
-    email = session.customer_details?.email || "";
-
-    const latestCharge = (session.payment_intent as Stripe.PaymentIntent | null)?.latest_charge as
-      | Stripe.Charge
-      | null
-      | undefined;
-    receiptUrl = latestCharge?.receipt_url || null;
+    return order;
   } catch {
-    // swallow and show generic confirmation
+    return null;
   }
-
-  return <SuccessShell amountText={amountText} email={email} receiptUrl={receiptUrl} />;
 }
 
-export default function Page({ searchParams }: { searchParams: { session_id?: string } }) {
-  const sessionId = searchParams?.session_id;
-  if (!sessionId) {
-    // No session id — still show a clear confirmation
+async function SuccessFromPayPal({ orderId }: { orderId: string }) {
+  let amountText = "";
+  let email = "";
+
+  const order = await loadOrder(orderId);
+  if (order) {
+    const captureAmount = order.purchase_units?.[0]?.payments?.captures?.[0]?.amount;
+    const orderAmount = order.purchase_units?.[0]?.amount;
+    amountText = formatAmount(
+      captureAmount?.value || orderAmount?.value || null,
+      captureAmount?.currency_code || orderAmount?.currency_code || "USD"
+    );
+    email = order.payer?.email_address || "";
+  }
+
+  return <SuccessShell amountText={amountText} email={email} />;
+}
+
+export default function Page({ searchParams }: { searchParams: { token?: string } }) {
+  const orderId = searchParams?.token;
+  if (!orderId) {
     return <SuccessShell />;
   }
 
   return (
     <Suspense fallback={<main className="max-w-xl mx-auto py-14">Loading…</main>}>
-      <SuccessFromStripe sessionId={sessionId} />
+      <SuccessFromPayPal orderId={orderId} />
     </Suspense>
   );
 }

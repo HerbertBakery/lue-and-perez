@@ -3,8 +3,6 @@
 import { Resend } from 'resend';
 import { redirect } from 'next/navigation';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function sendRfp(formData: FormData) {
   const name = (formData.get('name') as string || '').trim();
   const email = (formData.get('email') as string || '').trim();
@@ -17,9 +15,15 @@ export async function sendRfp(formData: FormData) {
 
   const to = process.env.CONTACT_TO;
   const from = process.env.CONTACT_FROM || 'Lue & Perez <onboarding@resend.dev>';
+  const apiKey = process.env.RESEND_API_KEY;
   if (!to) {
     redirect('/contact?sent=0&error=CONTACT_TO env not set');
   }
+  if (!apiKey) {
+    redirect('/contact?sent=0&error=RESEND_API_KEY env not set');
+  }
+
+  const resend = new Resend(apiKey);
 
   const subject = `New contact: ${name}`;
   const html = `

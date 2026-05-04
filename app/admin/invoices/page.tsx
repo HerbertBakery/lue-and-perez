@@ -43,7 +43,7 @@ export default function AdminInvoicesPage() {
         })),
       };
 
-      const res = await fetch("/api/stripe/invoices/create-send", {
+      const res = await fetch("/api/paypal/invoices/create-send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -53,7 +53,7 @@ export default function AdminInvoicesPage() {
       if (!res.ok) throw new Error(data?.error || "Invoice error");
 
       setHostedUrl(data.hostedInvoiceUrl || null);
-      alert("Invoice sent! (Test mode will email per your Stripe email settings.)");
+      alert("Invoice sent through PayPal.");
     } catch (e: any) {
       alert(e?.message || "Failed to create/send invoice");
     } finally {
@@ -65,7 +65,7 @@ export default function AdminInvoicesPage() {
 
   return (
     <main className="max-w-3xl mx-auto py-10 space-y-6">
-      <h1 className="text-2xl font-semibold">Invoice Builder — USD only</h1>
+      <h1 className="text-2xl font-semibold">PayPal Invoice Builder — USD only</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="space-y-1">
@@ -145,7 +145,7 @@ export default function AdminInvoicesPage() {
       <button type="button" onClick={handleSend}
               disabled={sending || !email || totalCents <= 0}
               className="px-4 py-2 rounded-2xl shadow bg-black text-white disabled:opacity-50">
-        {sending ? "Sending…" : `Create & Send Invoice for ${totalDisplay}`}
+        {sending ? "Sending…" : `Create & Send PayPal Invoice for ${totalDisplay}`}
       </button>
 
       {hostedUrl && (

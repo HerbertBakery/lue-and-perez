@@ -62,7 +62,7 @@ export default function TermsPage() {
           <h2 className="text-2xl font-semibold mb-2">Orders & Payments</h2>
           <p>
             Orders become binding upon confirmation. All invoices are due according to agreed
-            payment terms. Payments may be processed securely via Stripe or approved wire transfer.
+            payment terms. Payments may be processed securely via PayPal or approved wire transfer.
           </p>
         </section>
 
@@ -78,7 +78,7 @@ export default function TermsPage() {
           <h2 className="text-2xl font-semibold mb-2">Refunds & Cancellations</h2>
           <p>
             Cancellations must be requested in writing within 24 hours of order confirmation. Refunds
-            are issued at our discretion for defective or non-conforming goods. Stripe processing
+            are issued at our discretion for defective or non-conforming goods. PayPal processing
             fees may be non-refundable.
           </p>
         </section>

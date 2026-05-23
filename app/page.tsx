@@ -29,20 +29,20 @@ export default function HomePage() {
     }
   > = {
     "export-logistics": {
-      src: "/media/cold-chain.jpg",
-      alt: "Cold-chain product handling ready for export",
+      src: "/media/brand/brown-rice-bag.jpg",
+      alt: "Packaged brown rice product prepared for export-logistics planning",
     },
     consolidation: {
-      src: "/media/multi-supplier-pickups.jpg",
-      alt: "Multi-supplier consolidation workflow",
+      src: "/media/brand/sausage-board.jpg",
+      alt: "Prepared protein products aligned for consolidation planning",
     },
     sourcing: {
-      src: "/media/supplier-discovery.jpg",
-      alt: "Supplier discovery and product sourcing work",
+      src: "/media/services/prep-board.jpg",
+      alt: "Prepared ingredients and branded product styling for sourcing conversations",
     },
     manufacturing: {
-      src: "/media/co-packing-private-label.jpg",
-      alt: "Co-packing and private label production",
+      src: "/media/brand/rice-fish-portrait.jpg",
+      alt: "Finished plated product presentation for private label manufacturing",
     },
   };
 
@@ -131,10 +131,10 @@ export default function HomePage() {
               <div className="aspect-[4/3]">
                 <LoopingVideo
                   className="h-full w-full object-cover"
-                  poster="/media/supplier-discovery.jpg"
-                  mp4Src="/media/supplier-discovery.mp4"
-                  webmSrc="/media/supplier-discovery.webm"
-                  ariaLabel="Supplier discovery video"
+                  poster="/media/cold-chain.jpg"
+                  mp4Src="/media/cold-chain.mp4"
+                  webmSrc="/media/cold-chain.webm"
+                  ariaLabel="Chilled coffee product video"
                 />
               </div>
             </div>
@@ -274,14 +274,14 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100">
-              <div className="relative aspect-[4/5]">
-                <Image
-                  src="/media/brand/rice-plated-dark.jpg"
-                  alt="Styled plated Caribbean meal with branded rice packaging"
-                  fill
-                  sizes="(max-width: 639px) 100vw, 50vw"
-                  className="object-cover"
+            <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-950">
+              <div className="aspect-[4/5]">
+                <LoopingVideo
+                  className="h-full w-full object-cover"
+                  poster="/media/supplier-discovery.jpg"
+                  mp4Src="/media/supplier-discovery.mp4"
+                  webmSrc="/media/supplier-discovery.webm"
+                  ariaLabel="Supplier discovery vertical video"
                 />
               </div>
             </div>
@@ -319,11 +319,11 @@ export default function HomePage() {
                   <Image src={study.image.src} alt={study.image.alt} fill sizes="(max-width: 1279px) 100vw, 33vw" className="object-cover" />
                 </div>
                 <div className="p-6">
-                  <div className="flex flex-wrap gap-2">
-                    <span className="rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-teal-700">
+                  <div className="flex flex-wrap items-center gap-2 md:flex-nowrap">
+                    <span className="rounded-full bg-teal-50 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-teal-700">
                       {study.market}
                     </span>
-                    <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-slate-600">
+                    <span className="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-600">
                       {study.service}
                     </span>
                   </div>

@@ -257,8 +257,8 @@ export const caseStudies: CaseStudyContent[] = [
     highlight: "18% lower freight per unit through better pallet density and pickup alignment.",
     service: "Consolidation",
     image: {
-      src: "/media/multi-supplier-pickups.jpg",
-      alt: "Multi-supplier shipment staging for export consolidation.",
+      src: "/media/services/sausage-pack.jpg",
+      alt: "Packaged products arranged for a distributor-facing export program.",
     },
     snapshot: [
       { label: "Lane", value: "Caribbean to UK" },
@@ -289,8 +289,8 @@ export const caseStudies: CaseStudyContent[] = [
     highlight: "Retail-ready packaging, bilingual labeling, and a repeatable production spec before scale-up.",
     service: "Manufacturing",
     image: {
-      src: "/media/co-packing-private-label.jpg",
-      alt: "Private-label packaging setup and production coordination.",
+      src: "/media/services/chilli-oil.jpg",
+      alt: "Branded condiment bottle and plated food prepared for private-label presentation.",
     },
     snapshot: [
       { label: "Market", value: "Canada" },
@@ -321,8 +321,8 @@ export const caseStudies: CaseStudyContent[] = [
     highlight: "Export movement scheduled within 72 hours of production readiness to protect frozen quality.",
     service: "Export Logistics",
     image: {
-      src: "/media/cold-chain.jpg",
-      alt: "Temperature-controlled export planning for frozen bakery products.",
+      src: "/media/services/sungrown-harvests.jpg",
+      alt: "Packaged food products lined up for export logistics and destination-market presentation.",
     },
     snapshot: [
       { label: "Product state", value: "Frozen" },

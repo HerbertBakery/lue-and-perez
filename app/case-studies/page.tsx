@@ -35,11 +35,11 @@ export default function CaseStudies() {
               <Image src={study.image.src} alt={study.image.alt} fill sizes="(max-width: 1279px) 100vw, 33vw" className="object-cover" />
             </div>
             <div className="p-6">
-              <div className="flex flex-wrap gap-2">
-                <span className="rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-teal-700">
+              <div className="flex flex-wrap items-center gap-2 md:flex-nowrap">
+                <span className="rounded-full bg-teal-50 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-teal-700">
                   {study.market}
                 </span>
-                <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-slate-600">
+                <span className="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-600">
                   {study.service}
                 </span>
               </div>

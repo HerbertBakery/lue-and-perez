@@ -4,12 +4,9 @@ import FaqList from "@/components/FaqList";
 import ScrollDepthTracker from "@/components/ScrollDepthTracker";
 import TrackedLink from "@/components/TrackedLink";
 import VideoHero from "@/components/VideoHero";
-import VideoBlock from "@/components/VideoBlock";
 import {
-  buyerProfiles,
   caseStudies,
   faqItems,
-  operatingPillars,
   services,
   trustSignals,
 } from "@/lib/siteContent";
@@ -17,6 +14,36 @@ import {
 export default function HomePage() {
   const featuredServices = services.slice(0, 4);
   const featuredFaqs = faqItems.slice(0, 4);
+  const buyerSegments = [
+    "Importers",
+    "Distributors",
+    "Retail Programs",
+    "Private Label Teams",
+  ];
+  const capabilityMedia: Record<
+    string,
+    {
+      src: string;
+      alt: string;
+    }
+  > = {
+    "export-logistics": {
+      src: "/media/cold-chain.jpg",
+      alt: "Cold-chain product handling ready for export",
+    },
+    consolidation: {
+      src: "/media/multi-supplier-pickups.jpg",
+      alt: "Multi-supplier consolidation workflow",
+    },
+    sourcing: {
+      src: "/media/supplier-discovery.jpg",
+      alt: "Supplier discovery and product sourcing work",
+    },
+    manufacturing: {
+      src: "/media/co-packing-private-label.jpg",
+      alt: "Co-packing and private label production",
+    },
+  };
 
   return (
     <main className="flex flex-col">
@@ -27,87 +54,133 @@ export default function HomePage() {
         webmSrc="/media/hero-wide.webm"
         poster="/media/hero-wide.jpg"
         headline="Caribbean sourcing and export execution for serious B2B buyers"
-        subhead="Lue & Perez helps distributors, importers, and private-label programs source, consolidate, document, and move Caribbean food products into market with stronger operational control."
+        subhead="Source, consolidate, document, and move Caribbean food programs with tighter operational control."
       />
 
       <section className="border-y border-slate-200 bg-white">
-        <div className="mx-auto grid w-full max-w-6xl gap-5 px-4 py-5 lg:grid-cols-[minmax(0,1fr)_280px] lg:items-center">
-          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-            {trustSignals.map((item) => (
-              <div key={item.label} className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">{item.label}</p>
-                <p className="mt-2 text-sm font-semibold leading-6 text-slate-900">{item.value}</p>
-                <p className="mt-2 text-sm leading-6 text-slate-600">{item.description}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">Next step</p>
-            <h2 className="mt-2 text-xl font-semibold text-slate-900">Bring the commercial brief, not just a general inquiry</h2>
-            <p className="mt-3 text-sm leading-6 text-slate-600">
-              Serious buyer conversations move faster when destination market, product scope, timing, and packaging realities are already in view.
+        <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-10 md:py-14 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-700">What moves well</p>
+            <h2 className="mt-2 max-w-3xl text-3xl font-bold tracking-tight text-slate-900 md:text-4xl">
+              Programs that need product, packaging, and execution in the same conversation
+            </h2>
+            <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-600 md:text-base">
+              Buyers should see the kind of product, handling, and commercial readiness they can expect before the first call.
             </p>
-            <div className="mt-5 flex flex-col gap-3 sm:flex-row lg:flex-col">
+
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
+              {trustSignals.map((item) => (
+                <div key={item.label} className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">{item.label}</p>
+                  <p className="mt-2 text-base font-semibold leading-6 text-slate-900">{item.value}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <TrackedLink
                 href="/request-a-quote"
                 eventName="quote_cta_click"
-                eventParams={{ location: "home_trust_strip" }}
+                eventParams={{ location: "home_visual_intro" }}
                 className="inline-flex items-center justify-center rounded-xl bg-teal-700 px-4 py-3 text-sm font-semibold text-white hover:bg-teal-800"
               >
                 Request a Quote
               </TrackedLink>
+              <TrackedLink
+                href="/services"
+                eventName="service_index_click"
+                eventParams={{ location: "home_visual_intro" }}
+                className="inline-flex items-center justify-center rounded-xl border border-slate-300 px-4 py-3 text-sm font-semibold text-slate-900 hover:border-slate-400"
+              >
+                Explore Services
+              </TrackedLink>
             </div>
           </div>
-        </div>
-      </section>
 
-      <section className="py-12 md:py-16">
-        <div className="mx-auto w-full max-w-6xl px-4">
-          <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-700">Who this is for</p>
-            <h2 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">Built for buyers who need operating confidence, not just supplier access</h2>
-            <p className="mt-4 text-slate-600 md:text-lg">
-              The commercial value is not just product availability. It is the ability to connect sourcing, export readiness, packaging, logistics, and market requirements into one clearer path.
-            </p>
-          </div>
-
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-            {buyerProfiles.map((profile) => (
-              <div key={profile.title} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
-                <h3 className="text-lg font-semibold">{profile.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-slate-600">{profile.description}</p>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 sm:row-span-2">
+              <div className="relative aspect-[4/5]">
+                <Image
+                  src="/media/homepage/caribbean-rice-plate.jpg"
+                  alt="Prepared Caribbean rice and fish plating beside packaged rice"
+                  fill
+                  className="object-cover"
+                />
               </div>
-            ))}
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/80 to-transparent px-4 py-4 text-white">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-200">Market-ready</p>
+                <p className="mt-1 text-sm font-medium">Product presentation, packaging, and export execution should feel connected.</p>
+              </div>
+            </div>
+
+            <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100">
+              <div className="relative aspect-[4/3]">
+                <Image
+                  src="/media/homepage/cocoa-dark-chocolate.jpg"
+                  alt="Branded Caribbean chocolate product shot"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            </div>
+
+            <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-950">
+              <div className="aspect-[4/3]">
+                <video
+                  className="h-full w-full object-cover"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  poster="/media/supplier-discovery.jpg"
+                  preload="metadata"
+                  aria-label="Supplier discovery video"
+                >
+                  <source src="/media/supplier-discovery.webm" type="video/webm" />
+                  <source src="/media/supplier-discovery.mp4" type="video/mp4" />
+                </video>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       <section className="bg-slate-950 py-12 text-white md:py-16">
         <div className="mx-auto w-full max-w-6xl px-4">
-          <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-300">Why buyers choose Lue & Perez</p>
-            <h2 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">The operating value is in the handoffs</h2>
-            <p className="mt-4 text-sm leading-6 text-white/75 md:text-base">
-              Most import problems are not caused by a lack of suppliers. They come from poor alignment between product fit, packaging, documentation, timing, and freight execution.
-            </p>
-          </div>
-
-          <div className="mt-8 grid gap-5 lg:grid-cols-3">
-            {operatingPillars.map((pillar) => (
-              <div key={pillar.title} className="rounded-2xl border border-white/10 bg-white/5 p-6">
-                <h3 className="text-xl font-semibold text-white">{pillar.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-white/70">{pillar.description}</p>
-                <ul className="mt-4 space-y-2 text-sm leading-6 text-white/80">
-                  {pillar.bullets.map((item) => (
-                    <li key={item} className="flex gap-2">
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-300" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center">
+            <div className="overflow-hidden rounded-3xl border border-white/10 bg-white/5">
+              <div className="aspect-[16/10]">
+                <video
+                  className="h-full w-full object-cover"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  poster="/media/multi-supplier-pickups.jpg"
+                  preload="metadata"
+                  aria-label="Multi-supplier pickup and consolidation video"
+                >
+                  <source src="/media/multi-supplier-pickups.webm" type="video/webm" />
+                  <source src="/media/multi-supplier-pickups.mp4" type="video/mp4" />
+                </video>
               </div>
-            ))}
+            </div>
+
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-300">Built for</p>
+              <h2 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">Buyers who need execution to look as strong as the product</h2>
+              <p className="mt-4 max-w-2xl text-sm leading-6 text-white/75 md:text-base">
+                The strongest programs are not just sourced well. They are packed, documented, staged, and shipped with fewer weak handoffs.
+              </p>
+
+              <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                {buyerSegments.map((segment) => (
+                  <div key={segment} className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
+                    <p className="text-base font-semibold text-white">{segment}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -119,7 +192,7 @@ export default function HomePage() {
               <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-700">Core capabilities</p>
               <h2 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">What buyers actually need help with</h2>
               <p className="mt-4 text-slate-600 md:text-lg">
-                These are the operating workstreams behind Caribbean food programs that need to launch cleanly, replenish reliably, and scale with fewer avoidable surprises.
+                These are the operating workstreams behind export programs that need to launch cleanly and replenish reliably.
               </p>
             </div>
             <TrackedLink
@@ -139,32 +212,79 @@ export default function HomePage() {
                 href={service.href}
                 eventName="service_card_click"
                 eventParams={{ service: service.key, location: "home" }}
-                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:border-teal-700"
+                className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm hover:border-teal-700"
               >
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">{service.eyebrow}</p>
-                <h3 className="mt-2 text-xl font-semibold text-slate-900">{service.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-slate-600">{service.summary}</p>
-                <ul className="mt-5 space-y-2 text-sm text-slate-700">
-                  {service.outcomes.slice(0, 2).map((item) => (
-                    <li key={item} className="flex gap-2">
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-700" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
+                <div className="relative aspect-[16/10] border-b border-slate-200 bg-slate-100">
+                  <Image
+                    src={capabilityMedia[service.key].src}
+                    alt={capabilityMedia[service.key].alt}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="p-6">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">{service.eyebrow}</p>
+                  <h3 className="mt-2 text-xl font-semibold text-slate-900">{service.title}</h3>
+                  <p className="mt-3 text-sm leading-6 text-slate-600">{service.summary}</p>
+                </div>
               </TrackedLink>
             ))}
           </div>
         </div>
       </section>
 
-      <VideoBlock
-        title="Cold-chain execution that respects the commercial stakes"
-        description="Temperature-sensitive products live or die on handling discipline, routing, and documentation. The goal is to preserve product quality and protect commercial usability at destination."
-        mp4Src="/media/cold-chain.mp4"
-        webmSrc="/media/cold-chain.webm"
-        poster="/media/cold-chain.jpg"
-      />
+      <section className="py-12 md:py-16">
+        <div className="mx-auto grid w-full max-w-6xl gap-6 px-4 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-700">In motion</p>
+            <h2 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">Packaging, cold chain, and product presentation matter at every handoff</h2>
+            <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-600 md:text-base">
+              Serious buyers move faster when the handling, product format, and export-readiness are already visible.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-2">
+              {["Ambient", "Chilled", "Frozen", "Private Label"].map((label) => (
+                <span
+                  key={label}
+                  className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-slate-700"
+                >
+                  {label}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100">
+              <div className="relative aspect-[4/5]">
+                <Image
+                  src="/media/homepage/sweet-potato-pasta.jpg"
+                  alt="Packaged sweet potato pasta product lineup"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            </div>
+
+            <div className="overflow-hidden rounded-3xl border border-slate-200 bg-slate-950">
+              <div className="aspect-[4/5]">
+                <video
+                  className="h-full w-full object-cover"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  poster="/media/cold-chain.jpg"
+                  preload="metadata"
+                  aria-label="Cold-chain handling video"
+                >
+                  <source src="/media/cold-chain.webm" type="video/webm" />
+                  <source src="/media/cold-chain.mp4" type="video/mp4" />
+                </video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section className="py-14 md:py-16">
         <div className="mx-auto w-full max-w-6xl px-4">
@@ -172,9 +292,6 @@ export default function HomePage() {
             <div className="max-w-3xl">
               <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-700">Proof of fit</p>
               <h2 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">Selected project examples</h2>
-              <p className="mt-4 text-slate-600 md:text-lg">
-                These examples show the kinds of buyer-side problems the team is built to solve: lower landed cost, cleaner packaging readiness, stronger cold-chain control, and more reliable replenishment.
-              </p>
             </div>
             <TrackedLink
               href="/case-studies"
@@ -247,7 +364,7 @@ export default function HomePage() {
               <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-300">Next step</p>
               <h2 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">If the program is commercially serious, start with a qualified quote request</h2>
               <p className="mt-4 text-sm leading-6 text-white/75 md:text-base">
-                Share the destination market, product scope, estimated volume, and timeline. That gives Lue & Perez enough context to respond like an operator, not just a brochure site.
+                Share the destination market, product scope, estimated volume, and timeline so the response can start at the commercial brief, not at square one.
               </p>
             </div>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">

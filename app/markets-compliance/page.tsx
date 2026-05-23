@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import FaqList from "@/components/FaqList";
+import LoopingVideo from "@/components/LoopingVideo";
 import ScrollDepthTracker from "@/components/ScrollDepthTracker";
 import Section from "@/components/Section";
 import TrackedLink from "@/components/TrackedLink";
@@ -73,6 +74,7 @@ export default function Page() {
               alt="Branded premium brown rice packaging"
               fill
               priority
+              sizes="(max-width: 1023px) 100vw, 40vw"
               className="object-contain p-6 sm:p-8"
             />
           </div>
@@ -82,19 +84,13 @@ export default function Page() {
       <div className="mt-10 grid gap-6 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:items-center">
         <div className="overflow-hidden rounded-3xl border border-slate-200 bg-slate-950 shadow-sm">
           <div className="aspect-[16/10] bg-slate-950 p-3 sm:p-5">
-            <video
+            <LoopingVideo
               className="h-full w-full rounded-2xl object-contain"
-              autoPlay
-              muted
-              loop
-              playsInline
               poster="/media/cold-chain.jpg"
-              preload="metadata"
-              aria-label="Cold-chain handling and chilled coffee export video"
-            >
-              <source src="/media/cold-chain.webm" type="video/webm" />
-              <source src="/media/cold-chain.mp4" type="video/mp4" />
-            </video>
+              mp4Src="/media/cold-chain.mp4"
+              webmSrc="/media/cold-chain.webm"
+              ariaLabel="Cold-chain handling and chilled coffee export video"
+            />
           </div>
         </div>
 

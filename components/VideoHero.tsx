@@ -1,6 +1,7 @@
 "use client";
-import React from "react";
 import Link from "next/link";
+
+import LoopingVideo from "@/components/LoopingVideo";
 
 type Props = {
   mp4Src: string;
@@ -17,32 +18,16 @@ export default function VideoHero({
   headline = "Caribbean Export • Cold Chain • Consolidation",
   subhead = "Multi-supplier pickups, supplier discovery, co-packing & private label—handled.",
 }: Props) {
-  const [prefersReducedMotion, setPrefersReducedMotion] = React.useState(false);
-
-  React.useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setPrefersReducedMotion(mediaQuery.matches);
-    update();
-    mediaQuery.addEventListener("change", update);
-    return () => mediaQuery.removeEventListener("change", update);
-  }, []);
-
   return (
     <section className="relative w-full">
       <div className="absolute inset-0 bg-gradient-to-r from-slate-950/78 via-slate-950/45 to-slate-950/25 z-10" />
-      <video
+      <LoopingVideo
         className="h-[68svh] min-h-[420px] w-full object-cover sm:min-h-[460px] md:h-[72vh]"
-        autoPlay={!prefersReducedMotion}
-        muted
-        loop={!prefersReducedMotion}
-        playsInline
         poster={poster}
-        preload="metadata"
-        aria-hidden="true"
-      >
-        {webmSrc && <source src={webmSrc} type="video/webm" />}
-        <source src={mp4Src} type="video/mp4" />
-      </video>
+        mp4Src={mp4Src}
+        webmSrc={webmSrc}
+        priority
+      />
 
       <div className="absolute inset-0 z-20 flex items-center">
         <div className="mx-auto w-full max-w-6xl px-4">

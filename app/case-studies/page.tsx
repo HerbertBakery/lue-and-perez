@@ -32,7 +32,7 @@ export default function CaseStudies() {
             className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm hover:border-teal-700"
           >
             <div className="relative aspect-[16/10] border-b border-slate-200 bg-slate-100">
-              <Image src={study.image.src} alt={study.image.alt} fill className="object-cover" />
+              <Image src={study.image.src} alt={study.image.alt} fill sizes="(max-width: 1279px) 100vw, 33vw" className="object-cover" />
             </div>
             <div className="p-6">
               <div className="flex flex-wrap gap-2">

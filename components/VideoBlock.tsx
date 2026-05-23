@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import LoopingVideo from "@/components/LoopingVideo";
 
 type Props = {
   title?: string;
@@ -11,15 +11,6 @@ type Props = {
 
 // Simple vertical block: heading, subcopy, fixed-width video, autoplay/muted/loop
 export default function VideoBlock({ title, description, mp4Src, webmSrc, poster }: Props) {
-  const [prefersReducedMotion, setPrefersReducedMotion] = React.useState(false);
-
-  React.useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setPrefersReducedMotion(mediaQuery.matches);
-    update();
-    mediaQuery.addEventListener("change", update);
-    return () => mediaQuery.removeEventListener("change", update);
-  }, []);
 
   return (
     <section className="w-full py-10 md:py-14">
@@ -31,19 +22,13 @@ export default function VideoBlock({ title, description, mp4Src, webmSrc, poster
 
         <div className={`${title || description ? "mt-6" : ""} mx-auto w-full max-w-4xl overflow-hidden rounded-2xl border border-slate-200 bg-black shadow-sm`}>
           <div className="w-full aspect-video">
-            <video
+            <LoopingVideo
               className="w-full h-full object-cover"
-              autoPlay={!prefersReducedMotion}
-              muted
-              loop={!prefersReducedMotion}
-              playsInline
               poster={poster}
-              preload="metadata"
-              aria-label={title ? `${title} video` : "Lue & Perez service video"}
-            >
-              {webmSrc && <source src={webmSrc} type="video/webm" />}
-              <source src={mp4Src} type="video/mp4" />
-            </video>
+              mp4Src={mp4Src}
+              webmSrc={webmSrc}
+              ariaLabel={title ? `${title} video` : "Lue & Perez service video"}
+            />
           </div>
         </div>
       </div>

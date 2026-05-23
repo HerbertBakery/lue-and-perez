@@ -15,6 +15,7 @@ export default function SiteLogo({ href = "/", compact = false }: Props) {
         width={compact ? 40 : 64}
         height={compact ? 40 : 64}
         priority={!compact}
+        sizes={compact ? "(max-width: 640px) 40px, 44px" : "(max-width: 640px) 44px, (max-width: 768px) 56px, 64px"}
         className={compact ? "h-10 w-10 sm:h-11 sm:w-11" : "h-11 w-11 sm:h-14 sm:w-14 md:h-16 md:w-16"}
       />
       <div className="min-w-0">

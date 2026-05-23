@@ -1,5 +1,7 @@
 import Link from 'next/link'
 
+import LoopingVideo from '@/components/LoopingVideo'
+
 export default function VideoPanel({
   src = '/media/hero.mp4',
   eyebrow,
@@ -19,15 +21,10 @@ export default function VideoPanel({
     <section className="py-12">
       <div className={`container mx-auto px-4 grid gap-8 md:grid-cols-2 items-center ${reverse ? 'md:[&>*:first-child]:order-2' : ''}`}>
         <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl shadow">
-          <video
+          <LoopingVideo
             className="h-full w-full object-cover"
-            src={src}
-            playsInline
-            autoPlay
-            loop
-            muted
-            preload="metadata"
-            aria-label={`${title} video`}
+            mp4Src={src}
+            ariaLabel={`${title} video`}
           />
           <div className="pointer-events-none absolute inset-0 ring-1 ring-black/10 rounded-2xl" />
         </div>

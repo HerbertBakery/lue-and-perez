@@ -63,7 +63,7 @@ export default function CaseStudyTemplate({ caseStudy }: { caseStudy: CaseStudyC
       </div>
 
       <div className="relative mt-8 aspect-[16/8] overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 shadow-sm">
-        <Image src={caseStudy.image.src} alt={caseStudy.image.alt} fill className="object-cover" />
+        <Image src={caseStudy.image.src} alt={caseStudy.image.alt} fill sizes="100vw" className="object-cover" />
       </div>
 
       <div className="mt-8 grid gap-6 lg:grid-cols-[320px_minmax(0,1fr)]">

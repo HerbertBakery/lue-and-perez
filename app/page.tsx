@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import FaqList from "@/components/FaqList";
+import LoopingVideo from "@/components/LoopingVideo";
 import ScrollDepthTracker from "@/components/ScrollDepthTracker";
 import TrackedLink from "@/components/TrackedLink";
 import VideoHero from "@/components/VideoHero";
@@ -104,6 +105,7 @@ export default function HomePage() {
                   src="/media/homepage/caribbean-rice-plate.jpg"
                   alt="Prepared Caribbean rice and fish plating beside packaged rice"
                   fill
+                  sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 30vw"
                   className="object-cover"
                 />
               </div>
@@ -119,6 +121,7 @@ export default function HomePage() {
                   src="/media/homepage/cocoa-dark-chocolate.jpg"
                   alt="Branded Caribbean chocolate product shot"
                   fill
+                  sizes="(max-width: 639px) 100vw, 50vw"
                   className="object-cover"
                 />
               </div>
@@ -126,19 +129,13 @@ export default function HomePage() {
 
             <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-950">
               <div className="aspect-[4/3]">
-                <video
+                <LoopingVideo
                   className="h-full w-full object-cover"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
                   poster="/media/supplier-discovery.jpg"
-                  preload="metadata"
-                  aria-label="Supplier discovery video"
-                >
-                  <source src="/media/supplier-discovery.webm" type="video/webm" />
-                  <source src="/media/supplier-discovery.mp4" type="video/mp4" />
-                </video>
+                  mp4Src="/media/supplier-discovery.mp4"
+                  webmSrc="/media/supplier-discovery.webm"
+                  ariaLabel="Supplier discovery video"
+                />
               </div>
             </div>
           </div>
@@ -150,19 +147,13 @@ export default function HomePage() {
           <div className="grid gap-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center">
             <div className="overflow-hidden rounded-3xl border border-white/10 bg-white/5">
               <div className="aspect-[16/10]">
-                <video
+                <LoopingVideo
                   className="h-full w-full object-cover"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
                   poster="/media/multi-supplier-pickups.jpg"
-                  preload="metadata"
-                  aria-label="Multi-supplier pickup and consolidation video"
-                >
-                  <source src="/media/multi-supplier-pickups.webm" type="video/webm" />
-                  <source src="/media/multi-supplier-pickups.mp4" type="video/mp4" />
-                </video>
+                  mp4Src="/media/multi-supplier-pickups.mp4"
+                  webmSrc="/media/multi-supplier-pickups.webm"
+                  ariaLabel="Multi-supplier pickup and consolidation video"
+                />
               </div>
             </div>
 
@@ -219,6 +210,7 @@ export default function HomePage() {
                     src={capabilityMedia[service.key].src}
                     alt={capabilityMedia[service.key].alt}
                     fill
+                    sizes="(max-width: 767px) 100vw, 50vw"
                     className="object-cover"
                   />
                 </div>
@@ -260,6 +252,7 @@ export default function HomePage() {
                   src="/media/brand/rice-fish-landscape.jpg"
                   alt="Prepared Caribbean meal plated beside branded packaged rice"
                   fill
+                  sizes="(max-width: 639px) 100vw, 100vw"
                   className="object-cover"
                 />
               </div>
@@ -275,6 +268,7 @@ export default function HomePage() {
                   src="/media/homepage/sweet-potato-pasta.jpg"
                   alt="Packaged sweet potato pasta product lineup"
                   fill
+                  sizes="(max-width: 639px) 100vw, 50vw"
                   className="object-cover"
                 />
               </div>
@@ -286,6 +280,7 @@ export default function HomePage() {
                   src="/media/brand/rice-plated-dark.jpg"
                   alt="Styled plated Caribbean meal with branded rice packaging"
                   fill
+                  sizes="(max-width: 639px) 100vw, 50vw"
                   className="object-cover"
                 />
               </div>
@@ -321,7 +316,7 @@ export default function HomePage() {
                 className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm hover:border-teal-700"
               >
                 <div className="relative aspect-[16/10] border-b border-slate-200 bg-slate-100">
-                  <Image src={study.image.src} alt={study.image.alt} fill className="object-cover" />
+                  <Image src={study.image.src} alt={study.image.alt} fill sizes="(max-width: 1279px) 100vw, 33vw" className="object-cover" />
                 </div>
                 <div className="p-6">
                   <div className="flex flex-wrap gap-2">

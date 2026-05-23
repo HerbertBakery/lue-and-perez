@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import LoopingVideo from "@/components/LoopingVideo";
 import ScrollDepthTracker from "@/components/ScrollDepthTracker";
 import Section from "@/components/Section";
 import TrackedLink from "@/components/TrackedLink";
@@ -67,6 +68,7 @@ export default function AboutPage() {
                 alt="Prepared sausage products presented on a board"
                 fill
                 priority
+                sizes="(max-width: 1023px) 100vw, 32vw"
                 className="object-cover"
               />
             </div>
@@ -98,19 +100,13 @@ export default function AboutPage() {
       <div className="mt-10 grid gap-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center">
         <div className="overflow-hidden rounded-3xl border border-slate-200 bg-slate-950 shadow-sm">
           <div className="aspect-[16/10]">
-            <video
+            <LoopingVideo
               className="h-full w-full object-cover"
-              autoPlay
-              muted
-              loop
-              playsInline
               poster="/media/co-packing-private-label.jpg"
-              preload="metadata"
-              aria-label="Co-packing and private label production video"
-            >
-              <source src="/media/co-packing-private-label.webm" type="video/webm" />
-              <source src="/media/co-packing-private-label.mp4" type="video/mp4" />
-            </video>
+              mp4Src="/media/co-packing-private-label.mp4"
+              webmSrc="/media/co-packing-private-label.webm"
+              ariaLabel="Co-packing and private label production video"
+            />
           </div>
         </div>
 
@@ -121,6 +117,7 @@ export default function AboutPage() {
                 src="/media/brand/rice-fish-portrait.jpg"
                 alt="Styled Caribbean meal and branded rice packaging"
                 fill
+                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 40vw, 20vw"
                 className="object-cover"
               />
             </div>

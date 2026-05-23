@@ -26,6 +26,18 @@ export default function LoopingVideo({
   const videoRef = React.useRef<HTMLVideoElement | null>(null);
 
   React.useEffect(() => {
+    const node = videoRef.current;
+    if (!node) return;
+
+    node.muted = true;
+    node.defaultMuted = true;
+    node.playsInline = true;
+    node.setAttribute("muted", "");
+    node.setAttribute("playsinline", "");
+    node.setAttribute("webkit-playsinline", "true");
+  }, []);
+
+  React.useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     const update = () => setPrefersReducedMotion(mediaQuery.matches);
     update();
@@ -56,6 +68,31 @@ export default function LoopingVideo({
     return () => observer.disconnect();
   }, [priority, rootMargin, shouldLoad]);
 
+  React.useEffect(() => {
+    const node = videoRef.current;
+    if (!node || !shouldLoad || prefersReducedMotion) return;
+
+    const attemptPlayback = () => {
+      node.muted = true;
+      node.defaultMuted = true;
+      const playAttempt = node.play();
+      if (playAttempt && typeof playAttempt.catch === "function") {
+        playAttempt.catch(() => {
+          // Mobile browsers can briefly reject autoplay before metadata is ready.
+        });
+      }
+    };
+
+    attemptPlayback();
+    node.addEventListener("loadeddata", attemptPlayback);
+    node.addEventListener("canplay", attemptPlayback);
+
+    return () => {
+      node.removeEventListener("loadeddata", attemptPlayback);
+      node.removeEventListener("canplay", attemptPlayback);
+    };
+  }, [prefersReducedMotion, shouldLoad]);
+
   return (
     <video
       ref={videoRef}
@@ -64,6 +101,8 @@ export default function LoopingVideo({
       muted
       loop={!prefersReducedMotion}
       playsInline
+      disablePictureInPicture
+      disableRemotePlayback
       poster={poster}
       preload={shouldLoad ? (priority ? "auto" : "metadata") : "none"}
       aria-hidden={ariaLabel ? undefined : "true"}

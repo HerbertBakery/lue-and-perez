@@ -239,7 +239,7 @@ export default function HomePage() {
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-700">In motion</p>
             <h2 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">Packaging, cold chain, and product presentation matter at every handoff</h2>
             <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-600 md:text-base">
-              Serious buyers move faster when the handling, product format, and export-readiness are already visible.
+              Serious buyers move faster when the product story already looks shelf-ready, shipment-ready, and commercially thought through.
             </p>
             <div className="mt-6 flex flex-wrap gap-2">
               {["Ambient", "Chilled", "Frozen", "Private Label"].map((label) => (
@@ -254,6 +254,21 @@ export default function HomePage() {
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
+            <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 sm:col-span-2">
+              <div className="relative aspect-[16/10]">
+                <Image
+                  src="/media/brand/rice-fish-landscape.jpg"
+                  alt="Prepared Caribbean meal plated beside branded packaged rice"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/75 to-transparent px-4 py-4 text-white sm:px-5">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-200">Shelf to shipment</p>
+                <p className="mt-1 max-w-md text-sm font-medium">Presentation and packaging should already support the buyer conversation.</p>
+              </div>
+            </div>
+
             <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100">
               <div className="relative aspect-[4/5]">
                 <Image
@@ -265,21 +280,14 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="overflow-hidden rounded-3xl border border-slate-200 bg-slate-950">
-              <div className="aspect-[4/5]">
-                <video
-                  className="h-full w-full object-cover"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  poster="/media/cold-chain.jpg"
-                  preload="metadata"
-                  aria-label="Cold-chain handling video"
-                >
-                  <source src="/media/cold-chain.webm" type="video/webm" />
-                  <source src="/media/cold-chain.mp4" type="video/mp4" />
-                </video>
+            <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100">
+              <div className="relative aspect-[4/5]">
+                <Image
+                  src="/media/brand/rice-plated-dark.jpg"
+                  alt="Styled plated Caribbean meal with branded rice packaging"
+                  fill
+                  className="object-cover"
+                />
               </div>
             </div>
           </div>

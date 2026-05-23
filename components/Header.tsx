@@ -31,7 +31,7 @@ function NavLink({
       onClick={() => {
         if (trackEvent) trackEventFn(trackEvent, { link_text: label, link_url: href })
       }}
-      className={`rounded-md px-1 py-1 hover:text-teal-700 ${active ? 'text-teal-700 font-semibold' : ''}`}
+      className={`block rounded-xl px-3 py-2.5 text-sm hover:bg-slate-100 hover:text-teal-700 md:inline-flex md:rounded-md md:px-1 md:py-1 md:hover:bg-transparent ${active ? 'font-semibold text-teal-700' : ''}`}
     >
       {label}
     </Link>
@@ -55,7 +55,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/90 backdrop-blur">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between gap-3 py-2.5 sm:py-3">
+        <div className="flex items-center justify-between gap-3 py-2 sm:py-3">
           <SiteLogo />
 
           <nav className="hidden items-center gap-6 text-sm md:flex">
@@ -76,7 +76,7 @@ export default function Header() {
 
           <button
             type="button"
-            className="inline-flex shrink-0 items-center justify-center rounded-xl border border-slate-200 p-2 text-slate-700 md:hidden"
+            className="inline-flex shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white p-2 text-slate-700 shadow-sm md:hidden"
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? 'Close navigation' : 'Open navigation'}
@@ -88,7 +88,7 @@ export default function Header() {
 
         <nav
           id="mobile-nav"
-          className={`${open ? 'grid' : 'hidden'} gap-2 border-t border-slate-200 py-3 md:hidden`}
+          className={`${open ? 'grid' : 'hidden'} mb-3 gap-1 rounded-2xl border border-slate-200 bg-white p-2 shadow-sm md:hidden`}
         >
           {navItems.map((item) => (
             <div key={item.href} onClick={() => setOpen(false)}>

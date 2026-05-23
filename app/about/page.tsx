@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import ScrollDepthTracker from "@/components/ScrollDepthTracker";
 import Section from "@/components/Section";
@@ -7,7 +9,6 @@ import {
   authorityPanels,
   buyerProfiles,
   capabilityHighlights,
-  operatingPillars,
 } from "@/lib/siteContent";
 
 export const metadata = {
@@ -16,21 +17,26 @@ export const metadata = {
     "Learn how Lue & Perez supports buyers with sourcing, consolidation, export logistics, and private-label execution across Caribbean food categories.",
 };
 
+const opportunitySteps = [
+  "Clarify the destination market, product scope, and commercial timing.",
+  "Pressure-test sourcing, packaging, documentation, and logistics together.",
+  "Respond with the cleanest path to quote, launch, or scale.",
+];
+
 export default function AboutPage() {
   return (
-    <Section className="py-12">
+    <Section className="py-10 sm:py-12">
       <ScrollDepthTracker pageName="about" />
       <Breadcrumbs items={[{ href: "/about", label: "About" }]} />
 
-      <div className="mt-4 grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_340px] lg:items-start">
+      <div className="mt-4 grid gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(320px,0.95fr)] lg:items-start">
         <div className="max-w-4xl">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-700">About</p>
-          <h1 className="mt-2 text-3xl font-extrabold md:text-4xl">A B2B Caribbean export partner built for commercial and operational clarity</h1>
-          <p className="mt-4 text-slate-600 md:text-lg">
-            Lue & Perez supports buyers that need more than a supplier introduction. The work sits where sourcing, export execution, compliance, packaging, and launch planning overlap, especially when multiple suppliers or more demanding operating requirements are involved.
-          </p>
-          <p className="mt-4 text-slate-600 md:text-lg">
-            The objective is simple: give importers, distributors, retail programs, and private-label buyers a cleaner path from opportunity to execution.
+          <h1 className="mt-2 text-3xl font-extrabold md:text-4xl">
+            A Caribbean export partner built for buyers who need commercial clarity and cleaner execution
+          </h1>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600 md:text-lg">
+            Lue & Perez sits where sourcing, market readiness, packaging, and export handling overlap. The goal is not to add noise. It is to help serious B2B buyers move from opportunity to execution with fewer weak handoffs.
           </p>
 
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
@@ -42,48 +48,128 @@ export default function AboutPage() {
             >
               Start a Qualified Quote Request
             </TrackedLink>
+            <TrackedLink
+              href="/services"
+              eventName="service_index_click"
+              eventParams={{ location: "about_hero" }}
+              className="inline-flex items-center justify-center rounded-xl border border-slate-300 px-5 py-3 font-semibold text-slate-900 hover:border-slate-400"
+            >
+              Explore Services
+            </TrackedLink>
           </div>
         </div>
 
-        <aside className="rounded-2xl border border-slate-200 bg-slate-950 p-6 text-white shadow-sm">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-300">At a glance</p>
-          <ul className="mt-4 space-y-4 text-sm leading-6 text-white/80">
-            {capabilityHighlights.map((item) => (
-              <li key={item} className="flex gap-3">
-                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-300" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </aside>
+        <div className="space-y-4">
+          <div className="overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 shadow-sm">
+            <div className="relative aspect-[4/3]">
+              <Image
+                src="/media/brand/sausage-board.jpg"
+                alt="Prepared sausage products presented on a board"
+                fill
+                priority
+                className="object-cover"
+              />
+            </div>
+          </div>
+
+          <aside className="rounded-2xl border border-slate-200 bg-slate-950 p-6 text-white shadow-sm">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-300">What buyers lean on us for</p>
+            <ul className="mt-4 space-y-4 text-sm leading-6 text-white/80">
+              {capabilityHighlights.map((item) => (
+                <li key={item} className="flex gap-3">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-300" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </aside>
+        </div>
       </div>
 
-      <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+      <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         {aboutHighlights.map((item) => (
-          <div key={item.title} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="text-lg font-semibold">{item.title}</h2>
+          <div key={item.title} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">{item.title}</p>
             <p className="mt-3 text-sm leading-6 text-slate-600">{item.description}</p>
           </div>
         ))}
       </div>
 
-      <div className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,1.15fr)_360px]">
-        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-          <h2 className="text-xl font-semibold">Who we support</h2>
-          <div className="mt-4 grid gap-4 md:grid-cols-2">
-            {buyerProfiles.map((buyer) => (
-              <div key={buyer.title} className="rounded-xl border border-slate-200 p-4">
-                <h3 className="font-semibold text-slate-900">{buyer.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-slate-600">{buyer.description}</p>
-              </div>
-            ))}
+      <div className="mt-10 grid gap-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center">
+        <div className="overflow-hidden rounded-3xl border border-slate-200 bg-slate-950 shadow-sm">
+          <div className="aspect-[16/10]">
+            <video
+              className="h-full w-full object-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+              poster="/media/co-packing-private-label.jpg"
+              preload="metadata"
+              aria-label="Co-packing and private label production video"
+            >
+              <source src="/media/co-packing-private-label.webm" type="video/webm" />
+              <source src="/media/co-packing-private-label.mp4" type="video/mp4" />
+            </video>
           </div>
         </div>
 
-        <div className="space-y-4">
+        <div className="grid gap-4 sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+          <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 sm:min-h-full">
+            <div className="relative aspect-[4/5] sm:h-full sm:aspect-auto">
+              <Image
+                src="/media/brand/rice-fish-portrait.jpg"
+                alt="Styled Caribbean meal and branded rice packaging"
+                fill
+                className="object-cover"
+              />
+            </div>
+          </div>
+
+          <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-700">What the work looks like</p>
+            <h2 className="mt-2 text-2xl font-bold tracking-tight text-slate-900">Commercial support that stays close to the product reality</h2>
+            <p className="mt-4 text-sm leading-6 text-slate-600">
+              Buyers usually need more than a product list. They need to see how packaging, supplier readiness, market requirements, and export handling line up before the commercial brief gets too far ahead of the operating reality.
+            </p>
+            <div className="mt-5 flex flex-wrap gap-2">
+              {["Sourcing fit", "Export handling", "Label readiness", "Private label"].map((item) => (
+                <span
+                  key={item}
+                  className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-slate-700"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-10">
+        <div className="max-w-3xl">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-700">Who we support</p>
+          <h2 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">Buyer-side teams that need fewer gaps between product and execution</h2>
+        </div>
+        <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {buyerProfiles.map((buyer) => (
+            <div key={buyer.title} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+              <h3 className="text-lg font-semibold text-slate-900">{buyer.title}</h3>
+              <p className="mt-3 text-sm leading-6 text-slate-600">{buyer.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-10">
+        <div className="max-w-3xl">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-700">Why buyers bring us in</p>
+          <h2 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">The value is usually in making the handoffs cleaner</h2>
+        </div>
+        <div className="mt-6 grid gap-4 lg:grid-cols-3">
           {authorityPanels.map((panel) => (
-            <div key={panel.title} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-              <h2 className="text-lg font-semibold">{panel.title}</h2>
+            <div key={panel.title} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+              <h3 className="text-xl font-semibold text-slate-900">{panel.title}</h3>
               <p className="mt-3 text-sm leading-6 text-slate-600">{panel.description}</p>
               <ul className="mt-4 space-y-2 text-sm leading-6 text-slate-700">
                 {panel.items.map((item) => (
@@ -98,43 +184,19 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <div className="mt-10 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h2 className="text-xl font-semibold">How a serious opportunity usually moves</h2>
-        <ol className="mt-4 grid gap-4 md:grid-cols-3">
-          {[
-            "Clarify the destination market, channel, product scope, and timing.",
-            "Test sourcing, documentation, packaging, and logistics feasibility together.",
-            "Recommend the cleanest path to quote, launch, or scale with less avoidable friction.",
-          ].map((step, index) => (
-            <li key={step} className="rounded-xl border border-slate-200 p-4 text-sm leading-6 text-slate-600">
-              <div className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">Step {index + 1}</div>
+      <div className="mt-10 rounded-3xl border border-slate-200 bg-slate-950 px-5 py-8 text-white shadow-sm sm:px-6 md:px-8">
+        <div className="max-w-3xl">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-300">How an opportunity moves</p>
+          <h2 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">A serious request usually gets clearer fast</h2>
+        </div>
+        <ol className="mt-6 grid gap-4 md:grid-cols-3">
+          {opportunitySteps.map((step, index) => (
+            <li key={step} className="rounded-2xl border border-white/10 bg-white/5 p-5 text-sm leading-6 text-white/80">
+              <div className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-teal-300">Step {index + 1}</div>
               {step}
             </li>
           ))}
         </ol>
-      </div>
-
-      <div className="mt-10">
-        <div className="max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-700">Working style</p>
-          <h2 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">The value is in making the handoffs cleaner</h2>
-        </div>
-        <div className="mt-8 grid gap-6 lg:grid-cols-3">
-          {operatingPillars.map((pillar) => (
-            <div key={pillar.title} className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
-              <h3 className="text-xl font-semibold text-slate-900">{pillar.title}</h3>
-              <p className="mt-3 text-sm leading-6 text-slate-600">{pillar.description}</p>
-              <ul className="mt-4 space-y-2 text-sm leading-6 text-slate-700">
-                {pillar.bullets.map((item) => (
-                  <li key={item} className="flex gap-2">
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-700" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
       </div>
     </Section>
   );

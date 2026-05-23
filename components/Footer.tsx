@@ -7,8 +7,8 @@ import { trackEvent } from '@/lib/analytics'
 
 export default function Footer() {
   return (
-    <footer className="border-t border-slate-200 bg-white py-12">
-      <div className="container mx-auto grid gap-8 px-4 text-sm sm:grid-cols-2 xl:grid-cols-4">
+    <footer className="border-t border-slate-200 bg-white py-10 sm:py-12">
+      <div className="container mx-auto grid gap-8 px-4 text-sm sm:grid-cols-2 lg:grid-cols-4">
         <div>
           <SiteLogo compact />
           <p className="mt-3 max-w-sm text-slate-600">

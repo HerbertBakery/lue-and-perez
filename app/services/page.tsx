@@ -87,8 +87,8 @@ export default function ServicesPage() {
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
-          <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 sm:row-span-2">
-            <div className="relative aspect-[4/5]">
+          <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 sm:row-span-2 sm:min-h-full">
+            <div className="relative aspect-[4/5] sm:h-full sm:aspect-auto">
               <Image
                 src="/media/fresh/services-hero-shelf.jpg"
                 alt="Packaged Caribbean products merchandised on shelf"

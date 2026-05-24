@@ -6,6 +6,14 @@ import Link from 'next/link'
 import SiteLogo from '@/components/SiteLogo'
 import { trackEvent } from '@/lib/analytics'
 
+function FacebookMark() {
+  return <Facebook className="h-4 w-4 fill-current stroke-[1.75]" />
+}
+
+function InstagramMark() {
+  return <Instagram className="h-4 w-4 stroke-[1.9]" />
+}
+
 export default function Footer() {
   return (
     <footer className="border-t border-slate-200 bg-white py-10 sm:py-12">
@@ -17,24 +25,24 @@ export default function Footer() {
           </p>
           <div className="mt-4 flex items-center gap-3">
             <Link
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-slate-600 transition hover:border-teal-700 hover:text-teal-700"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#1877F2] text-white shadow-sm transition hover:scale-[1.03] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1877F2] focus-visible:ring-offset-2"
               href="https://www.facebook.com/Lue.Perez.Marketing.Distribution"
               target="_blank"
               rel="noreferrer"
               aria-label="Lue & Perez on Facebook"
               onClick={() => trackEvent('click_social', { platform: 'facebook', location: 'footer' })}
             >
-              <Facebook className="h-4 w-4" />
+              <FacebookMark />
             </Link>
             <Link
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-slate-600 transition hover:border-teal-700 hover:text-teal-700"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[radial-gradient(circle_at_30%_107%,#fdf497_0%,#fdf497_5%,#fd5949_45%,#d6249f_60%,#285AEB_90%)] text-white shadow-sm transition hover:scale-[1.03] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d6249f] focus-visible:ring-offset-2"
               href="https://www.instagram.com/lueandperez/"
               target="_blank"
               rel="noreferrer"
               aria-label="Lue & Perez on Instagram"
               onClick={() => trackEvent('click_social', { platform: 'instagram', location: 'footer' })}
             >
-              <Instagram className="h-4 w-4" />
+              <InstagramMark />
             </Link>
           </div>
         </div>

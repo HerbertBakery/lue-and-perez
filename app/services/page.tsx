@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import LoopingVideo from "@/components/LoopingVideo";
 import ScrollDepthTracker from "@/components/ScrollDepthTracker";
 import Section from "@/components/Section";
 import TrackedLink from "@/components/TrackedLink";
@@ -10,30 +11,51 @@ export const metadata = { title: "Services — Lue & Perez" };
 
 const serviceMedia: Record<
   string,
-  {
-    src: string;
-    alt: string;
-  }
+  | {
+      type: "image";
+      src: string;
+      alt: string;
+    }
+  | {
+      type: "video";
+      mp4Src: string;
+      webmSrc?: string;
+      poster: string;
+      alt: string;
+    }
 > = {
   sourcing: {
-    src: "/media/services/prep-board.jpg",
+    type: "video",
+    mp4Src: "/media/supplier-discovery.mp4",
+    webmSrc: "/media/supplier-discovery.webm",
+    poster: "/media/supplier-discovery.jpg",
     alt: "Prepared ingredients and kitchen setup for sourcing discussions",
   },
   consolidation: {
-    src: "/media/services/sausage-pack.jpg",
+    type: "video",
+    mp4Src: "/media/multi-supplier-pickups.mp4",
+    webmSrc: "/media/multi-supplier-pickups.webm",
+    poster: "/media/multi-supplier-pickups.jpg",
     alt: "Packaged products arranged for multi-supplier consolidation",
   },
   "export-logistics": {
-    src: "/media/services/sungrown-harvests.jpg",
+    type: "video",
+    mp4Src: "/media/cold-chain.mp4",
+    webmSrc: "/media/cold-chain.webm",
+    poster: "/media/cold-chain.jpg",
     alt: "Packaged food products aligned for export logistics planning",
   },
   manufacturing: {
-    src: "/media/services/chilli-oil.jpg",
+    type: "video",
+    mp4Src: "/media/co-packing-private-label.mp4",
+    webmSrc: "/media/co-packing-private-label.webm",
+    poster: "/media/co-packing-private-label.jpg",
     alt: "Branded condiment bottle and plated food for manufacturing and private-label work",
   },
   "caribbean-food-exports": {
-    src: "/media/homepage/sweet-potato-pasta.jpg",
-    alt: "Packaged sweet potato pasta lineup for end-to-end export partnerships",
+    type: "image",
+    src: "/media/services/nacho-bowl.jpg",
+    alt: "Caribbean product assortment styled for end-to-end export partnerships",
   },
 };
 
@@ -87,25 +109,25 @@ export default function ServicesPage() {
           </div>
 
           <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100">
-            <div className="relative aspect-[4/3]">
-              <Image
-                src="/media/homepage/cocoa-dark-chocolate.jpg"
-                alt="Branded Caribbean chocolate product shot for buyer-facing service positioning"
-                fill
-                sizes="(max-width: 639px) 100vw, 50vw"
-                className="object-cover"
+            <div className="aspect-[4/3] bg-slate-950">
+              <LoopingVideo
+                className="h-full w-full object-cover"
+                poster="/media/supplier-discovery.jpg"
+                mp4Src="/media/supplier-discovery.mp4"
+                webmSrc="/media/supplier-discovery.webm"
+                ariaLabel="Supplier discovery video"
               />
             </div>
           </div>
 
           <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100">
-            <div className="relative aspect-[4/3]">
-              <Image
-                src="/media/brand/rice-plated-dark.jpg"
-                alt="Plated Caribbean meal and branded rice styled for export presentation"
-                fill
-                sizes="(max-width: 639px) 100vw, 50vw"
-                className="object-cover"
+            <div className="aspect-[4/3] bg-slate-950">
+              <LoopingVideo
+                className="h-full w-full object-cover"
+                poster="/media/multi-supplier-pickups.jpg"
+                mp4Src="/media/multi-supplier-pickups.mp4"
+                webmSrc="/media/multi-supplier-pickups.webm"
+                ariaLabel="Consolidation and staging video"
               />
             </div>
           </div>
@@ -113,53 +135,67 @@ export default function ServicesPage() {
       </div>
 
       <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-        {services.map((service) => (
-          <TrackedLink
-            key={service.href}
-            href={service.href}
-            eventName="service_card_click"
-            eventParams={{ service: service.key, location: "services_index" }}
-            className="group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:border-teal-700"
-          >
-            <div className="relative aspect-[16/10] border-b border-slate-200 bg-slate-100">
-              <Image
-                src={serviceMedia[service.key].src}
-                alt={serviceMedia[service.key].alt}
-                fill
-                sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 33vw"
-                className="object-cover transition duration-500 group-hover:scale-[1.02]"
-              />
-            </div>
+        {services.map((service) => {
+          const media = serviceMedia[service.key];
 
-            <div className="p-6">
-              <div className="flex flex-wrap gap-2">
-                <span className="rounded-full bg-teal-50 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-teal-700">
-                  {service.eyebrow}
-                </span>
-                {serviceTags[service.key].slice(0, 2).map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-600"
-                  >
-                    {tag}
-                  </span>
-                ))}
+          return (
+            <TrackedLink
+              key={service.href}
+              href={service.href}
+              eventName="service_card_click"
+              eventParams={{ service: service.key, location: "services_index" }}
+              className="group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:border-teal-700"
+            >
+              <div className="relative aspect-[16/10] border-b border-slate-200 bg-slate-100">
+                {media.type === "image" ? (
+                  <Image
+                    src={media.src}
+                    alt={media.alt}
+                    fill
+                    sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 33vw"
+                    className="object-cover transition duration-500 group-hover:scale-[1.02]"
+                  />
+                ) : (
+                  <LoopingVideo
+                    className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]"
+                    poster={media.poster}
+                    mp4Src={media.mp4Src}
+                    webmSrc={media.webmSrc}
+                    ariaLabel={media.alt}
+                  />
+                )}
               </div>
 
-              <h2 className="mt-4 text-xl font-bold text-slate-900">{service.title}</h2>
-              <p className="mt-3 text-sm leading-6 text-slate-600">{service.summary}</p>
+              <div className="p-6">
+                <div className="flex flex-wrap gap-2">
+                  <span className="rounded-full bg-teal-50 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-teal-700">
+                    {service.eyebrow}
+                  </span>
+                  {serviceTags[service.key].slice(0, 2).map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-600"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
 
-              <ul className="mt-5 space-y-3 text-sm leading-6 text-slate-700">
-                {service.outcomes.slice(0, 2).map((item) => (
-                  <li key={item} className="flex gap-3">
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-700" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </TrackedLink>
-        ))}
+                <h2 className="mt-4 text-xl font-bold text-slate-900">{service.title}</h2>
+                <p className="mt-3 text-sm leading-6 text-slate-600">{service.summary}</p>
+
+                <ul className="mt-5 space-y-3 text-sm leading-6 text-slate-700">
+                  {service.outcomes.slice(0, 2).map((item) => (
+                    <li key={item} className="flex gap-3">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-700" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </TrackedLink>
+          );
+        })}
       </div>
     </Section>
   );

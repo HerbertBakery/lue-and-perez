@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { Volume2, VolumeX } from "lucide-react";
 
 type Props = {
   mp4Src: string;
@@ -10,6 +11,7 @@ type Props = {
   ariaLabel?: string;
   priority?: boolean;
   rootMargin?: string;
+  showAudioToggle?: boolean;
 };
 
 export default function LoopingVideo({
@@ -20,7 +22,9 @@ export default function LoopingVideo({
   ariaLabel,
   priority = false,
   rootMargin = "320px 0px",
+  showAudioToggle = false,
 }: Props) {
+  const [isMuted, setIsMuted] = React.useState(true);
   const [prefersReducedMotion, setPrefersReducedMotion] = React.useState(false);
   const [shouldLoad, setShouldLoad] = React.useState(priority);
   const videoRef = React.useRef<HTMLVideoElement | null>(null);
@@ -29,13 +33,17 @@ export default function LoopingVideo({
     const node = videoRef.current;
     if (!node) return;
 
-    node.muted = true;
-    node.defaultMuted = true;
+    node.muted = isMuted;
+    node.defaultMuted = isMuted;
     node.playsInline = true;
-    node.setAttribute("muted", "");
+    if (isMuted) {
+      node.setAttribute("muted", "");
+    } else {
+      node.removeAttribute("muted");
+    }
     node.setAttribute("playsinline", "");
     node.setAttribute("webkit-playsinline", "true");
-  }, []);
+  }, [isMuted]);
 
   React.useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -73,8 +81,8 @@ export default function LoopingVideo({
     if (!node || !shouldLoad || prefersReducedMotion) return;
 
     const attemptPlayback = () => {
-      node.muted = true;
-      node.defaultMuted = true;
+      node.muted = isMuted;
+      node.defaultMuted = isMuted;
       const playAttempt = node.play();
       if (playAttempt && typeof playAttempt.catch === "function") {
         playAttempt.catch(() => {
@@ -91,25 +99,55 @@ export default function LoopingVideo({
       node.removeEventListener("loadeddata", attemptPlayback);
       node.removeEventListener("canplay", attemptPlayback);
     };
-  }, [prefersReducedMotion, shouldLoad]);
+  }, [isMuted, prefersReducedMotion, shouldLoad]);
+
+  const toggleAudio = React.useCallback(() => {
+    const node = videoRef.current;
+    if (!node) return;
+
+    const nextMuted = !isMuted;
+    setIsMuted(nextMuted);
+    node.muted = nextMuted;
+    node.defaultMuted = nextMuted;
+
+    const playAttempt = node.play();
+    if (playAttempt && typeof playAttempt.catch === "function") {
+      playAttempt.catch(() => {
+        // A user-initiated toggle is the strongest chance to keep playback alive on mobile Safari.
+      });
+    }
+  }, [isMuted]);
 
   return (
-    <video
-      ref={videoRef}
-      className={className}
-      autoPlay={shouldLoad && !prefersReducedMotion}
-      muted
-      loop={!prefersReducedMotion}
-      playsInline
-      disablePictureInPicture
-      disableRemotePlayback
-      poster={poster}
-      preload={shouldLoad ? (priority ? "auto" : "metadata") : "none"}
-      aria-hidden={ariaLabel ? undefined : "true"}
-      aria-label={ariaLabel}
-    >
-      {shouldLoad && webmSrc ? <source src={webmSrc} type="video/webm" /> : null}
-      {shouldLoad ? <source src={mp4Src} type="video/mp4" /> : null}
-    </video>
+    <div className="relative h-full w-full">
+      <video
+        ref={videoRef}
+        className={className}
+        autoPlay={shouldLoad && !prefersReducedMotion}
+        muted={isMuted}
+        loop={!prefersReducedMotion}
+        playsInline
+        disablePictureInPicture
+        disableRemotePlayback
+        poster={poster}
+        preload={shouldLoad ? (priority ? "auto" : "metadata") : "none"}
+        aria-hidden={ariaLabel ? undefined : "true"}
+        aria-label={ariaLabel}
+      >
+        {shouldLoad && webmSrc ? <source src={webmSrc} type="video/webm" /> : null}
+        {shouldLoad ? <source src={mp4Src} type="video/mp4" /> : null}
+      </video>
+
+      {showAudioToggle ? (
+        <button
+          type="button"
+          onClick={toggleAudio}
+          className="absolute bottom-3 right-3 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-slate-950/70 text-white backdrop-blur transition hover:bg-slate-950/85"
+          aria-label={isMuted ? "Unmute video" : "Mute video"}
+        >
+          {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
+        </button>
+      ) : null}
+    </div>
   );
 }

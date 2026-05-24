@@ -62,14 +62,15 @@ export default function AboutPage() {
 
         <div className="space-y-4">
           <div className="overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 shadow-sm">
-            <div className="relative aspect-[4/3]">
-              <Image
-                src="/media/brand/sausage-board.jpg"
-                alt="Prepared sausage products presented on a board"
-                fill
+            <div className="relative aspect-[4/3] bg-slate-950">
+              <LoopingVideo
+                className="h-full w-full object-cover"
+                poster="/media/co-packing-private-label.jpg"
+                mp4Src="/media/co-packing-private-label.mp4"
+                webmSrc="/media/co-packing-private-label.webm"
+                ariaLabel="Co-packing and private label production video"
+                showAudioToggle
                 priority
-                sizes="(max-width: 1023px) 100vw, 32vw"
-                className="object-cover"
               />
             </div>
           </div>
@@ -98,46 +99,46 @@ export default function AboutPage() {
       </div>
 
       <div className="mt-10 grid gap-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center">
-        <div className="overflow-hidden rounded-3xl border border-slate-200 bg-slate-950 shadow-sm">
-          <div className="aspect-[16/10]">
-            <LoopingVideo
-              className="h-full w-full object-cover"
-              poster="/media/co-packing-private-label.jpg"
-              mp4Src="/media/co-packing-private-label.mp4"
-              webmSrc="/media/co-packing-private-label.webm"
-              ariaLabel="Co-packing and private label production video"
-            />
+        <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm sm:p-7">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-700">What the work looks like</p>
+          <h2 className="mt-2 text-2xl font-bold tracking-tight text-slate-900 md:text-3xl">Commercial support that stays close to the product reality</h2>
+          <p className="mt-4 text-sm leading-6 text-slate-600">
+            Buyers usually need more than a product list. They need to see how packaging, supplier readiness, market requirements, and export handling line up before the commercial brief gets too far ahead of the operating reality.
+          </p>
+          <div className="mt-5 flex flex-wrap gap-2">
+            {["Sourcing fit", "Export handling", "Label readiness", "Private label"].map((item) => (
+              <span
+                key={item}
+                className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-slate-700"
+              >
+                {item}
+              </span>
+            ))}
           </div>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
-          <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 sm:min-h-full">
-            <div className="relative aspect-[4/5] sm:h-full sm:aspect-auto">
-              <Image
-                src="/media/brand/rice-fish-portrait.jpg"
-                alt="Styled Caribbean meal and branded rice packaging"
-                fill
-                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 40vw, 20vw"
-                className="object-cover"
+          <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-950 sm:min-h-full">
+            <div className="aspect-[4/5] sm:h-full sm:aspect-auto">
+              <LoopingVideo
+                className="h-full w-full object-cover"
+                poster="/media/cold-chain.jpg"
+                mp4Src="/media/cold-chain.mp4"
+                webmSrc="/media/cold-chain.webm"
+                ariaLabel="Chilled product and cold-chain handling video"
               />
             </div>
           </div>
 
-          <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-700">What the work looks like</p>
-            <h2 className="mt-2 text-2xl font-bold tracking-tight text-slate-900">Commercial support that stays close to the product reality</h2>
-            <p className="mt-4 text-sm leading-6 text-slate-600">
-              Buyers usually need more than a product list. They need to see how packaging, supplier readiness, market requirements, and export handling line up before the commercial brief gets too far ahead of the operating reality.
-            </p>
-            <div className="mt-5 flex flex-wrap gap-2">
-              {["Sourcing fit", "Export handling", "Label readiness", "Private label"].map((item) => (
-                <span
-                  key={item}
-                  className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-slate-700"
-                >
-                  {item}
-                </span>
-              ))}
+          <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100">
+            <div className="relative aspect-[4/5]">
+              <Image
+                src="/media/brand/rice-plated-dark.jpg"
+                alt="Prepared Caribbean meal and branded rice styled for buyer-ready presentation"
+                fill
+                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 60vw, 26vw"
+                className="object-cover"
+              />
             </div>
           </div>
         </div>

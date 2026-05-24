@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import FaqList from "@/components/FaqList";
 import LoopingVideo from "@/components/LoopingVideo";
@@ -67,15 +65,15 @@ export default function Page() {
           </div>
         </div>
 
-        <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-          <div className="relative aspect-[4/5] bg-slate-50">
-            <Image
-              src="/media/brand/brown-rice-bag.jpg"
-              alt="Branded premium brown rice packaging"
-              fill
+        <div className="overflow-hidden rounded-3xl border border-slate-200 bg-slate-950 shadow-sm">
+          <div className="aspect-[4/5] bg-slate-950 p-3 sm:p-4">
+            <LoopingVideo
+              className="h-full w-full rounded-2xl object-cover"
+              poster="/media/supplier-discovery.jpg"
+              mp4Src="/media/supplier-discovery.mp4"
+              webmSrc="/media/supplier-discovery.webm"
+              ariaLabel="Supplier discovery and buyer-readiness video"
               priority
-              sizes="(max-width: 1023px) 100vw, 40vw"
-              className="object-contain p-6 sm:p-8"
             />
           </div>
         </div>

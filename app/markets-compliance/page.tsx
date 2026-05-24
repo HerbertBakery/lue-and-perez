@@ -72,6 +72,7 @@ export default function Page() {
               poster="/media/fresh/markets-container-loading.jpg"
               mp4Src="/media/fresh/markets-container-loading.mp4"
               ariaLabel="Container loading and export staging video"
+              softBackdrop
               priority
             />
           </div>
@@ -83,9 +84,10 @@ export default function Page() {
           <div className="aspect-[16/10] bg-slate-950 p-3 sm:p-5">
             <LoopingVideo
               className="h-full w-full rounded-2xl bg-slate-950 object-contain"
-              poster="/media/fresh/markets-bakery-line.jpg"
-              mp4Src="/media/fresh/markets-bakery-line.mp4"
-              ariaLabel="Bakery production and handling video"
+              poster="/media/fresh/markets-shipment-readiness.jpg"
+              mp4Src="/media/fresh/markets-shipment-readiness.mp4"
+              ariaLabel="Palletized shipment loading and export readiness video"
+              softBackdrop
             />
           </div>
         </div>

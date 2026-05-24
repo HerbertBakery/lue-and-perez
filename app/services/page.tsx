@@ -106,6 +106,7 @@ export default function ServicesPage() {
                 poster="/media/fresh/services-syrup-closeup.jpg"
                 mp4Src="/media/fresh/services-syrup-closeup.mp4"
                 ariaLabel="Product close-up video"
+                softBackdrop
               />
             </div>
           </div>
@@ -117,6 +118,7 @@ export default function ServicesPage() {
                 poster="/media/fresh/services-loading-dock.jpg"
                 mp4Src="/media/fresh/services-loading-dock.mp4"
                 ariaLabel="Loading dock and export staging video"
+                softBackdrop
               />
             </div>
           </div>

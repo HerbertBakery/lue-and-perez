@@ -69,6 +69,7 @@ export default function AboutPage() {
                 mp4Src="/media/fresh/about-lemon-lime.mp4"
                 ariaLabel="Lemon lime bottled beverage video"
                 showAudioToggle
+                softBackdrop
                 priority
               />
             </div>

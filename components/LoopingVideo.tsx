@@ -12,6 +12,7 @@ type Props = {
   priority?: boolean;
   rootMargin?: string;
   showAudioToggle?: boolean;
+  softBackdrop?: boolean;
 };
 
 export default function LoopingVideo({
@@ -23,6 +24,7 @@ export default function LoopingVideo({
   priority = false,
   rootMargin = "320px 0px",
   showAudioToggle = false,
+  softBackdrop = false,
 }: Props) {
   const [isMuted, setIsMuted] = React.useState(true);
   const [prefersReducedMotion, setPrefersReducedMotion] = React.useState(false);
@@ -119,10 +121,17 @@ export default function LoopingVideo({
   }, [isMuted]);
 
   return (
-    <div className="relative h-full w-full">
+    <div className="relative h-full w-full overflow-hidden">
+      {softBackdrop && poster ? (
+        <div aria-hidden="true" className="absolute inset-0">
+          <img src={poster} alt="" className="h-full w-full scale-110 object-cover blur-3xl opacity-50" />
+          <div className="absolute inset-0 bg-slate-950/35" />
+        </div>
+      ) : null}
+
       <video
         ref={videoRef}
-        className={className}
+        className={className ? `relative z-10 ${className}` : "relative z-10"}
         autoPlay={shouldLoad && !prefersReducedMotion}
         muted={isMuted}
         loop={!prefersReducedMotion}
@@ -142,7 +151,7 @@ export default function LoopingVideo({
         <button
           type="button"
           onClick={toggleAudio}
-          className="absolute bottom-3 right-3 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-slate-950/70 text-white backdrop-blur transition hover:bg-slate-950/85"
+          className="absolute bottom-3 right-3 z-20 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-slate-950/70 text-white backdrop-blur transition hover:bg-slate-950/85"
           aria-label={isMuted ? "Unmute video" : "Mute video"}
         >
           {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}

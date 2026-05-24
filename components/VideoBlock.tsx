@@ -32,6 +32,7 @@ export default function VideoBlock({ title, description, mp4Src, webmSrc, poster
               mp4Src={mp4Src}
               webmSrc={webmSrc}
               ariaLabel={title ? `${title} video` : "Lue & Perez service video"}
+              softBackdrop={orientation === "portrait"}
             />
           </div>
         </div>

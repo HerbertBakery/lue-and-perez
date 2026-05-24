@@ -1,5 +1,6 @@
 'use client'
 
+import { Facebook, Instagram } from 'lucide-react'
 import Link from 'next/link'
 
 import SiteLogo from '@/components/SiteLogo'
@@ -14,6 +15,28 @@ export default function Footer() {
           <p className="mt-3 max-w-sm text-slate-600">
             B2B export partner for Caribbean foods across sourcing, consolidation, export logistics, private label, and market-readiness work.
           </p>
+          <div className="mt-4 flex items-center gap-3">
+            <Link
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-slate-600 transition hover:border-teal-700 hover:text-teal-700"
+              href="https://www.facebook.com/Lue.Perez.Marketing.Distribution"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Lue & Perez on Facebook"
+              onClick={() => trackEvent('click_social', { platform: 'facebook', location: 'footer' })}
+            >
+              <Facebook className="h-4 w-4" />
+            </Link>
+            <Link
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 text-slate-600 transition hover:border-teal-700 hover:text-teal-700"
+              href="https://www.instagram.com/lueandperez/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Lue & Perez on Instagram"
+              onClick={() => trackEvent('click_social', { platform: 'instagram', location: 'footer' })}
+            >
+              <Instagram className="h-4 w-4" />
+            </Link>
+          </div>
         </div>
 
         <div>

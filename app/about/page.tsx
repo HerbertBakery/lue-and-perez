@@ -62,13 +62,12 @@ export default function AboutPage() {
 
         <div className="space-y-4">
           <div className="overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 shadow-sm">
-            <div className="relative aspect-[4/3] bg-slate-950">
+            <div className="relative aspect-[4/5] bg-slate-950">
               <LoopingVideo
-                className="h-full w-full object-cover"
-                poster="/media/co-packing-private-label.jpg"
-                mp4Src="/media/co-packing-private-label.mp4"
-                webmSrc="/media/co-packing-private-label.webm"
-                ariaLabel="Co-packing and private label production video"
+                className="h-full w-full bg-slate-950 object-contain"
+                poster="/media/fresh/about-lemon-lime.jpg"
+                mp4Src="/media/fresh/about-lemon-lime.mp4"
+                ariaLabel="Lemon lime bottled beverage video"
                 showAudioToggle
                 priority
               />
@@ -118,14 +117,14 @@ export default function AboutPage() {
         </div>
 
         <div className="grid gap-4 sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
-          <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-950 sm:min-h-full">
-            <div className="aspect-[4/5] sm:h-full sm:aspect-auto">
-              <LoopingVideo
-                className="h-full w-full object-cover"
-                poster="/media/cold-chain.jpg"
-                mp4Src="/media/cold-chain.mp4"
-                webmSrc="/media/cold-chain.webm"
-                ariaLabel="Chilled product and cold-chain handling video"
+          <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 sm:min-h-full">
+            <div className="relative aspect-[4/5] sm:h-full sm:aspect-auto">
+              <Image
+                src="/media/fresh/about-cocoa-pods.jpg"
+                alt="Cocoa pods growing in the field"
+                fill
+                sizes="(max-width: 639px) 100vw, (max-width: 1023px) 60vw, 24vw"
+                className="object-cover"
               />
             </div>
           </div>
@@ -133,8 +132,8 @@ export default function AboutPage() {
           <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100">
             <div className="relative aspect-[4/5]">
               <Image
-                src="/media/brand/rice-plated-dark.jpg"
-                alt="Prepared Caribbean meal and branded rice styled for buyer-ready presentation"
+                src="/media/fresh/about-sorrel-bottle.jpg"
+                alt="Bottled sorrel beverage photographed for buyer-facing product presentation"
                 fill
                 sizes="(max-width: 639px) 100vw, (max-width: 1023px) 60vw, 26vw"
                 className="object-cover"

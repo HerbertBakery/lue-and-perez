@@ -19,43 +19,34 @@ const serviceMedia: Record<
   | {
       type: "video";
       mp4Src: string;
-      webmSrc?: string;
       poster: string;
       alt: string;
     }
 > = {
   sourcing: {
-    type: "video",
-    mp4Src: "/media/supplier-discovery.mp4",
-    webmSrc: "/media/supplier-discovery.webm",
-    poster: "/media/supplier-discovery.jpg",
-    alt: "Prepared ingredients and kitchen setup for sourcing discussions",
+    type: "image",
+    src: "/media/fresh/service-sourcing-cassava.jpg",
+    alt: "Cassava flour packaging photographed for Caribbean sourcing conversations",
   },
   consolidation: {
-    type: "video",
-    mp4Src: "/media/multi-supplier-pickups.mp4",
-    webmSrc: "/media/multi-supplier-pickups.webm",
-    poster: "/media/multi-supplier-pickups.jpg",
-    alt: "Packaged products arranged for multi-supplier consolidation",
+    type: "image",
+    src: "/media/fresh/service-consolidation-container.jpg",
+    alt: "Palletized products arranged inside a shipping container",
   },
   "export-logistics": {
-    type: "video",
-    mp4Src: "/media/cold-chain.mp4",
-    webmSrc: "/media/cold-chain.webm",
-    poster: "/media/cold-chain.jpg",
-    alt: "Packaged food products aligned for export logistics planning",
+    type: "image",
+    src: "/media/fresh/service-export-pallets.jpg",
+    alt: "Prepared pallet loads staged beside an export container",
   },
   manufacturing: {
-    type: "video",
-    mp4Src: "/media/co-packing-private-label.mp4",
-    webmSrc: "/media/co-packing-private-label.webm",
-    poster: "/media/co-packing-private-label.jpg",
-    alt: "Branded condiment bottle and plated food for manufacturing and private-label work",
+    type: "image",
+    src: "/media/fresh/service-manufacturing-syrups.jpg",
+    alt: "Retail-ready syrup bottles prepared for private-label and production discussions",
   },
   "caribbean-food-exports": {
     type: "image",
-    src: "/media/services/nacho-bowl.jpg",
-    alt: "Caribbean product assortment styled for end-to-end export partnerships",
+    src: "/media/fresh/service-caribbean-rice.jpg",
+    alt: "Packaged brown rice positioned for buyer-ready Caribbean export programs",
   },
 };
 
@@ -99,8 +90,8 @@ export default function ServicesPage() {
           <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 sm:row-span-2">
             <div className="relative aspect-[4/5]">
               <Image
-                src="/media/services/guacamole-bowl.jpg"
-                alt="Prepared Caribbean-style food photographed for a buyer-facing product presentation"
+                src="/media/fresh/services-hero-shelf.jpg"
+                alt="Packaged Caribbean products merchandised on shelf"
                 fill
                 sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 32vw"
                 className="object-cover"
@@ -109,25 +100,23 @@ export default function ServicesPage() {
           </div>
 
           <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100">
-            <div className="aspect-[4/3] bg-slate-950">
+            <div className="aspect-[4/5] bg-slate-950">
               <LoopingVideo
-                className="h-full w-full object-cover"
-                poster="/media/supplier-discovery.jpg"
-                mp4Src="/media/supplier-discovery.mp4"
-                webmSrc="/media/supplier-discovery.webm"
-                ariaLabel="Supplier discovery video"
+                className="h-full w-full bg-slate-950 object-contain"
+                poster="/media/fresh/services-syrup-closeup.jpg"
+                mp4Src="/media/fresh/services-syrup-closeup.mp4"
+                ariaLabel="Product close-up video"
               />
             </div>
           </div>
 
           <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100">
-            <div className="aspect-[4/3] bg-slate-950">
+            <div className="aspect-[4/5] bg-slate-950">
               <LoopingVideo
-                className="h-full w-full object-cover"
-                poster="/media/multi-supplier-pickups.jpg"
-                mp4Src="/media/multi-supplier-pickups.mp4"
-                webmSrc="/media/multi-supplier-pickups.webm"
-                ariaLabel="Consolidation and staging video"
+                className="h-full w-full bg-slate-950 object-contain"
+                poster="/media/fresh/services-loading-dock.jpg"
+                mp4Src="/media/fresh/services-loading-dock.mp4"
+                ariaLabel="Loading dock and export staging video"
               />
             </div>
           </div>
@@ -160,7 +149,6 @@ export default function ServicesPage() {
                     className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]"
                     poster={media.poster}
                     mp4Src={media.mp4Src}
-                    webmSrc={media.webmSrc}
                     ariaLabel={media.alt}
                   />
                 )}
@@ -184,14 +172,7 @@ export default function ServicesPage() {
                 <h2 className="mt-4 text-xl font-bold text-slate-900">{service.title}</h2>
                 <p className="mt-3 text-sm leading-6 text-slate-600">{service.summary}</p>
 
-                <ul className="mt-5 space-y-3 text-sm leading-6 text-slate-700">
-                  {service.outcomes.slice(0, 2).map((item) => (
-                    <li key={item} className="flex gap-3">
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-700" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
+                <p className="mt-4 text-sm font-medium text-slate-700">{serviceTags[service.key][2]}</p>
               </div>
             </TrackedLink>
           );

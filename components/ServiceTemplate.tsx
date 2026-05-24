@@ -90,6 +90,7 @@ export default function ServiceTemplate({ service }: { service: ServiceContent }
             mp4Src={service.media.mp4Src}
             webmSrc={service.media.webmSrc}
             poster={service.media.poster}
+            orientation={service.media.orientation}
           />
         </div>
       ) : null}

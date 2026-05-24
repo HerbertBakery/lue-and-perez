@@ -22,6 +22,7 @@ export type ServiceContent = {
     mp4Src: string;
     webmSrc?: string;
     poster?: string;
+    orientation?: "landscape" | "portrait";
   };
 };
 
@@ -83,6 +84,14 @@ export const services: ServiceContent[] = [
       "Cold-chain risk across handoffs and dwell time",
       "Launch delays caused by incomplete export packs",
     ],
+    media: {
+      title: "Shipment handoff discipline",
+      description:
+        "Export logistics works better when loading, dwell time, and documentation are already aligned before the shipment leaves origin.",
+      mp4Src: "/media/fresh/detail-export-logistics-loading.mp4",
+      poster: "/media/fresh/detail-export-logistics-loading.jpg",
+      orientation: "portrait",
+    },
   },
   {
     key: "consolidation",
@@ -115,11 +124,12 @@ export const services: ServiceContent[] = [
       "Last-minute relabeling or pallet configuration problems",
     ],
     media: {
-      title: "",
-      description: "",
-      mp4Src: "/media/multi-supplier-pickups.mp4",
-      webmSrc: "/media/multi-supplier-pickups.webm",
-      poster: "/media/multi-supplier-pickups.jpg",
+      title: "Container staging",
+      description:
+        "Consolidation is cleaner when multiple supplier loads are staged, checked, and handed off with fewer surprises at the dock.",
+      mp4Src: "/media/fresh/detail-consolidation-loading.mp4",
+      poster: "/media/fresh/detail-consolidation-loading.jpg",
+      orientation: "portrait",
     },
   },
   {
@@ -156,9 +166,9 @@ export const services: ServiceContent[] = [
       title: "Supplier discovery",
       description:
         "We match buyers with vetted Caribbean producers aligned on capability, quality expectations, commercial fit, and documentation readiness.",
-      mp4Src: "/media/supplier-discovery.mp4",
-      webmSrc: "/media/supplier-discovery.webm",
-      poster: "/media/supplier-discovery.jpg",
+      mp4Src: "/media/fresh/detail-sourcing-cocoa-rebel.mp4",
+      poster: "/media/fresh/detail-sourcing-cocoa-rebel.jpg",
+      orientation: "portrait",
     },
   },
   {
@@ -192,12 +202,12 @@ export const services: ServiceContent[] = [
       "Production timing that slips because specs are incomplete",
     ],
     media: {
-      title: "Co-packing and private label",
+      title: "Private label development",
       description:
-        "Recipe development, packaging, and private-label execution under tighter QA so buyers can launch or scale with more confidence.",
-      mp4Src: "/media/co-packing-private-label.mp4",
-      webmSrc: "/media/co-packing-private-label.webm",
-      poster: "/media/co-packing-private-label.jpg",
+        "Packaging, product finish, and retail presentation should already look disciplined before a buyer commits to scale-up.",
+      mp4Src: "/media/fresh/detail-manufacturing-ricecake.mp4",
+      poster: "/media/fresh/detail-manufacturing-ricecake.jpg",
+      orientation: "portrait",
     },
   },
   {
@@ -230,6 +240,14 @@ export const services: ServiceContent[] = [
       "Trying to source and ship while also solving market compliance",
       "Needing private label support without building a large local team",
     ],
+    media: {
+      title: "Commercial-ready execution",
+      description:
+        "The full export partnership works best when product presentation, packaging, and shipment readiness are already moving in the same direction.",
+      mp4Src: "/media/fresh/detail-full-partnership-syrup-pour.mp4",
+      poster: "/media/fresh/detail-full-partnership-syrup-pour.jpg",
+      orientation: "portrait",
+    },
   },
 ];
 

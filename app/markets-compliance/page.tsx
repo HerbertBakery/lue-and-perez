@@ -68,11 +68,10 @@ export default function Page() {
         <div className="overflow-hidden rounded-3xl border border-slate-200 bg-slate-950 shadow-sm">
           <div className="aspect-[4/5] bg-slate-950 p-3 sm:p-4">
             <LoopingVideo
-              className="h-full w-full rounded-2xl object-cover"
-              poster="/media/supplier-discovery.jpg"
-              mp4Src="/media/supplier-discovery.mp4"
-              webmSrc="/media/supplier-discovery.webm"
-              ariaLabel="Supplier discovery and buyer-readiness video"
+              className="h-full w-full rounded-2xl bg-slate-950 object-contain"
+              poster="/media/fresh/markets-container-loading.jpg"
+              mp4Src="/media/fresh/markets-container-loading.mp4"
+              ariaLabel="Container loading and export staging video"
               priority
             />
           </div>
@@ -83,11 +82,10 @@ export default function Page() {
         <div className="overflow-hidden rounded-3xl border border-slate-200 bg-slate-950 shadow-sm">
           <div className="aspect-[16/10] bg-slate-950 p-3 sm:p-5">
             <LoopingVideo
-              className="h-full w-full rounded-2xl object-contain"
-              poster="/media/cold-chain.jpg"
-              mp4Src="/media/cold-chain.mp4"
-              webmSrc="/media/cold-chain.webm"
-              ariaLabel="Cold-chain handling and chilled coffee export video"
+              className="h-full w-full rounded-2xl bg-slate-950 object-contain"
+              poster="/media/fresh/markets-bakery-line.jpg"
+              mp4Src="/media/fresh/markets-bakery-line.mp4"
+              ariaLabel="Bakery production and handling video"
             />
           </div>
         </div>

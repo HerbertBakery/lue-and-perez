@@ -20,7 +20,7 @@ export default function Page() {
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-700">Commercial inquiry</p>
           <h1 className="mt-2 text-3xl font-extrabold md:text-4xl">Request a quote</h1>
           <p className="mt-4 max-w-2xl text-slate-600 md:text-lg">
-            Tell us what you need, where it is going, and how you plan to sell it. We review commercial fit, export readiness, and the likely logistics path before responding with next steps.
+            Share the products, destination market, volume, and timeline.
           </p>
           <p className="mt-4 text-sm font-medium text-slate-700">
             Qualified B2B inquiries typically receive a response within two business days.
@@ -59,9 +59,6 @@ export default function Page() {
           <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">Buyer support</p>
             <h2 className="mt-2 text-lg font-semibold text-slate-900">Need a one-page overview first?</h2>
-            <p className="mt-3 text-sm leading-6 text-slate-600">
-              Download a clean branded capabilities sheet if your team wants a quick summary before sending the commercial brief.
-            </p>
             <CapabilitiesLink
               context="quote_sidebar"
               className="mt-5 inline-flex items-center gap-2 rounded-xl border border-slate-300 px-4 py-3 text-sm font-semibold text-slate-800 hover:border-teal-700 hover:text-teal-700"

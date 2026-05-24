@@ -66,7 +66,7 @@ export default function HomePage() {
               Programs that need product, packaging, and execution in the same conversation
             </h2>
             <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-600 md:text-base">
-              Buyers should see the kind of product, handling, and commercial readiness they can expect before the first call.
+              Product, packaging, and execution in one view.
             </p>
 
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
@@ -161,7 +161,7 @@ export default function HomePage() {
               <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-300">Built for</p>
               <h2 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">Buyers who need execution to look as strong as the product</h2>
               <p className="mt-4 max-w-2xl text-sm leading-6 text-white/75 md:text-base">
-                The strongest programs are not just sourced well. They are packed, documented, staged, and shipped with fewer weak handoffs.
+                Packed, documented, staged, and shipped with discipline.
               </p>
 
               <div className="mt-6 grid gap-3 sm:grid-cols-2">
@@ -183,7 +183,7 @@ export default function HomePage() {
               <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-700">Core capabilities</p>
               <h2 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">What buyers actually need help with</h2>
               <p className="mt-4 text-slate-600 md:text-lg">
-                These are the operating workstreams behind export programs that need to launch cleanly and replenish reliably.
+                Sourcing, consolidation, export logistics, and manufacturing support.
               </p>
             </div>
             <TrackedLink
@@ -231,7 +231,7 @@ export default function HomePage() {
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-700">In motion</p>
             <h2 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">Packaging, cold chain, and product presentation matter at every handoff</h2>
             <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-600 md:text-base">
-              Serious buyers move faster when the product story already looks shelf-ready, shipment-ready, and commercially thought through.
+              Shelf-ready packaging and disciplined handling shorten buyer conversations.
             </p>
             <div className="mt-6 flex flex-wrap gap-2">
               {["Ambient", "Chilled", "Frozen", "Private Label"].map((label) => (
@@ -365,9 +365,9 @@ export default function HomePage() {
           <div className="rounded-3xl border border-slate-200 bg-slate-950 px-5 py-8 text-white shadow-sm sm:px-6 md:px-10 md:py-10">
             <div className="max-w-3xl">
               <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-300">Next step</p>
-              <h2 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">If the program is commercially serious, start with a qualified quote request</h2>
+              <h2 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">Start a quote request</h2>
               <p className="mt-4 text-sm leading-6 text-white/75 md:text-base">
-                Share the destination market, product scope, estimated volume, and timeline so the response can start at the commercial brief, not at square one.
+                Share the destination market, product scope, estimated volume, and timeline.
               </p>
             </div>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">

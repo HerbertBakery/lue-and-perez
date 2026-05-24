@@ -37,7 +37,7 @@ export default function AboutPage() {
             A Caribbean export partner built for buyers who need commercial clarity and cleaner execution
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600 md:text-lg">
-            Lue & Perez sits where sourcing, market readiness, packaging, and export handling overlap. The goal is not to add noise. It is to help serious B2B buyers move from opportunity to execution with fewer weak handoffs.
+            Sourcing, market readiness, packaging, and export handling in one operating partner.
           </p>
 
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
@@ -103,7 +103,7 @@ export default function AboutPage() {
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-700">What the work looks like</p>
           <h2 className="mt-2 text-2xl font-bold tracking-tight text-slate-900 md:text-3xl">Commercial support that stays close to the product reality</h2>
           <p className="mt-4 text-sm leading-6 text-slate-600">
-            Buyers usually need more than a product list. They need to see how packaging, supplier readiness, market requirements, and export handling line up before the commercial brief gets too far ahead of the operating reality.
+            Packaging, supplier readiness, market requirements, and export handling reviewed together.
           </p>
           <div className="mt-5 flex flex-wrap gap-2">
             {["Sourcing fit", "Export handling", "Label readiness", "Private label"].map((item) => (

@@ -51,7 +51,7 @@ export default function Page() {
             Destination-market readiness matters as much as product sourcing
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600 md:text-lg">
-            Export work gets expensive when labels, documents, handling, and product format are treated as afterthoughts. Buyers usually need those realities surfaced early, while the commercial brief is still flexible.
+            Labels, documents, handling, and product format need to be right before shipment.
           </p>
           <div className="mt-6 flex flex-wrap gap-2">
             {["North America", "UK / EU", "Middle East", "CARICOM"].map((item) => (

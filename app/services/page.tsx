@@ -80,7 +80,7 @@ export default function ServicesPage() {
             Operating support for buyers who need product, packaging, and export execution to move together
           </h1>
           <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-600 md:text-base">
-            The work stays commercial, visual, and shipment-minded from first shortlist through launch readiness.
+            Sourcing, consolidation, export logistics, and private-label support.
           </p>
 
           <div className="mt-6 flex flex-wrap gap-2">

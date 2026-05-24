@@ -459,14 +459,14 @@ export const aboutHighlights = [
   },
   {
     title: "Buyer-side discipline",
-    description: "The goal is not more email traffic. It is a clearer path to quote, launch, replenish, and scale with fewer avoidable surprises.",
+    description: "Quote, launch, replenish, and scale with tighter operating control.",
   },
 ];
 
 export const authorityPanels = [
   {
     title: "What gets reviewed first",
-    description: "Most serious projects are assessed against the same buyer-side realities before time gets committed.",
+    description: "Destination market, product handling, supplier fit, and packaging readiness.",
     items: [
       "Destination market, channel, and labeling expectations",
       "Category-specific handling, shelf-life, or temperature constraints",
@@ -476,7 +476,7 @@ export const authorityPanels = [
   },
   {
     title: "Where Lue & Perez tends to add value",
-    description: "The strongest fit is where sourcing decisions and export execution need to move together.",
+    description: "Projects where sourcing, packaging, and export execution move together.",
     items: [
       "New Caribbean category programs entering a formal market",
       "Multi-supplier orders that need consolidation discipline",
@@ -496,8 +496,8 @@ export const quoteChecklist = [
 
 export const quoteExpectations = [
   "Qualified B2B requests receive a response within two business days.",
-  "The team reviews commercial fit, export readiness, and likely execution risks before replying.",
-  "If more detail is needed, follow-up focuses on what moves the program forward rather than generic back-and-forth.",
+  "The team reviews product scope, export readiness, and destination requirements before replying.",
+  "Follow-up focuses on the information needed to price and plan the program.",
 ];
 
 export function getServiceByKey(key: ServiceKey) {

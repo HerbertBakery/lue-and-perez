@@ -77,10 +77,6 @@ export default function QuoteForm() {
       }}
       className="space-y-5"
     >
-      <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4 text-sm leading-6 text-slate-600">
-        This form is for qualified B2B sourcing, export, consolidation, and private-label inquiries. The more commercially specific the brief, the more useful the response will be.
-      </div>
-
       <input type="hidden" name="startedAt" value={startedAt} />
       <div className="grid gap-4 md:grid-cols-2">
         <div>

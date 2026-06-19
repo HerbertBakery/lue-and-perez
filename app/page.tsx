@@ -35,8 +35,8 @@ export default function HomePage() {
       alt: "Packaged brown rice product prepared for export-logistics planning",
     },
     consolidation: {
-      src: "/media/brand/sausage-board.jpg",
-      alt: "Prepared protein products aligned for consolidation planning",
+      src: "/media/brand/consolidation-honey.jpg",
+      alt: "Honey products staged at the hive for consolidation planning",
     },
     sourcing: {
       src: "/media/services/sourcing-breakfast-soursop.jpg",

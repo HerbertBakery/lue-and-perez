@@ -26,6 +26,8 @@ export default function HomePage() {
     {
       src: string;
       alt: string;
+      imageClassName?: string;
+      panelClassName?: string;
     }
   > = {
     "export-logistics": {
@@ -39,6 +41,8 @@ export default function HomePage() {
     sourcing: {
       src: "/media/services/simple-syrup-lineup.png",
       alt: "Branded simple syrup product lineup for sourcing conversations",
+      imageClassName: "object-contain p-3 sm:p-4",
+      panelClassName: "bg-white",
     },
     manufacturing: {
       src: "/media/brand/rice-fish-portrait.jpg",
@@ -122,7 +126,7 @@ export default function HomePage() {
                   alt="Branded Caribbean pancake syrup lineup and breakfast campaign image"
                   fill
                   sizes="(max-width: 639px) 100vw, 50vw"
-                  className="object-cover"
+                  className="object-contain p-2 sm:p-3"
                 />
               </div>
             </div>
@@ -205,13 +209,17 @@ export default function HomePage() {
                 eventParams={{ service: service.key, location: "home" }}
                 className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm hover:border-teal-700"
               >
-                <div className="relative aspect-[16/10] border-b border-slate-200 bg-slate-100">
+                <div
+                  className={`relative aspect-[16/10] border-b border-slate-200 ${
+                    capabilityMedia[service.key].panelClassName ?? "bg-slate-100"
+                  }`}
+                >
                   <Image
                     src={capabilityMedia[service.key].src}
                     alt={capabilityMedia[service.key].alt}
                     fill
                     sizes="(max-width: 767px) 100vw, 50vw"
-                    className="object-cover"
+                    className={capabilityMedia[service.key].imageClassName ?? "object-cover"}
                   />
                 </div>
                 <div className="p-6">
@@ -269,7 +277,7 @@ export default function HomePage() {
                   alt="Branded guava slushie syrup promotional image"
                   fill
                   sizes="(max-width: 639px) 100vw, 50vw"
-                  className="object-cover"
+                  className="object-contain p-2 sm:p-3"
                 />
               </div>
             </div>

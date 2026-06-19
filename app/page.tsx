@@ -37,8 +37,8 @@ export default function HomePage() {
       alt: "Prepared protein products aligned for consolidation planning",
     },
     sourcing: {
-      src: "/media/services/prep-board.jpg",
-      alt: "Prepared ingredients and branded product styling for sourcing conversations",
+      src: "/media/services/simple-syrup-lineup.png",
+      alt: "Branded simple syrup product lineup for sourcing conversations",
     },
     manufacturing: {
       src: "/media/brand/rice-fish-portrait.jpg",
@@ -118,8 +118,8 @@ export default function HomePage() {
             <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100">
               <div className="relative aspect-[4/3]">
                 <Image
-                  src="/media/homepage/cocoa-dark-chocolate.jpg"
-                  alt="Branded Caribbean chocolate product shot"
+                  src="/media/homepage/pancake-syrup-breakfast.jpg"
+                  alt="Branded Caribbean pancake syrup lineup and breakfast campaign image"
                   fill
                   sizes="(max-width: 639px) 100vw, 50vw"
                   className="object-cover"
@@ -265,8 +265,8 @@ export default function HomePage() {
             <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100">
               <div className="relative aspect-[4/5]">
                 <Image
-                  src="/media/homepage/sweet-potato-pasta.jpg"
-                  alt="Packaged sweet potato pasta product lineup"
+                  src="/media/homepage/slushie-syrup-guava.png"
+                  alt="Branded guava slushie syrup promotional image"
                   fill
                   sizes="(max-width: 639px) 100vw, 50vw"
                   className="object-cover"

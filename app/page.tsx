@@ -133,12 +133,12 @@ export default function HomePage() {
 
             <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100">
               <div className="relative aspect-[4/3]">
-                <Image
-                  src="/media/services/simple-syrup-lineup.png"
-                  alt="Branded simple syrup poster creative"
-                  fill
-                  sizes="(max-width: 639px) 100vw, 50vw"
-                  className="object-contain p-2 sm:p-3"
+                <LoopingVideo
+                  className="h-full w-full object-cover"
+                  poster="/media/cold-chain.jpg"
+                  mp4Src="/media/cold-chain.mp4"
+                  webmSrc="/media/cold-chain.webm"
+                  ariaLabel="Chilled coffee product video"
                 />
               </div>
             </div>
@@ -273,7 +273,7 @@ export default function HomePage() {
             <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100">
               <div className="relative aspect-[4/5]">
                 <Image
-                  src="/media/homepage/slushie-syrup-guava.png"
+                  src="/media/homepage/slushie-syrup-guava.jpg"
                   alt="Branded guava slushie syrup promotional image"
                   fill
                   sizes="(max-width: 639px) 100vw, 50vw"
@@ -282,14 +282,14 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-950">
-              <div className="aspect-[4/5]">
-                <LoopingVideo
-                  className="h-full w-full object-cover"
-                  poster="/media/supplier-discovery.jpg"
-                  mp4Src="/media/supplier-discovery.mp4"
-                  webmSrc="/media/supplier-discovery.webm"
-                  ariaLabel="Supplier discovery vertical video"
+            <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100">
+              <div className="relative aspect-[4/5]">
+                <Image
+                  src="/media/services/simple-syrup-lineup.jpg"
+                  alt="Branded simple syrup poster creative"
+                  fill
+                  sizes="(max-width: 639px) 100vw, 50vw"
+                  className="object-contain p-2 sm:p-3"
                 />
               </div>
             </div>

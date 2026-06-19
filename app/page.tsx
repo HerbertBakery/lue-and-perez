@@ -39,10 +39,10 @@ export default function HomePage() {
       alt: "Prepared protein products aligned for consolidation planning",
     },
     sourcing: {
-      src: "/media/services/simple-syrup-lineup.png",
-      alt: "Branded simple syrup product lineup for sourcing conversations",
-      imageClassName: "object-contain p-3 sm:p-4",
-      panelClassName: "bg-white",
+      src: "/media/services/sourcing-breakfast-soursop.jpg",
+      alt: "Breakfast setting with branded soursop pancake syrup for sourcing conversations",
+      imageClassName: "object-cover object-center",
+      panelClassName: "bg-slate-100",
     },
     manufacturing: {
       src: "/media/brand/rice-fish-portrait.jpg",
@@ -131,14 +131,14 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-950">
-              <div className="aspect-[4/3]">
-                <LoopingVideo
-                  className="h-full w-full object-cover"
-                  poster="/media/cold-chain.jpg"
-                  mp4Src="/media/cold-chain.mp4"
-                  webmSrc="/media/cold-chain.webm"
-                  ariaLabel="Chilled coffee product video"
+            <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100">
+              <div className="relative aspect-[4/3]">
+                <Image
+                  src="/media/services/simple-syrup-lineup.png"
+                  alt="Branded simple syrup poster creative"
+                  fill
+                  sizes="(max-width: 639px) 100vw, 50vw"
+                  className="object-contain p-2 sm:p-3"
                 />
               </div>
             </div>

@@ -107,7 +107,7 @@ export default function HomePage() {
             <div className="relative col-span-2 overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 sm:col-span-1 sm:row-span-2 sm:min-h-full">
               <div className="relative aspect-[16/11] sm:h-full sm:aspect-auto">
                 <LoopingVideo
-                  className="h-full w-full object-cover"
+                  className="absolute inset-0 h-full w-full object-cover"
                   poster="/media/fresh/home-supplier-discovery.jpg"
                   mp4Src="/media/fresh/home-supplier-discovery.mp4"
                   ariaLabel="Supplier discovery and product review video"
@@ -116,22 +116,22 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white">
+            <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-[#454545]">
               <div className="relative aspect-square sm:aspect-[4/3]">
                 <Image
                   src="/logo.png"
                   alt="Lue & Perez official logo"
                   fill
                   sizes="(max-width: 639px) 100vw, 50vw"
-                  className="object-contain p-6 sm:p-8"
+                  className="object-contain p-2 scale-[1.22] sm:p-4 sm:scale-[1.18]"
                 />
               </div>
             </div>
 
-            <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white">
+            <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-950">
               <div className="relative aspect-square sm:aspect-[4/3]">
                 <LoopingVideo
-                  className="h-full w-full object-cover"
+                  className="absolute inset-0 h-full w-full object-cover"
                   poster="/media/fresh/partnerships.jpg"
                   mp4Src="/media/fresh/partnerships.mp4"
                   ariaLabel="Caribbean partnerships and product presentation video"

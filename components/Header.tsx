@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
-import { Menu, X } from 'lucide-react'
+import { Facebook, Instagram, Menu, X } from 'lucide-react'
 
 import SiteLogo from '@/components/SiteLogo'
 import { trackEvent } from '@/lib/analytics'
@@ -11,6 +11,12 @@ type NavItem = {
   href: string
   label: string
   trackEvent?: string
+}
+
+type SocialItem = {
+  href: string
+  label: string
+  platform: 'facebook' | 'instagram'
 }
 
 function NavLink({
@@ -42,6 +48,14 @@ function trackEventFn(eventName: string, params: Record<string, unknown>) {
   trackEvent(eventName, params)
 }
 
+function FacebookMark() {
+  return <Facebook className="h-4 w-4 fill-current stroke-[1.75]" />
+}
+
+function InstagramMark() {
+  return <Instagram className="h-4 w-4 stroke-[1.9]" />
+}
+
 export default function Header() {
   const [open, setOpen] = useState(false)
 
@@ -52,15 +66,50 @@ export default function Header() {
     { href: '/about', label: 'About' },
   ]
 
+  const socialItems: SocialItem[] = [
+    {
+      href: 'https://www.facebook.com/Lue.Perez.Marketing.Distribution',
+      label: 'Lue & Perez on Facebook',
+      platform: 'facebook',
+    },
+    {
+      href: 'https://www.instagram.com/lueandperez/',
+      label: 'Lue & Perez on Instagram',
+      platform: 'instagram',
+    },
+  ]
+
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/90 backdrop-blur">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between gap-3 py-2 sm:py-3">
-          <div className="md:hidden">
-            <SiteLogo compact />
-          </div>
-          <div className="hidden md:block">
-            <SiteLogo />
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="md:hidden">
+              <SiteLogo compact />
+            </div>
+            <div className="hidden md:block">
+              <SiteLogo />
+            </div>
+
+            <div className="flex items-center gap-2">
+              {socialItems.map((item) => (
+                <Link
+                  key={item.platform}
+                  href={item.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={item.label}
+                  onClick={() => trackEvent('click_social', { platform: item.platform, location: 'header' })}
+                  className={
+                    item.platform === 'facebook'
+                      ? 'inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#1877F2] text-white shadow-sm transition hover:scale-[1.03] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1877F2] focus-visible:ring-offset-2 sm:h-9 sm:w-9'
+                      : 'inline-flex h-8 w-8 items-center justify-center rounded-full bg-[radial-gradient(circle_at_30%_107%,#fdf497_0%,#fdf497_5%,#fd5949_45%,#d6249f_60%,#285AEB_90%)] text-white shadow-sm transition hover:scale-[1.03] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d6249f] focus-visible:ring-offset-2 sm:h-9 sm:w-9'
+                  }
+                >
+                  {item.platform === 'facebook' ? <FacebookMark /> : <InstagramMark />}
+                </Link>
+              ))}
+            </div>
           </div>
 
           <nav className="hidden items-center gap-6 text-sm md:flex">

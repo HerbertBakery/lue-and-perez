@@ -31,8 +31,8 @@ export default function HomePage() {
     }
   > = {
     "export-logistics": {
-      src: "/media/brand/brown-rice-bag.jpg",
-      alt: "Packaged brown rice product prepared for export-logistics planning",
+      src: "/media/brand/export-logistics-cocoa.jpg",
+      alt: "Cocoa Republic chocolate bars arranged for export-logistics planning",
     },
     consolidation: {
       src: "/media/brand/consolidation-honey.jpg",
@@ -45,8 +45,8 @@ export default function HomePage() {
       panelClassName: "bg-slate-100",
     },
     manufacturing: {
-      src: "/media/brand/rice-fish-portrait.jpg",
-      alt: "Finished plated product presentation for private label manufacturing",
+      src: "/media/brand/manufacturing-scorpion-pepper.jpg",
+      alt: "Scorpion pepper powder packaging prepared for manufacturing support",
     },
   };
 
@@ -104,13 +104,14 @@ export default function HomePage() {
 
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 sm:row-span-2">
-              <div className="relative aspect-[4/5]">
-                <Image
-                  src="/media/homepage/caribbean-rice-plate.jpg"
-                  alt="Prepared Caribbean rice and fish plating beside packaged rice"
-                  fill
-                  sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 30vw"
-                  className="object-cover"
+              <div className="aspect-[4/5] bg-slate-950">
+                <LoopingVideo
+                  className="h-full w-full object-contain"
+                  poster="/media/homepage/caribbean-food-presentation.jpg"
+                  mp4Src="/media/homepage/caribbean-food-presentation.mp4"
+                  ariaLabel="Caribbean food product presentation video"
+                  priority
+                  softBackdrop
                 />
               </div>
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/80 to-transparent px-4 py-4 text-white">
@@ -119,11 +120,11 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100">
+            <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-amber-50">
               <div className="relative aspect-[4/3]">
                 <Image
-                  src="/media/homepage/pancake-syrup-breakfast.jpg"
-                  alt="Branded Caribbean pancake syrup lineup and breakfast campaign image"
+                  src="/media/homepage/honey-products.jpg"
+                  alt="Branded honey bottle and jar product image"
                   fill
                   sizes="(max-width: 639px) 100vw, 50vw"
                   className="object-contain p-2 sm:p-3"

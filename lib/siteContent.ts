@@ -28,8 +28,7 @@ export type ServiceContent = {
 
 export type CaseStudyKey =
   | "uk-fcl-consolidation"
-  | "private-label-pepper-sauce"
-  | "frozen-bakery-middle-east";
+  | "private-label-pepper-sauce";
 
 export type CaseStudyContent = {
   slug: CaseStudyKey;
@@ -329,47 +328,16 @@ export const caseStudies: CaseStudyContent[] = [
       src: "/media/services/chilli-oil.jpg",
       alt: "Branded condiment bottle and plated food prepared for private-label presentation.",
     },
+    cardMedia: {
+      type: "video",
+      mp4Src: "/media/fresh/case-study-pepper-caribbean-food.mp4",
+      poster: "/media/fresh/case-study-pepper-caribbean-food.jpg",
+      alt: "Caribbean food preparation video for the private-label pepper sauce case study",
+    },
     snapshot: [
       { label: "Market", value: "Canada" },
       { label: "Program", value: "Private label" },
       { label: "Priority", value: "Packaging readiness" },
-    ],
-  },
-  {
-    slug: "frozen-bakery-middle-east",
-    title: "Frozen Bakery SKUs - Middle East",
-    market: "Middle East",
-    clientType: "Importer / Distributor",
-    summary: "A frozen bakery shipment required tight temperature integrity, minimal dwell time, and a lane design suited to a longer-haul export market.",
-    challenge:
-      "Frozen product quality depended on validated routing, disciplined handling, and tighter shipment timing from production to export departure.",
-    approach: [
-      "Selected validated cold-chain carriers and routing options",
-      "Used a two-stop routing plan with minimal dwell time",
-      "Scheduled export movement within 72 hours of production readiness",
-    ],
-    outcomes: [
-      "Improved cold-chain confidence across a long-haul lane",
-      "Faster handoff from production to shipment readiness",
-      "A more controlled operating model for frozen export programs",
-    ],
-    relevance:
-      "This project demonstrates the kind of execution detail required when product quality depends on temperature discipline, timing, and route design.",
-    highlight: "Export movement scheduled within 72 hours of production readiness to protect frozen quality.",
-    service: "Export Logistics",
-    image: {
-      src: "/media/services/sungrown-harvests.jpg",
-      alt: "Packaged food products lined up for export logistics and destination-market presentation.",
-    },
-    cardMedia: {
-      type: "image",
-      src: "/media/fresh/case-study-frozen-cottage.jpg",
-      alt: "Frozen bakery case study still image captured from cottage production footage.",
-    },
-    snapshot: [
-      { label: "Product state", value: "Frozen" },
-      { label: "Market", value: "Middle East" },
-      { label: "Priority", value: "Cold-chain control" },
     ],
   },
 ];

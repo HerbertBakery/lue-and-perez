@@ -20,7 +20,7 @@ export default function CaseStudies() {
         </p>
       </div>
 
-      <div className="mt-8 grid gap-6 xl:grid-cols-3">
+      <div className="mt-8 grid gap-6 md:grid-cols-2">
         {caseStudies.map((study) => (
           <CaseStudyCard key={study.slug} location="case_studies_index" study={study} />
         ))}

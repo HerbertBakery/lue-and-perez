@@ -32,12 +32,12 @@ export default function HomePage() {
     }
   > = {
     "export-logistics": {
-      src: "/media/brand/export-logistics-cocoa.jpg",
-      alt: "Cocoa Republic chocolate bars arranged for export-logistics planning",
+      src: "/media/brand/export-logistics-pallet.jpg",
+      alt: "Export-ready pallet staging inside a warehouse for logistics planning",
     },
     consolidation: {
-      src: "/media/brand/consolidation-coconut-oil.jpg",
-      alt: "Constance Estate coconut oil positioned for consolidation planning",
+      src: "/media/brand/consolidation-snacks.jpg",
+      alt: "Retail snack assortment on shelf for consolidation planning across packaged products",
     },
     sourcing: {
       src: "/media/services/sourcing-breakfast-soursop.jpg",
@@ -119,11 +119,11 @@ export default function HomePage() {
             <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-amber-50">
               <div className="relative aspect-[4/3]">
                 <Image
-                  src="/media/homepage/honey-products.jpg"
-                  alt="Branded honey bottle and jar product image"
+                  src="/media/homepage/syrup-bottles.jpg"
+                  alt="Locally made Caribbean syrup bottles presented for buyer conversations"
                   fill
                   sizes="(max-width: 639px) 100vw, 50vw"
-                  className="object-fill"
+                  className="object-cover object-center"
                 />
               </div>
             </div>
@@ -132,10 +132,9 @@ export default function HomePage() {
               <div className="relative aspect-[4/3]">
                 <LoopingVideo
                   className="h-full w-full object-cover"
-                  poster="/media/cold-chain.jpg"
-                  mp4Src="/media/cold-chain.mp4"
-                  webmSrc="/media/cold-chain.webm"
-                  ariaLabel="Chilled coffee product video"
+                  poster="/media/fresh/home-supplier-discovery.jpg"
+                  mp4Src="/media/fresh/home-supplier-discovery.mp4"
+                  ariaLabel="Supplier discovery and product review video"
                 />
               </div>
             </div>
@@ -253,12 +252,11 @@ export default function HomePage() {
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 sm:col-span-2">
               <div className="relative aspect-[16/10]">
-                <Image
-                  src="/media/brand/rice-fish-landscape.jpg"
-                  alt="Prepared Caribbean meal plated beside branded packaged rice"
-                  fill
-                  sizes="(max-width: 639px) 100vw, 100vw"
-                  className="object-cover"
+                <LoopingVideo
+                  className="h-full w-full object-cover"
+                  poster="/media/fresh/home-cold-chain.jpg"
+                  mp4Src="/media/fresh/home-cold-chain.mp4"
+                  ariaLabel="Cold-chain handling and product presentation video"
                 />
               </div>
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/75 to-transparent px-4 py-4 text-white sm:px-5">
@@ -311,7 +309,7 @@ export default function HomePage() {
             </TrackedLink>
           </div>
 
-          <div className="mt-8 grid gap-6 xl:grid-cols-3">
+          <div className="mt-8 grid gap-6 md:grid-cols-2">
             {caseStudies.map((study) => (
               <CaseStudyCard key={study.slug} location="home" study={study} />
             ))}

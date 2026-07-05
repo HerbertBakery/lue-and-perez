@@ -130,12 +130,14 @@ export default function HomePage() {
 
             <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100">
               <div className="relative aspect-square sm:aspect-[4/3]">
-                <LoopingVideo
-                  className="absolute inset-0 h-full w-full scale-[1.08] object-cover object-top"
-                  poster="/media/fresh/partnerships.jpg"
-                  mp4Src="/media/fresh/partnerships.mp4"
-                  ariaLabel="Caribbean partnerships and product presentation video"
-                />
+                <div className="absolute inset-0">
+                  <LoopingVideo
+                    className="h-full w-full scale-[1.08] object-cover object-top"
+                    poster="/media/fresh/partnerships.jpg"
+                    mp4Src="/media/fresh/partnerships.mp4"
+                    ariaLabel="Caribbean partnerships and product presentation video"
+                  />
+                </div>
               </div>
             </div>
           </div>

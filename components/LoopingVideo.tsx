@@ -8,6 +8,7 @@ type Props = {
   webmSrc?: string;
   poster?: string;
   className?: string;
+  fill?: boolean;
   ariaLabel?: string;
   priority?: boolean;
   rootMargin?: string;
@@ -20,6 +21,7 @@ export default function LoopingVideo({
   webmSrc,
   poster,
   className,
+  fill = false,
   ariaLabel,
   priority = false,
   rootMargin = "320px 0px",
@@ -46,6 +48,18 @@ export default function LoopingVideo({
     node.setAttribute("playsinline", "");
     node.setAttribute("webkit-playsinline", "true");
   }, [isMuted]);
+
+  const wrapperClassName = fill
+    ? "absolute inset-0 h-full w-full overflow-hidden"
+    : "relative h-full w-full overflow-hidden";
+
+  const videoClassName = className
+    ? fill
+      ? `absolute inset-0 z-10 block ${className}`
+      : `relative z-10 block ${className}`
+    : fill
+      ? "absolute inset-0 z-10 block"
+      : "relative z-10 block";
 
   React.useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -121,7 +135,7 @@ export default function LoopingVideo({
   }, [isMuted]);
 
   return (
-    <div className="relative h-full w-full overflow-hidden">
+    <div className={wrapperClassName}>
       {softBackdrop && poster ? (
         <div aria-hidden="true" className="absolute inset-0">
           <img src={poster} alt="" className="h-full w-full scale-110 object-cover blur-3xl opacity-50" />
@@ -131,7 +145,7 @@ export default function LoopingVideo({
 
       <video
         ref={videoRef}
-        className={className ? `relative z-10 block ${className}` : "relative z-10 block"}
+        className={videoClassName}
         autoPlay={shouldLoad && !prefersReducedMotion}
         muted={isMuted}
         loop={!prefersReducedMotion}

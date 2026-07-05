@@ -1,7 +1,7 @@
 import Link from 'next/link'
 export function Breadcrumbs({items}:{items:{href:string,label:string}[]}) {
   return (
-    <nav aria-label="Breadcrumb" className="text-sm text-slate-600">
+    <nav aria-label="Breadcrumb" className="hidden text-sm text-slate-600 sm:block">
       <ol className="flex items-center flex-wrap gap-2">
         <li><Link href="/" className="hover:text-teal-700">Home</Link></li>
         {items.map((it, i) => (

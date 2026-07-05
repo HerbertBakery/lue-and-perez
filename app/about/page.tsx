@@ -33,10 +33,10 @@ export default function AboutPage() {
       <div className="mt-4 grid gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(320px,0.95fr)] lg:items-start">
         <div className="max-w-4xl">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-700">About</p>
-          <h1 className="mt-2 text-3xl font-extrabold md:text-4xl">
+          <h1 className="mt-2 text-2xl font-extrabold sm:text-3xl md:text-4xl">
             A Caribbean export partner built for buyers who need commercial clarity and cleaner execution
           </h1>
-          <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600 md:text-lg">
+          <p className="mt-4 hidden max-w-2xl text-base leading-7 text-slate-600 sm:block md:text-lg">
             Sourcing, market readiness, packaging, and export handling in one operating partner.
           </p>
 
@@ -53,7 +53,7 @@ export default function AboutPage() {
               href="/services"
               eventName="service_index_click"
               eventParams={{ location: "about_hero" }}
-              className="inline-flex items-center justify-center rounded-xl border border-slate-300 px-5 py-3 font-semibold text-slate-900 hover:border-slate-400"
+              className="hidden items-center justify-center rounded-xl border border-slate-300 px-5 py-3 font-semibold text-slate-900 hover:border-slate-400 sm:inline-flex"
             >
               Explore Services
             </TrackedLink>
@@ -62,9 +62,9 @@ export default function AboutPage() {
 
         <div className="space-y-4">
           <div className="overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 shadow-sm">
-            <div className="relative aspect-[4/5]">
+            <div className="relative aspect-[4/3] sm:aspect-[4/5]">
               <LoopingVideo
-                className="h-full w-full object-cover"
+                className="h-full w-full scale-[1.08] object-cover"
                 poster="/media/fresh/partnerships.jpg"
                 mp4Src="/media/fresh/partnerships.mp4"
                 ariaLabel="Caribbean partnerships and product presentation video"
@@ -74,7 +74,7 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <aside className="rounded-2xl border border-slate-200 bg-slate-950 p-6 text-white shadow-sm">
+          <aside className="hidden rounded-2xl border border-slate-200 bg-slate-950 p-6 text-white shadow-sm sm:block">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-300">What buyers lean on us for</p>
             <ul className="mt-4 space-y-4 text-sm leading-6 text-white/80">
               {capabilityHighlights.map((item) => (
@@ -116,7 +116,7 @@ export default function AboutPage() {
           </div>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+        <div className="hidden gap-4 sm:grid sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
           <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 sm:min-h-full">
             <div className="relative aspect-[4/5] sm:h-full sm:aspect-auto">
               <Image

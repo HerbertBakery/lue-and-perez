@@ -67,14 +67,14 @@ export default function ServicesPage() {
       <div className="mt-4 grid gap-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-center">
         <div className="max-w-3xl">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-700">Services</p>
-          <h1 className="mt-2 text-3xl font-extrabold tracking-tight md:text-4xl">
+          <h1 className="mt-2 text-2xl font-extrabold tracking-tight sm:text-3xl md:text-4xl">
             Operating support for buyers who need product, packaging, and export execution to move together
           </h1>
-          <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-600 md:text-base">
+          <p className="mt-4 hidden max-w-2xl text-sm leading-6 text-slate-600 sm:block md:text-base">
             Sourcing, consolidation, export logistics, and private-label support.
           </p>
 
-          <div className="mt-6 flex flex-wrap gap-2">
+          <div className="mt-6 hidden flex-wrap gap-2 sm:flex">
             {["Sourcing", "Consolidation", "Cold Chain", "Private Label", "Documentation"].map((label) => (
               <span
                 key={label}
@@ -88,7 +88,7 @@ export default function ServicesPage() {
 
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 sm:row-span-2 sm:min-h-full">
-            <div className="relative aspect-[4/5] sm:h-full sm:aspect-auto">
+            <div className="relative aspect-[4/3] sm:h-full sm:aspect-auto">
               <Image
                 src="/media/fresh/services-hero-shelf.jpg"
                 alt="Packaged Caribbean products merchandised on shelf"
@@ -99,7 +99,7 @@ export default function ServicesPage() {
             </div>
           </div>
 
-          <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100">
+          <div className="relative hidden overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 sm:block">
             <div className="relative aspect-[4/5]">
               <LoopingVideo
                 className="h-full w-full object-cover"
@@ -110,7 +110,7 @@ export default function ServicesPage() {
             </div>
           </div>
 
-          <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100">
+          <div className="relative hidden overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 sm:block">
             <div className="relative aspect-[4/5]">
               <LoopingVideo
                 className="h-full w-full object-cover"
@@ -170,9 +170,9 @@ export default function ServicesPage() {
                 </div>
 
                 <h2 className="mt-4 text-xl font-bold text-slate-900">{service.title}</h2>
-                <p className="mt-3 text-sm leading-6 text-slate-600">{service.summary}</p>
+                <p className="mt-3 hidden text-sm leading-6 text-slate-600 sm:block">{service.summary}</p>
 
-                <p className="mt-4 text-sm font-medium text-slate-700">{serviceTags[service.key][2]}</p>
+                <p className="mt-4 hidden text-sm font-medium text-slate-700 sm:block">{serviceTags[service.key][2]}</p>
               </div>
             </TrackedLink>
           );

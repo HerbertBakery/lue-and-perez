@@ -18,12 +18,14 @@ export default function SiteLogo({ href = "/", compact = false }: Props) {
         sizes={compact ? "(max-width: 640px) 40px, 44px" : "(max-width: 640px) 44px, (max-width: 768px) 56px, 64px"}
         className={compact ? "h-10 w-10 sm:h-11 sm:w-11" : "h-11 w-11 sm:h-14 sm:w-14 md:h-16 md:w-16"}
       />
-      <div className="min-w-0">
-        <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-900 sm:text-sm sm:tracking-[0.16em]">
-          Lue & Perez
+      {compact ? null : (
+        <div className="min-w-0">
+          <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-900 sm:text-sm sm:tracking-[0.16em]">
+            Lue & Perez
+          </div>
+          <div className="hidden text-sm text-slate-600 md:block">Marketing &amp; Distribution</div>
         </div>
-        <div className="hidden text-sm text-slate-600 md:block">Marketing &amp; Distribution</div>
-      </div>
+      )}
     </>
   );
 

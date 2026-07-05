@@ -56,7 +56,12 @@ export default function Header() {
     <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/90 backdrop-blur">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between gap-3 py-2 sm:py-3">
-          <SiteLogo />
+          <div className="md:hidden">
+            <SiteLogo compact />
+          </div>
+          <div className="hidden md:block">
+            <SiteLogo />
+          </div>
 
           <nav className="hidden items-center gap-6 text-sm md:flex">
             {navItems.map((item) => (

@@ -22,7 +22,7 @@ export default function VideoHero({
     <section className="relative w-full">
       <div className="absolute inset-0 bg-gradient-to-r from-slate-950/78 via-slate-950/45 to-slate-950/25 z-10" />
       <LoopingVideo
-        className="h-[68svh] min-h-[420px] w-full object-cover sm:min-h-[460px] md:h-[72vh]"
+        className="h-[58svh] min-h-[360px] w-full object-cover sm:min-h-[460px] md:h-[72vh]"
         poster={poster}
         mp4Src={mp4Src}
         webmSrc={webmSrc}
@@ -35,10 +35,10 @@ export default function VideoHero({
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-white/75 sm:mb-4 sm:text-sm">
               Trinidad & Tobago Based
             </p>
-            <h1 className="text-balance text-white text-3xl font-semibold drop-shadow sm:text-4xl md:text-6xl">
+            <h1 className="text-balance text-2xl font-semibold text-white drop-shadow sm:text-4xl md:text-6xl">
               {headline}
             </h1>
-            <p className="mt-4 max-w-2xl text-sm text-white/90 sm:text-base md:text-lg">
+            <p className="mt-4 hidden max-w-2xl text-sm text-white/90 sm:block sm:text-base md:text-lg">
               {subhead}
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap">
@@ -50,7 +50,7 @@ export default function VideoHero({
               </Link>
               <Link
                 href="/services"
-                className="inline-flex items-center justify-center rounded-xl border border-white/25 bg-white/10 px-5 py-3 font-semibold text-white backdrop-blur hover:bg-white/16"
+                className="hidden items-center justify-center rounded-xl border border-white/25 bg-white/10 px-5 py-3 font-semibold text-white backdrop-blur hover:bg-white/16 sm:inline-flex"
               >
                 Explore Services
               </Link>

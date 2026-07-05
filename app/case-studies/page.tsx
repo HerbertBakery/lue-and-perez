@@ -15,7 +15,7 @@ export default function CaseStudies() {
       <div className="mt-4 max-w-3xl">
         <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-700">Case studies</p>
         <h1 className="mt-2 text-3xl font-extrabold md:text-4xl">Examples of how buyer-side problems get solved</h1>
-        <p className="mt-3 text-slate-600 md:text-lg">
+        <p className="mt-3 hidden text-slate-600 sm:block md:text-lg">
           These examples are shaped around operating outcomes that matter in B2B trade: cost structure, shelf-life usability, packaging readiness, and route discipline.
         </p>
       </div>

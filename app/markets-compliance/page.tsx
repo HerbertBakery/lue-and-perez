@@ -47,13 +47,13 @@ export default function Page() {
       <div className="mt-4 grid gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(320px,0.95fr)] lg:items-center">
         <div className="max-w-4xl">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-700">Markets &amp; compliance</p>
-          <h1 className="mt-2 text-3xl font-extrabold md:text-4xl">
+          <h1 className="mt-2 max-w-[13ch] text-2xl font-extrabold sm:max-w-none sm:text-3xl md:text-4xl">
             Destination-market readiness matters as much as product sourcing
           </h1>
-          <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600 md:text-lg">
+          <p className="mt-4 hidden max-w-2xl text-base leading-7 text-slate-600 sm:block md:text-lg">
             Labels, documents, handling, and product format need to be right before shipment.
           </p>
-          <div className="mt-6 flex flex-wrap gap-2">
+          <div className="mt-6 hidden flex-wrap gap-2 sm:flex">
             {["North America", "UK / EU", "Middle East", "CARICOM"].map((item) => (
               <span
                 key={item}
@@ -66,9 +66,9 @@ export default function Page() {
         </div>
 
         <div className="overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 shadow-sm">
-          <div className="relative aspect-[4/5]">
+          <div className="relative aspect-[4/3] sm:aspect-[4/5]">
             <LoopingVideo
-              className="h-full w-full object-cover"
+              className="h-full w-full scale-[1.04] object-cover"
               poster="/media/fresh/markets-container-loading.jpg"
               mp4Src="/media/fresh/markets-container-loading.mp4"
               ariaLabel="Container loading and export staging video"
@@ -92,7 +92,7 @@ export default function Page() {
 
         <div className="rounded-3xl border border-slate-200 bg-slate-950 p-6 text-white shadow-sm sm:p-7">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-300">Before product moves</p>
-          <h2 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">The handling and paperwork have to make sense for the destination</h2>
+          <h2 className="mt-2 text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">The handling and paperwork have to make sense for the destination</h2>
           <p className="mt-4 text-sm leading-6 text-white/75 md:text-base">
             The easiest export projects are usually the ones where labeling, cold-chain logic, certificates, and import assumptions are already visible before freight gets booked.
           </p>
@@ -129,7 +129,7 @@ export default function Page() {
           </div>
         </div>
 
-        <aside className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <aside className="hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm lg:block">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">Need a commercial read first?</p>
           <h3 className="mt-2 text-xl font-semibold text-slate-900">Start with the destination, product mix, and timing.</h3>
           <p className="mt-3 text-sm leading-6 text-slate-600">

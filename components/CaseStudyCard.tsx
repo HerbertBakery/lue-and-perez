@@ -55,7 +55,7 @@ export default function CaseStudyCard({ location, study }: Props) {
         </div>
         <h3 className="mt-4 text-xl font-semibold text-slate-900">{study.title}</h3>
         <p className="mt-2 text-sm font-medium text-slate-500">{study.clientType}</p>
-        <p className="mt-3 text-sm leading-6 text-slate-600">{study.summary}</p>
+        <p className="mt-3 hidden text-sm leading-6 text-slate-600 sm:block">{study.summary}</p>
         <p className="mt-4 rounded-xl bg-slate-50 px-4 py-3 text-sm font-medium leading-6 text-slate-800">
           {study.highlight}
         </p>

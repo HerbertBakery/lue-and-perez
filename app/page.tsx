@@ -136,11 +136,10 @@ export default function HomePage() {
               <div className="relative aspect-square sm:aspect-[4/3]">
                 <LoopingVideo
                   fill
-                  className="h-full w-full object-contain"
-                  poster="/media/fresh/partnerships.jpg"
-                  mp4Src="/media/fresh/partnerships.mp4"
-                  softBackdrop
-                  ariaLabel="Caribbean partnerships and product presentation video"
+                  className="h-full w-full object-cover object-center"
+                  poster="/media/fresh/product-design-innovation.jpg"
+                  mp4Src="/media/fresh/product-design-innovation.mp4"
+                  ariaLabel="Product design and innovation video"
                 />
               </div>
             </div>

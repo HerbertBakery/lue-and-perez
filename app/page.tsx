@@ -113,12 +113,6 @@ export default function HomePage() {
                   priority
                 />
               </div>
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950 via-slate-950/75 to-transparent px-4 pb-5 pt-10 text-white sm:px-5">
-                <p className="inline-flex rounded-full bg-slate-950/55 px-2.5 py-1 text-[11px] font-semibold uppercase leading-none tracking-[0.18em] text-teal-200">
-                  Market-ready
-                </p>
-                <p className="mt-1 text-sm font-medium">Product presentation, packaging, and export execution should feel connected.</p>
-              </div>
             </div>
 
             <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-amber-50">

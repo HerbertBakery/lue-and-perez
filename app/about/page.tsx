@@ -62,14 +62,13 @@ export default function AboutPage() {
 
         <div className="space-y-4">
           <div className="overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 shadow-sm">
-            <div className="relative aspect-[4/5] bg-slate-950">
+            <div className="relative aspect-[4/5]">
               <LoopingVideo
-                className="h-full w-full bg-slate-950 object-contain"
-                poster="/media/fresh/about-lemon-lime.jpg"
-                mp4Src="/media/fresh/about-lemon-lime.mp4"
-                ariaLabel="Lemon lime bottled beverage video"
+                className="h-full w-full object-cover"
+                poster="/media/fresh/partnerships.jpg"
+                mp4Src="/media/fresh/partnerships.mp4"
+                ariaLabel="Caribbean partnerships and product presentation video"
                 showAudioToggle
-                softBackdrop
                 priority
               />
             </div>

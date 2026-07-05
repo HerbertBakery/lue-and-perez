@@ -131,7 +131,7 @@ export default function LoopingVideo({
 
       <video
         ref={videoRef}
-        className={className ? `relative z-10 ${className}` : "relative z-10"}
+        className={className ? `relative z-10 block ${className}` : "relative z-10 block"}
         autoPlay={shouldLoad && !prefersReducedMotion}
         muted={isMuted}
         loop={!prefersReducedMotion}

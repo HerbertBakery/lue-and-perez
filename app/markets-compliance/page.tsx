@@ -65,14 +65,13 @@ export default function Page() {
           </div>
         </div>
 
-        <div className="overflow-hidden rounded-3xl border border-slate-200 bg-slate-950 shadow-sm">
-          <div className="aspect-[4/5] bg-slate-950 p-3 sm:p-4">
+        <div className="overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 shadow-sm">
+          <div className="relative aspect-[4/5]">
             <LoopingVideo
-              className="h-full w-full rounded-2xl bg-slate-950 object-contain"
+              className="h-full w-full object-cover"
               poster="/media/fresh/markets-container-loading.jpg"
               mp4Src="/media/fresh/markets-container-loading.mp4"
               ariaLabel="Container loading and export staging video"
-              softBackdrop
               priority
             />
           </div>
@@ -80,14 +79,13 @@ export default function Page() {
       </div>
 
       <div className="mt-10 grid gap-6 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:items-center">
-        <div className="overflow-hidden rounded-3xl border border-slate-200 bg-slate-950 shadow-sm">
-          <div className="aspect-[16/10] bg-slate-950 p-3 sm:p-5">
+        <div className="overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 shadow-sm">
+          <div className="relative aspect-[16/10]">
             <LoopingVideo
-              className="h-full w-full rounded-2xl bg-slate-950 object-contain"
+              className="h-full w-full object-cover"
               poster="/media/fresh/markets-shipment-readiness.jpg"
               mp4Src="/media/fresh/markets-shipment-readiness.mp4"
               ariaLabel="Palletized shipment loading and export readiness video"
-              softBackdrop
             />
           </div>
         </div>

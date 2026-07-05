@@ -21,18 +21,17 @@ export default function VideoBlock({ title, description, mp4Src, webmSrc, poster
         ) : null}
 
         <div
-          className={`${title || description ? "mt-6" : ""} mx-auto w-full overflow-hidden rounded-2xl border border-slate-200 bg-black shadow-sm ${
+          className={`${title || description ? "mt-6" : ""} mx-auto w-full overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 shadow-sm ${
             orientation === "portrait" ? "max-w-md" : "max-w-4xl"
           }`}
         >
           <div className={orientation === "portrait" ? "w-full aspect-[9/16]" : "w-full aspect-video"}>
             <LoopingVideo
-              className={`h-full w-full ${orientation === "portrait" ? "bg-slate-950 object-contain" : "object-cover"}`}
+              className="h-full w-full object-cover"
               poster={poster}
               mp4Src={mp4Src}
               webmSrc={webmSrc}
               ariaLabel={title ? `${title} video` : "Lue & Perez service video"}
-              softBackdrop={orientation === "portrait"}
             />
           </div>
         </div>

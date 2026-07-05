@@ -47,6 +47,19 @@ export type CaseStudyContent = {
     src: string;
     alt: string;
   };
+  cardMedia?:
+    | {
+        type: "image";
+        src: string;
+        alt: string;
+        className?: string;
+      }
+    | {
+        type: "video";
+        mp4Src: string;
+        poster: string;
+        alt: string;
+      };
   snapshot: Array<{
     label: string;
     value: string;
@@ -278,6 +291,12 @@ export const caseStudies: CaseStudyContent[] = [
       src: "/media/services/sausage-pack.jpg",
       alt: "Packaged products arranged for a distributor-facing export program.",
     },
+    cardMedia: {
+      type: "video",
+      mp4Src: "/media/fresh/case-study-uk-fcl.mp4",
+      poster: "/media/fresh/case-study-uk-fcl.jpg",
+      alt: "Container-ready product handling video for UK consolidation case study",
+    },
     snapshot: [
       { label: "Lane", value: "Caribbean to UK" },
       { label: "Focus", value: "FCL consolidation" },
@@ -341,6 +360,11 @@ export const caseStudies: CaseStudyContent[] = [
     image: {
       src: "/media/services/sungrown-harvests.jpg",
       alt: "Packaged food products lined up for export logistics and destination-market presentation.",
+    },
+    cardMedia: {
+      type: "image",
+      src: "/media/fresh/case-study-frozen-cottage.jpg",
+      alt: "Frozen bakery case study still image captured from cottage production footage.",
     },
     snapshot: [
       { label: "Product state", value: "Frozen" },

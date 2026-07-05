@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import CaseStudyCard from "@/components/CaseStudyCard";
 import FaqList from "@/components/FaqList";
 import LoopingVideo from "@/components/LoopingVideo";
 import ScrollDepthTracker from "@/components/ScrollDepthTracker";
@@ -35,8 +36,8 @@ export default function HomePage() {
       alt: "Cocoa Republic chocolate bars arranged for export-logistics planning",
     },
     consolidation: {
-      src: "/media/brand/consolidation-honey.jpg",
-      alt: "Honey products staged at the hive for consolidation planning",
+      src: "/media/brand/consolidation-coconut-oil.jpg",
+      alt: "Constance Estate coconut oil positioned for consolidation planning",
     },
     sourcing: {
       src: "/media/services/sourcing-breakfast-soursop.jpg",
@@ -45,8 +46,8 @@ export default function HomePage() {
       panelClassName: "bg-slate-100",
     },
     manufacturing: {
-      src: "/media/brand/manufacturing-scorpion-pepper.jpg",
-      alt: "Scorpion pepper powder packaging prepared for manufacturing support",
+      src: "/media/brand/manufacturing-scorpion-nuts.jpg",
+      alt: "Scorpion pepper nuts product packaging prepared for manufacturing support",
     },
   };
 
@@ -103,13 +104,13 @@ export default function HomePage() {
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
-            <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 sm:row-span-2">
-              <div className="aspect-[4/5] bg-slate-950">
+            <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 sm:row-span-2 sm:min-h-full">
+              <div className="relative aspect-[4/5] sm:h-full sm:aspect-auto">
                 <LoopingVideo
                   className="h-full w-full object-cover"
-                  poster="/media/homepage/caribbean-food-presentation.jpg"
-                  mp4Src="/media/homepage/caribbean-food-presentation.mp4"
-                  ariaLabel="Caribbean food product presentation video"
+                  poster="/media/fresh/partnerships.jpg"
+                  mp4Src="/media/fresh/partnerships.mp4"
+                  ariaLabel="Caribbean partnerships and product presentation video"
                   priority
                 />
               </div>
@@ -122,7 +123,7 @@ export default function HomePage() {
                   alt="Branded honey bottle and jar product image"
                   fill
                   sizes="(max-width: 639px) 100vw, 50vw"
-                  className="object-cover object-center"
+                  className="object-fill"
                 />
               </div>
             </div>
@@ -273,7 +274,7 @@ export default function HomePage() {
                   alt="Branded guava slushie syrup promotional image"
                   fill
                   sizes="(max-width: 639px) 100vw, 50vw"
-                  className="object-contain p-2 sm:p-3"
+                  className="object-fill"
                 />
               </div>
             </div>
@@ -285,7 +286,7 @@ export default function HomePage() {
                   alt="Branded simple syrup poster creative"
                   fill
                   sizes="(max-width: 639px) 100vw, 50vw"
-                  className="object-contain p-2 sm:p-3"
+                  className="object-fill"
                 />
               </div>
             </div>
@@ -312,33 +313,7 @@ export default function HomePage() {
 
           <div className="mt-8 grid gap-6 xl:grid-cols-3">
             {caseStudies.map((study) => (
-              <TrackedLink
-                key={study.slug}
-                href={`/case-studies/${study.slug}`}
-                eventName="case_study_open"
-                eventParams={{ case_study: study.slug, location: "home" }}
-                className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm hover:border-teal-700"
-              >
-                <div className="relative aspect-[16/10] border-b border-slate-200 bg-slate-100">
-                  <Image src={study.image.src} alt={study.image.alt} fill sizes="(max-width: 1279px) 100vw, 33vw" className="object-cover" />
-                </div>
-                <div className="p-6">
-                  <div className="flex flex-wrap items-center gap-2 md:flex-nowrap">
-                    <span className="rounded-full bg-teal-50 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-teal-700">
-                      {study.market}
-                    </span>
-                    <span className="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-600">
-                      {study.service}
-                    </span>
-                  </div>
-                  <h3 className="mt-4 text-xl font-semibold text-slate-900">{study.title}</h3>
-                  <p className="mt-2 text-sm font-medium text-slate-500">{study.clientType}</p>
-                  <p className="mt-3 text-sm leading-6 text-slate-600">{study.summary}</p>
-                  <p className="mt-4 rounded-xl bg-slate-50 px-4 py-3 text-sm font-medium leading-6 text-slate-800">
-                    {study.highlight}
-                  </p>
-                </div>
-              </TrackedLink>
+              <CaseStudyCard key={study.slug} location="home" study={study} />
             ))}
           </div>
         </div>

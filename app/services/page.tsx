@@ -100,25 +100,23 @@ export default function ServicesPage() {
           </div>
 
           <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100">
-            <div className="aspect-[4/5] bg-slate-950">
+            <div className="relative aspect-[4/5]">
               <LoopingVideo
-                className="h-full w-full bg-slate-950 object-contain"
+                className="h-full w-full object-cover"
                 poster="/media/fresh/services-syrup-closeup.jpg"
                 mp4Src="/media/fresh/services-syrup-closeup.mp4"
                 ariaLabel="Product close-up video"
-                softBackdrop
               />
             </div>
           </div>
 
           <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100">
-            <div className="aspect-[4/5] bg-slate-950">
+            <div className="relative aspect-[4/5]">
               <LoopingVideo
-                className="h-full w-full bg-slate-950 object-contain"
+                className="h-full w-full object-cover"
                 poster="/media/fresh/services-loading-dock.jpg"
                 mp4Src="/media/fresh/services-loading-dock.mp4"
                 ariaLabel="Loading dock and export staging video"
-                softBackdrop
               />
             </div>
           </div>

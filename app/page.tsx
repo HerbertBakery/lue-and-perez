@@ -68,7 +68,10 @@ export default function HomePage() {
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-700">What moves well</p>
             <h2 className="mt-2 max-w-[12ch] text-2xl font-bold tracking-tight text-slate-900 sm:max-w-3xl sm:text-3xl md:text-4xl">
-              Programs that need product, packaging, and execution in the same conversation
+              <span className="sm:hidden">Product, packaging, and execution in the same conversation</span>
+              <span className="hidden sm:inline">
+                Programs that need product, packaging, and execution in the same conversation
+              </span>
             </h2>
             <p className="mt-4 hidden max-w-2xl text-sm leading-6 text-slate-600 sm:block md:text-base">
               Product, packaging, and execution in one view.
@@ -129,13 +132,14 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100">
+            <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-950">
               <div className="relative aspect-square sm:aspect-[4/3]">
                 <LoopingVideo
                   fill
-                  className="h-full w-full scale-[1.08] object-cover object-top"
+                  className="h-full w-full object-contain"
                   poster="/media/fresh/partnerships.jpg"
                   mp4Src="/media/fresh/partnerships.mp4"
+                  softBackdrop
                   ariaLabel="Caribbean partnerships and product presentation video"
                 />
               </div>

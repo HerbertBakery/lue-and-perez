@@ -166,18 +166,17 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-slate-950 py-8 text-white sm:hidden">
+      <section className="border-b border-slate-200 bg-white py-8 sm:hidden">
         <div className="mx-auto w-full max-w-6xl px-4">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-300">In motion</p>
-          <h2 className="mt-2 text-2xl font-bold tracking-tight">Execution should already look organized</h2>
-          <div className="mt-4 overflow-hidden rounded-3xl border border-white/10 bg-white/5">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-700">Cold chain</p>
+          <h2 className="mt-2 text-2xl font-bold tracking-tight text-slate-900">Handling should already look disciplined</h2>
+          <div className="mt-4 overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 shadow-sm">
             <div className="aspect-[16/10]">
               <LoopingVideo
                 className="h-full w-full object-cover"
-                poster="/media/multi-supplier-pickups.jpg"
-                mp4Src="/media/multi-supplier-pickups.mp4"
-                webmSrc="/media/multi-supplier-pickups.webm"
-                ariaLabel="Multi-supplier pickup and consolidation video"
+                poster="/media/fresh/home-cold-chain.jpg"
+                mp4Src="/media/fresh/home-cold-chain.mp4"
+                ariaLabel="Cold-chain handling and product presentation video"
               />
             </div>
           </div>

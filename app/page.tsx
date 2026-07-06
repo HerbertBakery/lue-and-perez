@@ -16,6 +16,12 @@ import {
 export default function HomePage() {
   const featuredServices = services.slice(0, 4);
   const featuredFaqs = faqItems.slice(0, 4);
+  const mobileCapabilityHighlights = [
+    "Supplier discovery",
+    "Consolidation",
+    "Export logistics",
+    "Private label support",
+  ];
   const buyerSegments = [
     "Importers",
     "Distributors",
@@ -147,7 +153,20 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-slate-950 py-12 text-white md:py-16">
+      <section className="border-b border-slate-200 bg-slate-50 py-8 sm:hidden">
+        <div className="mx-auto w-full max-w-6xl px-4">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-700">Capabilities</p>
+          <div className="mt-4 grid grid-cols-2 gap-3">
+            {mobileCapabilityHighlights.map((item) => (
+              <div key={item} className="rounded-2xl border border-slate-200 bg-white px-4 py-4 text-sm font-semibold text-slate-900 shadow-sm">
+                {item}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="hidden bg-slate-950 py-12 text-white sm:block md:py-16">
         <div className="mx-auto w-full max-w-6xl px-4">
           <div className="grid gap-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center">
             <div className="overflow-hidden rounded-3xl border border-white/10 bg-white/5">
@@ -181,7 +200,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-12 md:py-16">
+      <section className="hidden py-12 sm:block md:py-16">
         <div className="mx-auto w-full max-w-6xl px-4">
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div className="max-w-3xl">
@@ -234,7 +253,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-12 md:py-16">
+      <section className="hidden py-12 sm:block md:py-16">
         <div className="mx-auto grid w-full max-w-6xl gap-6 px-4 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-700">In motion</p>
@@ -297,7 +316,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-14 md:py-16">
+      <section className="hidden py-14 sm:block md:py-16">
         <div className="mx-auto w-full max-w-6xl px-4">
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div className="max-w-3xl">

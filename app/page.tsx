@@ -73,7 +73,7 @@ export default function HomePage() {
         <div className="mx-auto grid w-full max-w-6xl gap-6 px-4 py-10 md:gap-8 md:py-14 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-700">What moves well</p>
-            <h2 className="mt-2 max-w-[12ch] text-2xl font-bold tracking-tight text-slate-900 sm:max-w-3xl sm:text-3xl md:text-4xl">
+            <h2 className="mt-2 max-w-none text-balance text-2xl font-bold tracking-tight text-slate-900 sm:max-w-3xl sm:text-3xl md:text-4xl">
               <span className="sm:hidden">Product, packaging, and execution in the same conversation</span>
               <span className="hidden sm:inline">
                 Programs that need product, packaging, and execution in the same conversation

@@ -166,6 +166,24 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="bg-slate-950 py-8 text-white sm:hidden">
+        <div className="mx-auto w-full max-w-6xl px-4">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-300">In motion</p>
+          <h2 className="mt-2 text-2xl font-bold tracking-tight">Execution should already look organized</h2>
+          <div className="mt-4 overflow-hidden rounded-3xl border border-white/10 bg-white/5">
+            <div className="aspect-[16/10]">
+              <LoopingVideo
+                className="h-full w-full object-cover"
+                poster="/media/multi-supplier-pickups.jpg"
+                mp4Src="/media/multi-supplier-pickups.mp4"
+                webmSrc="/media/multi-supplier-pickups.webm"
+                ariaLabel="Multi-supplier pickup and consolidation video"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="hidden bg-slate-950 py-12 text-white sm:block md:py-16">
         <div className="mx-auto w-full max-w-6xl px-4">
           <div className="grid gap-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center">
